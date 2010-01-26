@@ -7,6 +7,9 @@
 {% endfor %}
 </ul>
 
+<h2>Postup</h2>
+{{ recipe.directions|linebreaks }}
+
 {% comment %}
 TODO get ingredients as list - from view. see django.utils.html.py
 
