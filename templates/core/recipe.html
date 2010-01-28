@@ -1,3 +1,11 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+ Edesia - {{ recipe.name }}
+{% endblock title %}
+
+{% block content %}
+
 <h1>{{ recipe.name}}</h1>
 <h2>Přísady</h2>
 
@@ -10,19 +18,4 @@
 <h2>Postup</h2>
 {{ recipe.directions|linebreaks }}
 
-{% comment %}
-TODO get ingredients as list - from view. see django.utils.html.py
-
-{{ recipe.ingredients|linebreaks }}
-{% if error_message %}<p><strong>{{ error_message }}</strong>{% endif %}
-
-<form action="/polls/{{ poll.id }}/vote/" method="post">
-    {% for choice in poll.choice_set.all %}
-        <input type="radio" name="choice" id="choice{{ forloop.counter }}"
-        value="{{ choice.id }}" />
-        <label for="choice{{ forloop.counter }}">{{ choice.choice }}</label>
-        <br />
-    {% endfor %}
-    <input type="submit" value="Vote" />
-</form>
-{% endcomment %}
+{% endblock content %}
