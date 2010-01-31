@@ -22,4 +22,5 @@ urlpatterns += patterns('edesia',
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
+    url(r'^$', 'core.views.recipe_list', name='home'),
 )

@@ -17,18 +17,22 @@
 	<!-- header starts-->
 	<div id="header-wrap"><div id="header" class="container_16">						
 		
-		<h1 id="logo-text"><a href="index.html" title="">Edesia</a></h1>
+        <h1 id="logo-text"><a href="{% url home %}" title="">Edesia</a></h1>
         {# <p id="intro">Put your favorite slogan here...</p> #}
 		
 		<!-- navigation -->
 		<div  id="nav">
-			<ul>
-				<li id="current"><a href="index.html">Home</a></li>
+            <ul>
+                {# TODO setting of "current" style, with the li id="current" #}
+                {# <li id="current"><a href="index.html">Home</a></li> #}
+                <li><a href="{% url home %}">Home</a></li>
+                {% comment %}
 				<li><a href="style.html">Style Demo</a></li>
 				<li><a href="blog.html">Blog</a></li>
 				<li><a href="index.html">Services</a></li>
 				<li><a href="index.html">Support</a></li>
-				<li><a href="index.html">About</a></li>		
+                <li><a href="index.html">About</a></li>		
+                {% endcomment %}
 			</ul>		
 		</div>		
 		
@@ -51,7 +55,7 @@
 
 
 		<!-- main -->
-        <div id="main" class="grid_8">
+        <div id="main" class="grid_9">
 
             {% block content %}
             {% endblock content %}
@@ -139,21 +143,24 @@
 		</div>
 		
 		<!-- left-columns starts -->
-		<div id="left-columns" class="grid_8">
+		<div id="left-columns" class="grid_4">
 		
 			<div class="grid_4 alpha">
 			
 				<div class="sidemenu">	
 					<h3>Sidebar Menu</h3>
 					<ul>				
-						<li><a href="index.html">Home</a></li>
+                        <li><a href="{% url home %}">Home</a></li>
+                        {% comment %}
 						<li><a href="index.html#TemplateInfo">TemplateInfo</a></li>
 						<li><a href="style.html">Style Demo</a></li>
 						<li><a href="blog.html">Blog</a></li>
-						<li><a href="http://www.dreamtemplate.com" title="Web Templates">Web Templates</a></li>
+                        <li><a href="http://www.dreamtemplate.com" title="Web Templates">Web Templates</a></li>
+                        {% endcomment %}
 					</ul>	
 				</div>
-				
+
+                {% comment %}
 				<div class="sidemenu">
 					<h3>Links</h3>
 					<ul>
@@ -200,7 +207,9 @@
 				If you are interested in supporting my work and would like to contribute, you are
 				welcome to make a small donation through the 
 				<a href="http://www.styleshout.com/">donate link</a> on my website - it will 
-				be a great help and will surely be appreciated.</p>				
+                be a great help and will surely be appreciated.</p>
+
+                {% endcomment %}
 		
 			</div>
 
@@ -347,9 +356,9 @@
 			</p>	
 			
 			<p class="bottom-right" >
-				<a href="index.html">Home</a> |
-				<a href="index.html">Sitemap</a> |
-				<a href="index.html">RSS Feed</a> |						
+                <a href="{% url home %}">Home</a> |
+                {# <a href="index.html">Sitemap</a> | #}
+                {# <a href="index.html">RSS Feed</a> |	#}
 				<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | 
 		   	    <a href="http://validator.w3.org/check/referer">XHTML</a>
 			</p>
