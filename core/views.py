@@ -16,9 +16,18 @@ def recipe_detail(request, recipe_id):
 
     ingredient_list = ['a','b','c']
     """
-    #TODO remove empty rows
+    #TODO remove empty rows from ingredients
             
     return render_to_response('core/recipe.html', 
             {'recipe': r,
              'ingredient_list': ingredient_list},
             context_instance=RequestContext(request))
+
+def recipe_list(request):
+    #TODO use paging
+    recipes = Recipe.objects.all().order_by('name')
+
+    return render_to_response('core/recipe_list.html',
+            {'recipes': recipes},
+            context_instance=RequestContext(request))
+    
