@@ -23,9 +23,12 @@ def recipe_detail(request, recipe_id):
              'ingredient_list': ingredient_list},
             context_instance=RequestContext(request))
 
-def recipe_list(request):
+def recipe_list(request, tag_id):
     #TODO use paging
-    recipes = Recipe.objects.all().order_by('name')
+    if tag_id:
+        recipes = Recipe.objects.filter(tags__id__exact=tag_id)
+    else:
+        recipes = Recipe.objects.all().order_by('name')
 
     return render_to_response('core/recipe_list.html',
             {'recipes': recipes},

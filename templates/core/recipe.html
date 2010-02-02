@@ -7,6 +7,14 @@
 {% block content %}
 
 <h1>{{ recipe.name}}</h1>
+<p>
+{% if recipe.preparation_time %}
+Doba přípravy: {{ recipe.preparation_time }} minut <br />
+{% endif %}
+{% if recipe.servings %}
+Počet porcí: {{ recipe.servings }} 
+{% endif %}
+</p>
 <h2>Přísady</h2>
 
 <ul>
@@ -19,3 +27,12 @@
 {{ recipe.directions|linebreaks }}
 
 {% endblock content %}
+
+{% block context_menu %}
+    {{ block.super }}
+    {# TODO format properly #}
+    Další recepty v kategorii:
+    {% for tag in recipe.tags.all %}
+        <li><a href="{% url core.views.recipe_list tag.id %}">{{ tag.name }}</a></li>
+    {% endfor %}
+{% endblock context_menu %}

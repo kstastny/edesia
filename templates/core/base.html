@@ -16,16 +16,18 @@
 
 	<!-- header starts-->
 	<div id="header-wrap"><div id="header" class="container_16">						
-		
+        {% block logo %}		
         <h1 id="logo-text"><a href="{% url home %}" title="">Edesia</a></h1>
         {# <p id="intro">Put your favorite slogan here...</p> #}
-		
+        {% endblock logo %}
+
 		<!-- navigation -->
 		<div  id="nav">
             <ul>
                 {# TODO setting of "current" style, with the li id="current" #}
                 {# <li id="current"><a href="index.html">Home</a></li> #}
                 <li><a href="{% url home %}">Home</a></li>
+                <li><a href="{% url recipe_list %}">Recepty</a></li>
                 {% comment %}
 				<li><a href="style.html">Style Demo</a></li>
 				<li><a href="blog.html">Blog</a></li>
@@ -145,12 +147,19 @@
 		<!-- left-columns starts -->
 		<div id="left-columns" class="grid_4">
 		
-			<div class="grid_4 alpha">
+            <div class="grid_4 alpha">
+
+                <div class="sidemenu">
+                    {% block ad_left %} {# advertisement #}
+                    {% endblock ad_left %}
+                </div>
 			
 				<div class="sidemenu">	
 					<h3>Sidebar Menu</h3>
-					<ul>				
+                    <ul>
+                        {% block context_menu %}
                         <li><a href="{% url home %}">Home</a></li>
+                        {% endblock context_menu %}
                         {% comment %}
 						<li><a href="index.html#TemplateInfo">TemplateInfo</a></li>
 						<li><a href="style.html">Style Demo</a></li>
@@ -158,7 +167,12 @@
                         <li><a href="http://www.dreamtemplate.com" title="Web Templates">Web Templates</a></li>
                         {% endcomment %}
 					</ul>	
-				</div>
+                </div>
+
+                <div class="sidemenu">
+                    {% block left_block %}
+                    {% endblock left_block %}
+                </div>
 
                 {% comment %}
 				<div class="sidemenu">
@@ -351,7 +365,7 @@
 		<div id="footer-bottom">
 	
 			<p class="bottom-left">			
-			Powered by Edesia&trade;&nbsp; &copy;2010 by Karel Stastny &nbsp; &nbsp;
+			Powered by Edesia&trade;&nbsp; &copy; 2010 Karel Šťastný&nbsp; &nbsp;
 			<a href="http://www.stylishtemplate.com/" title="Website Templates">website templates</a> by <a href="http://www.styleshout.com/">styleshout</a>
 			</p>	
 			

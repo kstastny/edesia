@@ -17,10 +17,13 @@ urlpatterns += patterns('edesia',
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    (r'^recipes/$','core.views.recipe_list'),
-    (r'^recipes/(?P<recipe_id>\d+)/$','core.views.recipe_detail'),
+    url(r'^recipes/$','core.views.recipe_list', {'tag_id':None}, name='recipe_list'),
+    url(r'^recipes/(?P<tag_id>\d+)/$','core.views.recipe_list', name='recipe_list'),
+    (r'^recipe/(?P<recipe_id>\d+)/$','core.views.recipe_detail'),
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
-    url(r'^$', 'core.views.recipe_list', name='home'),
+
+    #TODO use different home page
+    url(r'^$', 'core.views.recipe_list', {'tag_id':None}, name='home'),
 )

@@ -7,6 +7,8 @@ class Recipe(models.Model):
     primary_photo = models.CharField(max_length=255, blank=True)
     inserted = models.DateField(auto_now_add=True)
     tags = models.ManyToManyField('Tag', blank=True)
+    servings = models.PositiveIntegerField(blank='True', null=True)
+    preparation_time = models.PositiveIntegerField(blank='True', null=True)
 
     def __unicode__(self):
         return self.name
