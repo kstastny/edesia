@@ -144,6 +144,15 @@ label {
 	font-weight: bold;
 	color: #7BA857;
 }
+
+/* input field labels - e.g. recipe edit */
+form p label {
+    float: left;
+    width: 120px;
+    position: relative;
+    top: 8px;
+}
+
 input, select, textarea {
 	margin: 5px 0;
 	padding: 5px;
