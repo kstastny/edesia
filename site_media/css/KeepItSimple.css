@@ -249,6 +249,16 @@ input.button {
 	right: 10px; top: 0;	
 }
 
+/* header login info */
+#header #login_info {
+	position: absolute;
+	top: 10px; right: 0;
+	padding: 0; margin: 0;
+	border: none;
+	width: 270px; height: 33px;
+	z-index: 999999;
+}
+
 /* header quick search */
 #header form#quick-search {
 	position: absolute;

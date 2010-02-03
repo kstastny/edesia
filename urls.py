@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
+from django.core.urlresolvers import reverse
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -7,9 +8,12 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^%s(?P<path>.*)$' % settings.MEDIA_URL[1:], 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page':'/'}, name='logout'),
+    url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'auth/login.html'}, name='login'),
+    url(r'^register/$', 'django.contrib.auth.views.login', name='register'),
     )
 
-#TODO move recipe patterns to core
+#TODO move recipe patterns to core, authentication patterns to auth
 urlpatterns += patterns('edesia',
     # Example:
     # (r'^edesia/', include('edesia.foo.urls')),
@@ -26,6 +30,8 @@ urlpatterns += patterns('edesia',
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
 
+
     #TODO use different home page
     url(r'^$', 'core.views.recipe_list', {'tag_id':None}, name='home'),
+
 )

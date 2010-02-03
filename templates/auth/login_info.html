@@ -1,0 +1,15 @@
+{% if user.is_authenticated %}
+Přihlášen jako {{ user.username }}. 
+<a href="{% url logout %}">Odhlásit</a>
+{% else %}
+{% comment %}
+{# would need some better formatting #}
+<form action="{% url login %}">
+ Uživatelské jméno: <input type="text" /><br />
+ Heslo: <input type="password" />
+</form>
+{% endcomment %}
+<a href="{% url login %}">Přihlásit</a><br />
+<a href="{% url register %}">Nová registrace</a>
+
+{% endif %}

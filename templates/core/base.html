@@ -21,6 +21,12 @@
         {# <p id="intro">Put your favorite slogan here...</p> #}
         {% endblock logo %}
 
+        {% block login_info %}
+        <div id="login_info">
+            {% include "auth/login_info.html" %}
+        </div>
+        {% endblock login_info %}
+
 		<!-- navigation -->
 		<div  id="nav">
             <ul>
@@ -28,6 +34,9 @@
                 {# <li id="current"><a href="index.html">Home</a></li> #}
                 <li><a href="{% url home %}">Úvod</a></li>
                 <li><a href="{% url recipe_list %}">Recepty</a></li>
+                <li><a href="">O stránkách</a></li>
+                <li><a href="">Odkazy</a></li>
+                <li><a href="">Kontakt</a></li>
 			</ul>		
 		</div>		
 		
@@ -148,7 +157,7 @@
                 </div>
 			
 				<div class="sidemenu">	
-					<h3>Sidebar Menu</h3>
+                    {# <h3>Sidebar Menu</h3> #}
                     <ul>
                         {% block context_menu %}
                         <li><a href="{% url recipe_edit %}">Nový recept</a></li>

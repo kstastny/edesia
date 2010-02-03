@@ -88,3 +88,5 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'edesia.core',
 )
+
+LOGIN_REDIRECT_URL = '/'
