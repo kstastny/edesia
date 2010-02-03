@@ -1,7 +1,12 @@
 from django.shortcuts import get_object_or_404, render_to_response
 from django.utils.encoding import force_unicode
 from django.template import RequestContext
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+
 from models import Recipe
+from forms import RecipeForm
+
 import re
 
 def recipe_detail(request, recipe_id):
@@ -33,4 +38,27 @@ def recipe_list(request, tag_id):
     return render_to_response('core/recipe_list.html',
             {'recipes': recipes},
             context_instance=RequestContext(request))
-    
+
+def recipe_edit(request, recipe_id):
+    if request.method == 'POST':
+        if recipe_id:
+            recipe = Recipe.objects.get(pk=recipe_id)
+            form = RecipeForm(request.POST, instance=recipe)
+        else:
+            form = RecipeForm(request.POST) # todo load instance, add to the form
+        #print 'saving with id %s ' % form.instance.id
+        if form.is_valid():
+            form.save() #TODO creates new one every time :( - id is not received!
+            return HttpResponseRedirect(reverse('recipe_detail', \
+                    args=[form.instance.id]))
+        else:
+            pass #TODO handle validation ???
+    elif recipe_id:
+        recipe = Recipe.objects.get(pk=recipe_id)
+        form = RecipeForm(instance=recipe)
+    else:
+        form = RecipeForm()
+
+    return render_to_response('core/recipe_edit.html', 
+            {'form': form}, 
+            context_instance=RequestContext(request))

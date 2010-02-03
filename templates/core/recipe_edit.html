@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+ Edesia - {{ recipe.name }}
+{% endblock title %}
+
+{% block content %}
+
+{% if form.instance.id %}
+<form action="{% url recipe_edit form.instance.id %}" method="POST">
+{% else %}
+<form action="{% url recipe_edit %}" method="POST">
+{% endif %}
+    {{ form.as_p }}
+
+<input type="submit" value="Uložit" />
+{# TODO add Cancel button - redirect back/to home page #}
+
+</form>
+
+{% endblock content %}
+
+{% block context_menu %}
+    {{ block.super }}
+{% endblock context_menu %}

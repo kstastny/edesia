@@ -19,7 +19,9 @@ urlpatterns += patterns('edesia',
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^recipes/$','core.views.recipe_list', {'tag_id':None}, name='recipe_list'),
     url(r'^recipes/(?P<tag_id>\d+)/$','core.views.recipe_list', name='recipe_list'),
-    (r'^recipe/(?P<recipe_id>\d+)/$','core.views.recipe_detail'),
+    url(r'^recipe/(?P<recipe_id>\d+)/$','core.views.recipe_detail', name='recipe_detail'),
+    url(r'^recipe/edit/$','core.views.recipe_edit', {'recipe_id':None}, name='recipe_edit'),
+    url(r'^recipe/edit/(?P<recipe_id>\d+)/$','core.views.recipe_edit',name='recipe_edit'),
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
