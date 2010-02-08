@@ -48,7 +48,10 @@ def recipe_edit(request, recipe_id):
             form = RecipeForm(request.POST) # todo load instance, add to the form
         #print 'saving with id %s ' % form.instance.id
         if form.is_valid():
-            form.save() #TODO creates new one every time :( - id is not received!
+            #save the user if he's logged in and the recipe is new
+            if request.user.is_authenticated() and not form.instance.id:
+                form.instance.inserted_by = request.user
+            form.save() 
             return HttpResponseRedirect(reverse('recipe_detail', \
                     args=[form.instance.id]))
         else:
