@@ -1,5 +1,4 @@
 #TODO use some translated UserCreationForm - can it be localized?
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import Group
 from django.shortcuts import render_to_response
@@ -7,6 +6,8 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
+from auth.forms import UserCreationForm
+from auth.models import UserProfile
 
 def register(request):
     if request.method == 'POST':
@@ -19,6 +20,12 @@ def register(request):
             user.groups.add(Group.objects.get(name='Users'))
 
             user.save()
+
+            #p = user.get_profile()
+            p = UserProfile()
+            p.user = user
+            p.gender = form.cleaned_data['gender']
+            p.save()
 
             #login user - after saving user object, password contains just hash,
             #that's why we use the original password from the form
