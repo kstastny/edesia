@@ -56,6 +56,7 @@ def recipe_edit(request, recipe_id):
             #save the user if he's logged in and the recipe is new
             if request.user.is_authenticated() and not form.instance.id:
                 form.instance.inserted_by = request.user
+            print form.instance.tags
             form.save() 
             return HttpResponseRedirect(reverse('recipe_detail', \
                     args=[form.instance.id]))
