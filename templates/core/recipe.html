@@ -26,10 +26,19 @@ Počet porcí: {{ recipe.servings }}
 <h2>Postup</h2>
 {{ recipe.directions|linebreaks }}
 
+{% if recipe.inserted_by %}
+<p>Recept vložil{% if not recipe.inserted_by.get_profile.gender %}a{% endif %} {{ recipe.inserted_by }} </p>
+{% endif %}
+
 {% endblock content %}
 
 {% block context_menu %}
     {{ block.super }}
+
+    {% if can_modify %}
+    <li><a href="{% url recipe_edit recipe.id %}">Upravit recept</a></li>
+    {% endif%}
+
     {# TODO format properly #}
     Další recepty v kategorii:
     {% for tag in recipe.tags.all %}

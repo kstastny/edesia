@@ -1,3 +1,4 @@
+#coding=utf-8
 from django.shortcuts import get_object_or_404, render_to_response
 from django.utils.encoding import force_unicode
 from django.template import RequestContext
@@ -25,7 +26,8 @@ def recipe_detail(request, recipe_id):
             
     return render_to_response('core/recipe.html', 
             {'recipe': r,
-             'ingredient_list': ingredient_list},
+             'ingredient_list': ingredient_list,
+             'can_modify': request.user.can_modify(r) },
             context_instance=RequestContext(request))
 
 def recipe_list(request, tag_id):
@@ -43,6 +45,9 @@ def recipe_edit(request, recipe_id):
     if request.method == 'POST':
         if recipe_id:
             recipe = Recipe.objects.get(pk=recipe_id)
+            if not request.user.can_modify(recipe):
+                raise Exception(u'User %s cannot modify recipe %s' % \
+                        (request.user, recipe))
             form = RecipeForm(request.POST, instance=recipe)
         else:
             form = RecipeForm(request.POST) # todo load instance, add to the form
@@ -58,6 +63,9 @@ def recipe_edit(request, recipe_id):
             pass #TODO handle validation ???
     elif recipe_id:
         recipe = Recipe.objects.get(pk=recipe_id)
+        if not request.user.can_modify(recipe):
+            raise Exception(u'User %s cannot modify recipe %s' % \
+                    (request.user, recipe))
         form = RecipeForm(instance=recipe)
     else:
         form = RecipeForm()

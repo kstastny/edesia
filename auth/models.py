@@ -11,14 +11,21 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return self.user.username
 
-    def user_saved(sender, **kwargs):
-        """
-        Creates and saves new model if the user was created
-        """
-        print 'user was just saved'
+#extend standard User model for simple model authorization
+def can_modify(self, model):
+    """
+     Returns true if the user can modify specified model
+    """
+    if not hasattr(model, "inserted_by"):
+        return False
 
-def test(sender, **kwargs):
-    print 'in test method'
+    if not self.is_authenticated:
+        return False
 
-post_save.connect(UserProfile.user_saved, sender=User)
-post_save.connect(test, sender=User)
+    if model.inserted_by == self:
+        return True
+
+    return self.is_superuser
+    #return False
+
+User.can_modify = can_modify
