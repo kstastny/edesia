@@ -6,8 +6,7 @@ class TagInline(admin.TabularInline):
     extra = 3
 
 class RecipeAdmin(admin.ModelAdmin):
-    #inlines = [TagInline]
-    pass
+    prepopulated_field = {'slug': ('name')}
 
 
 admin.site.register(Recipe, RecipeAdmin)
