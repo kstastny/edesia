@@ -36,7 +36,7 @@ Počet porcí: {{ recipe.servings }}
     {{ block.super }}
 
     {% if can_modify %}
-    <li><a href="{% url recipe_edit recipe.id %}">Upravit recept</a></li>
+    <li><a href="{% url recipe_edit recipe.slug %}">Upravit recept</a></li>
     {% endif%}
 
     {# TODO format properly #}

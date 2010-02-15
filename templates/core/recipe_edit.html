@@ -7,7 +7,7 @@
 {% block content %}
 
 {% if form.instance.id %}
-<form action="{% url recipe_edit form.instance.id %}" method="POST">
+<form action="{% url recipe_edit form.instance.slug %}" method="POST">
 {% else %}
 <form action="{% url recipe_edit %}" method="POST">
 {% endif %}

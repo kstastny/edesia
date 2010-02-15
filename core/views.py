@@ -10,8 +10,8 @@ from forms import RecipeForm
 
 import re
 
-def recipe_detail(request, recipe_id):
-    r = get_object_or_404(Recipe, pk=recipe_id)
+def recipe_detail(request, recipe_slug):
+    r = get_object_or_404(Recipe, slug=recipe_slug)
     #normalize line breaks - see django.utils.html.linebreaks
     ingredients = re.sub(r'\r\n|\r|\n','\n', force_unicode(r.ingredients))
     ingredient_list = re.split('\n{1,}',ingredients)
@@ -41,10 +41,11 @@ def recipe_list(request, tag_id):
             {'recipes': recipes},
             context_instance=RequestContext(request))
 
-def recipe_edit(request, recipe_id):
+#TODO remove the recipe_id - use only slug
+def recipe_edit(request, recipe_slug):
     if request.method == 'POST':
-        if recipe_id:
-            recipe = Recipe.objects.get(pk=recipe_id)
+        if recipe_slug:
+            recipe = Recipe.objects.get(slug=recipe_slug)
             if not request.user.can_modify(recipe):
                 raise Exception(u'User %s cannot modify recipe %s' % \
                         (request.user, recipe))
@@ -56,14 +57,13 @@ def recipe_edit(request, recipe_id):
             #save the user if he's logged in and the recipe is new
             if request.user.is_authenticated() and not form.instance.id:
                 form.instance.inserted_by = request.user
-            print form.instance.tags
             form.save() 
             return HttpResponseRedirect(reverse('recipe_detail', \
-                    args=[form.instance.id]))
+                    args=[form.instance.slug]))
         else:
             pass #TODO handle validation ???
-    elif recipe_id:
-        recipe = Recipe.objects.get(pk=recipe_id)
+    elif recipe_slug:
+        recipe = Recipe.objects.get(slug=recipe_slug)
         if not request.user.can_modify(recipe):
             raise Exception(u'User %s cannot modify recipe %s' % \
                     (request.user, recipe))
