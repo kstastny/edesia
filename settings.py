@@ -93,3 +93,15 @@ INSTALLED_APPS = (
 LOGIN_REDIRECT_URL = '/'
 
 AUTH_PROFILE_MODULE = 'auth.UserProfile'
+
+import logging
+LOG_FILE = 'c:/temp/logs/django.log'
+LOG_LEVEL = logging.DEBUG
+LOG_FORMAT = '%(asctime)s %(levelname)s %(message)s'
+
+logging.basicConfig(
+        level=LOG_LEVEL,
+        filename=LOG_FILE,
+        format=LOG_FORMAT)
+
+#initialize 

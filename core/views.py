@@ -1,4 +1,7 @@
 #coding=utf-8
+import re
+import logging
+
 from django.shortcuts import get_object_or_404, render_to_response
 from django.utils.encoding import force_unicode
 from django.template import RequestContext
@@ -8,7 +11,6 @@ from django.core.urlresolvers import reverse
 from models import Recipe
 from forms import RecipeForm
 
-import re
 
 def recipe_detail(request, recipe_slug):
     r = get_object_or_404(Recipe, slug=recipe_slug)
@@ -52,10 +54,10 @@ def recipe_edit(request, recipe_slug):
             form = RecipeForm(request.POST, instance=recipe)
         else:
             form = RecipeForm(request.POST) # todo load instance, add to the form
-        #print 'saving with id %s ' % form.instance.id
         if form.is_valid():
             #save the user if he's logged in and the recipe is new
             if request.user.is_authenticated() and not form.instance.id:
+                logging.debug('saving new recipe: %s', form.cleaned_data['name'])
                 form.instance.inserted_by = request.user
             form.save() 
             return HttpResponseRedirect(reverse('recipe_detail', \
