@@ -1,4 +1,5 @@
 #coding=utf-8
+import logging
 
 from django import forms
 from django.forms import ModelForm
@@ -19,8 +20,19 @@ class RecipeForm(ModelForm):
         super(RecipeForm, self).__init__(*args, **kwargs)
         instance = getattr(self, 'instance', None)
         if instance and instance.id:
-            self.fields['name'].widget.attrs['readonly'] = True
-            self.fields['name'].widget.attrs['disabled'] = True
+            #name cannot be modified once input
+            field = self.fields['name']
+            field.widget.attrs['readonly'] = True
+            field.widget.attrs['disabled'] = True
+            field.required = False
+            
+
+    def clean_name(self):
+        logging.debug('In RecipeForm.clean_name')
+        instance = getattr(self, 'instance', None)
+        if instance and instance.id:
+            return instance.name
+        return self.cleaned_data.get('name', None)
 
     class Meta:
         model = Recipe
