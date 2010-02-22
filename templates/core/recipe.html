@@ -42,6 +42,6 @@ Počet porcí: {{ recipe.servings }}
     {# TODO format properly #}
     Další recepty v kategorii:
     {% for tag in recipe.tags.all %}
-        <li><a href="{% url core.views.recipe_list tag.id %}">{{ tag.name }}</a></li>
+        <li><a href="{% url core.views.recipe_list tag.slug %}">{{ tag.name }}</a></li>
     {% endfor %}
 {% endblock context_menu %}

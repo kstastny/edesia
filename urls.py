@@ -22,7 +22,7 @@ urlpatterns += patterns('edesia',
     # to INSTALLED_APPS to enable admin documentation:
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^recipes/$','core.views.recipe_list', {'tag_id':None}, name='recipe_list'),
-    url(r'^recipes/(?P<tag_id>\d+)/$','core.views.recipe_list', name='recipe_list'),
+    url(r'^recipes/(?P<tag_slug>[\w-]+)/$','core.views.recipe_list', name='recipe_list'),
     url(r'^recipe/(?P<recipe_slug>[\w-]+)/$','core.views.recipe_detail', name='recipe_detail'),
     url(r'^recipe_edit/$','core.views.recipe_edit', {'recipe_slug':None}, name='recipe_edit'),
     url(r'^recipe_edit/(?P<recipe_slug>[\w-]+)/$','core.views.recipe_edit',name='recipe_edit'),
@@ -32,6 +32,6 @@ urlpatterns += patterns('edesia',
 
 
     #TODO use different home page
-    url(r'^$', 'core.views.recipe_list', {'tag_id':None}, name='home'),
+    url(r'^$', 'core.views.recipe_list', {'tag_slug':None}, name='home'),
 
 )

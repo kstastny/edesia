@@ -32,10 +32,10 @@ def recipe_detail(request, recipe_slug):
              'can_modify': request.user.can_modify(r) },
             context_instance=RequestContext(request))
 
-def recipe_list(request, tag_id):
+def recipe_list(request, tag_slug):
     #TODO use paging
-    if tag_id:
-        recipes = Recipe.objects.filter(tags__id__exact=tag_id)
+    if tag_slug:
+        recipes = Recipe.objects.filter(tags__slug__exact=tag_slug)
     else:
         recipes = Recipe.objects.all().order_by('name')
 

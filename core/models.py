@@ -25,6 +25,12 @@ class Recipe(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=50)
     recipes = models.ManyToManyField('Recipe', blank=True)
+    slug = models.SlugField(unique=True, blank=True)
+
+    def save(self):
+        #TODO if slug already exists, assign another - increasing numbers
+        self.slug = slugify(self.name)
+        models.Model.save(self)
 
     def __unicode__(self):
         return self.name
