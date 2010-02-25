@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AnonymousUser
 
 
 class UserProfile(models.Model):
@@ -29,3 +30,4 @@ def can_modify(self, model):
     #return False
 
 User.can_modify = can_modify
+AnonymousUser.can_modify = can_modify
