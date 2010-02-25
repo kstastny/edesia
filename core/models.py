@@ -23,7 +23,7 @@ class Recipe(models.Model):
         return self.name
 
 class Tag(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
     recipes = models.ManyToManyField('Recipe', blank=True)
     slug = models.SlugField(unique=True, blank=True)
 
