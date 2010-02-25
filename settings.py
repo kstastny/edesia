@@ -89,8 +89,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.flatpages',
-    'edesia.auth',
+    'edesia.auth',#TODO rename - has problems when generating DB (same name as auth in django.contrib)
     'edesia.core',
+    'edesia.south',#standard django-south 
 )
 
 LOGIN_REDIRECT_URL = '/'
