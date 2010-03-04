@@ -27,6 +27,9 @@ class Tag(models.Model):
     recipes = models.ManyToManyField('Recipe', blank=True)
     slug = models.SlugField(unique=True, blank=True)
 
+    class Meta:
+        ordering = ['name']
+
     def save(self):
         #TODO if slug already exists, assign another - increasing numbers
         self.slug = slugify(self.name)
