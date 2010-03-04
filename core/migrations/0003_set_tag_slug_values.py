@@ -5,6 +5,8 @@ from edesia.core.models import *
 from django.template.defaultfilters import slugify
 
 class Migration:
+
+    no_dry_run = True
     
     def forwards(self, orm):
         "Write your forwards migration here"
