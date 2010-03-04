@@ -35,3 +35,8 @@ urlpatterns += patterns('edesia',
     url(r'^$', 'core.views.recipe_list', {'tag_slug':None}, name='home'),
 
 )
+
+
+urlpatterns += patterns('',
+        (r'^contact/', include('edesia.contact.urls')),
+        )

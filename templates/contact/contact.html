@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+ Edesia - Kontakt
+{% endblock title %}
+
+{% block content %}
+
+
+<p>Pokud máte jakékoli dotazy či připomínky ke stránkám, neváhejte nám je sdělit pomocí tohoto webového formuláře, nebo odeslat email na <a href="mailto:info@edesia.cz">info@edesia.cz</a>.</p>
+
+<form action="." method="post">
+    {{ form.as_p }}
+
+    <input type="submit" value="Odeslat" />
+</form>
+
+{% endblock content %}

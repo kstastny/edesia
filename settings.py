@@ -92,6 +92,7 @@ INSTALLED_APPS = (
     'edesia.auth',#TODO rename - has problems when generating DB (same name as auth in django.contrib)
     'edesia.core',
     'edesia.south',#standard django-south 
+    'edesia.contact',#standard django-south 
 )
 
 LOGIN_REDIRECT_URL = '/'
