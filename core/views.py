@@ -12,7 +12,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from models import Recipe
 from forms import RecipeForm
 
-RECIPE_PAGE_SIZE = 15
+RECIPE_PAGE_SIZE = 25
 
 
 def recipe_detail(request, recipe_slug):
