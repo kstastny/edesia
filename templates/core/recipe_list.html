@@ -9,12 +9,28 @@
 <h1>Seznam receptů</h1>
 
 <ul>
-{% for recipe in recipes %}
+{% for recipe in recipes.object_list %}
 <li>
   <a href="{% url core.views.recipe_detail recipe.slug %}" >{{ recipe.name }}</a>
 </li> 
 {% endfor %}
 </ul>
 
+{# TODO better page representation - display icons to First, Prev, Next, Last and a few pages around #}
+<div class="pagination">
+    <span class="step-links">
+        {% if recipes.has_previous %}
+            <a href="?page={{ recipes.previous_page_number }}">Předchozí</a>
+        {% endif %}
+
+        <span class="current">
+            Strana {{ recipes.number }}/{{ recipes.paginator.num_pages }}
+        </span>
+
+        {% if recipes.has_next %}
+            <a href="?page={{ recipes.next_page_number }}">Další</a>
+        {% endif %}
+    </span>
+</div>
 
 {% endblock content %}

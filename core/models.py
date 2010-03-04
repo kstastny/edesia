@@ -14,6 +14,9 @@ class Recipe(models.Model):
     inserted_by = models.ForeignKey(User, null=True)
     slug = models.SlugField(unique=True, blank=True) 
 
+    class Meta:
+        ordering = ['name']
+
     def save(self):
         #TODO if slug already exists, assign another - increasing numbers
         self.slug = slugify(self.name)

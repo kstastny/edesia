@@ -7,9 +7,12 @@ from django.utils.encoding import force_unicode
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 from models import Recipe
 from forms import RecipeForm
+
+RECIPE_PAGE_SIZE = 15
 
 
 def recipe_detail(request, recipe_slug):
@@ -37,10 +40,22 @@ def recipe_list(request, tag_slug):
     if tag_slug:
         recipes = Recipe.objects.filter(tags__slug__exact=tag_slug)
     else:
-        recipes = Recipe.objects.all().order_by('name')
+        recipes = Recipe.objects.all()
+
+    paginator = Paginator(recipes, RECIPE_PAGE_SIZE)
+
+    try:
+        page = int(request.GET.get('page','1'))
+    except ValueError:
+        page = 1
+
+    try:
+        recipe_page = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        recipe_page = paginator.page(paginator.num_pages)
 
     return render_to_response('core/recipe_list.html',
-            {'recipes': recipes},
+            {'recipes': recipe_page },
             context_instance=RequestContext(request))
 
 #TODO remove the recipe_id - use only slug
