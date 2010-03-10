@@ -7,7 +7,7 @@ from models import Recipe, Tag
 
 
 class RecipeForm(ModelForm):
-    name = forms.CharField(label='Jméno')
+    name = forms.CharField(label='Název')
     ingredients = forms.CharField(label='Přísady', widget=forms.Textarea)
     directions = forms.CharField(label='Postup', widget=forms.Textarea)
     preparation_time = forms.IntegerField(label='Doba přípravy', required=False)
