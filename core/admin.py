@@ -7,6 +7,9 @@ class TagInline(admin.TabularInline):
 
 class RecipeAdmin(admin.ModelAdmin):
     prepopulated_field = {'slug': ('name')}
+    list_display = ('name', 'inserted', 'inserted_by', ) 
+    list_filter = ('inserted', 'inserted_by', )
+    list_per_page = 50
 
 class TagAdmin(admin.ModelAdmin):
     ordering = ('name', )
