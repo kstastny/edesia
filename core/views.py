@@ -9,7 +9,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
-from models import Recipe
+from models import Recipe, Tag
 from forms import RecipeForm
 
 RECIPE_PAGE_SIZE = 25
@@ -36,9 +36,10 @@ def recipe_detail(request, recipe_slug):
             context_instance=RequestContext(request))
 
 def recipe_list(request, tag_slug):
-    #TODO use paging
+    tag = None
     if tag_slug:
         recipes = Recipe.objects.filter(tags__slug__exact=tag_slug)
+        tag = Tag.objects.get(slug=tag_slug)
     else:
         recipes = Recipe.objects.all()
 
@@ -55,10 +56,11 @@ def recipe_list(request, tag_slug):
         recipe_page = paginator.page(paginator.num_pages)
 
     return render_to_response('core/recipe_list.html',
-            {'recipes': recipe_page },
+            {'recipes': recipe_page ,
+                'tag': tag},
             context_instance=RequestContext(request))
 
-#TODO remove the recipe_id - use only slug
+
 def recipe_edit(request, recipe_slug):
     if request.method == 'POST':
         if recipe_slug:
@@ -90,4 +92,17 @@ def recipe_edit(request, recipe_slug):
 
     return render_to_response('core/recipe_edit.html', 
             {'form': form}, 
+            context_instance=RequestContext(request))
+
+def category_list(request):
+    tags = Tag.objects.all()
+
+    #TODO sort somehow
+
+    #ignore categories without recipes - can be removed later when enoug recipes are present
+    tags = [tag for tag in tags if tag.recipe_count() > 0]
+
+
+    return render_to_response('core/category_list.html',
+            { 'tags' : tags },
             context_instance=RequestContext(request))

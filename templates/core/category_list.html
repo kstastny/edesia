@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+{% load edesia_extras %}
+
+{% block title %}
+ Edesia - Kategorie
+{% endblock title %}
+
+{% block content %}
+
+{# TODO generate dynamically - solve where to store the structure #}
+<h2>Kategorie receptů</h2>
+<p><a href="{% url recipe_list %}">Všechny recepty</a></p>
+
+<ul>
+    {% for tag in tags %}
+    <ul>
+        <li>
+        <a href="{% url recipe_list tag.slug %}">{{ tag.name }}</a>
+        </li>
+    </ul>
+    {% endfor %}
+</ul>
+
+
+{% endblock content %}
+

@@ -31,8 +31,10 @@ urlpatterns += patterns('edesia',
     (r'^admin/', include(admin.site.urls)),
 
 
+    url(r'^categories/$', 'core.views.category_list', name='category_list'),
     #TODO use different home page
-    url(r'^$', 'core.views.recipe_list', {'tag_slug':None}, name='home'),
+    #url(r'^$', 'core.views.recipe_list', {'tag_slug':None}, name='home'),
+    url(r'^$', 'core.views.category_list', name='home'),
 
 )
 

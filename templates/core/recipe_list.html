@@ -8,6 +8,10 @@
 
 <h1>Seznam receptů</h1>
 
+{% if tag %}
+<h2> {{ tag.name }} </h2>
+{% endif %}
+
 <ul>
 {% for recipe in recipes.object_list %}
 <li>
