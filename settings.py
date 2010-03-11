@@ -89,11 +89,16 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.flatpages',
+    'django.contrib.comments',
     'edesia.auth',#TODO rename - has problems when generating DB (same name as auth in django.contrib)
     'edesia.core',
     'edesia.south',#standard django-south 
     'edesia.contact',#standard django-south 
 )
+
+#comment settings
+COMMENTS_HIDE_REMOVED = True
+COMMENT_MAX_LENGTH = 3000
 
 LOGIN_REDIRECT_URL = '/'
 

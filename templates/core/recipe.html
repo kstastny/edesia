@@ -1,5 +1,6 @@
 {% extends "core/base.html" %}
 {% load edesia_extras %}
+{% load comments %}
 
 {% block title %}
  Edesia - {{ recipe.name }}
@@ -30,6 +31,29 @@ Počet porcí: {{ recipe.servings }}
 {% if recipe.inserted_by %}
 <p>Recept vložil{% if not recipe.inserted_by.get_profile.gender %}a{% endif %} {{ recipe.inserted_by }} </p>
 {% endif %}
+
+
+{# recipe comments #}
+{# TODO count of comments #}
+
+{# TODO paging ? (every 10 comments) #}
+{% get_comment_list for recipe as comment_list %}
+<ol class="commentlist">
+    {% for comment in comment_list %}
+    <li class="{% cycle 'alt' '' %}"> {# TODO class="alt" for every other row #}
+    <cite>
+        {{ comment.user_name }}
+        <span class="comment-data"></span>
+    </cite>
+    <div class="comment-text">
+        <p>{{ comment.comment }}</p>
+    </div>
+    </li>
+{% endfor %}
+</ol>
+
+{# TODO render manually - if user is logged, prefill his name #}
+{% render_comment_form for recipe %}
 
 {% endblock content %}
 
