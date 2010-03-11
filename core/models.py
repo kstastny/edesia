@@ -27,6 +27,10 @@ class Recipe(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
+    #TODO solve problem with this relationship - is ManyToMany but from both sides - two tables are generated :(
+    #keep only attribute 'tags' on the Recipe. This attribute should return the recipes
+    #like this? 
+    #recipes = Recipe.objects.filter(tags__slug__exact=tag_slug)
     recipes = models.ManyToManyField('Recipe', blank=True)
     slug = models.SlugField(unique=True, blank=True)
 
@@ -40,3 +44,6 @@ class Tag(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def recipe_count(self):
+        return Recipe.objects.filter(tags__id__exact=self.id).count()

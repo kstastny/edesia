@@ -13,6 +13,7 @@ class RecipeAdmin(admin.ModelAdmin):
 
 class TagAdmin(admin.ModelAdmin):
     ordering = ('name', )
+    list_display = ('name', 'slug', 'recipe_count', )
 
 
 admin.site.register(Recipe, RecipeAdmin)
