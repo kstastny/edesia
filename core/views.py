@@ -95,7 +95,7 @@ def recipe_edit(request, recipe_slug):
             context_instance=RequestContext(request))
 
 def category_list(request):
-    tags = Tag.objects.all()
+    tags = Tag.objects.filter(order__gt=0)
 
     #TODO sort somehow
 

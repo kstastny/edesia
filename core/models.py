@@ -33,9 +33,12 @@ class Tag(models.Model):
     #recipes = Recipe.objects.filter(tags__slug__exact=tag_slug)
     recipes = models.ManyToManyField('Recipe', blank=True)
     slug = models.SlugField(unique=True, blank=True)
+    #TODO make some better structure later
+    #order of tag in category listing. If it is negative, the Tag won't be displayed
+    order = models.IntegerField(blank=True, null=False, default=9999)
 
     class Meta:
-        ordering = ['name']
+        ordering = ['order']
 
     def save(self):
         #TODO if slug already exists, assign another - increasing numbers
