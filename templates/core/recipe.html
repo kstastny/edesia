@@ -42,8 +42,8 @@ Počet porcí: {{ recipe.servings }}
     {% for comment in comment_list %}
     <li class="{% cycle 'alt' '' %}"> {# TODO class="alt" for every other row #}
     <cite>
-        {{ comment.user_name }}
-        <span class="comment-data"></span>
+        {{ comment.user_name }}<br />
+        <span class="comment-data">{{ comment.submit_date|date:"j. N Y, G:i" }}</span>
     </cite>
     <div class="comment-text">
         <p>{{ comment.comment }}</p>
