@@ -94,11 +94,13 @@ INSTALLED_APPS = (
     'edesia.core',
     'edesia.south',#standard django-south 
     'edesia.contact',#standard django-south 
+    'edesia.comments',
 )
 
 #comment settings
 COMMENTS_HIDE_REMOVED = True
 COMMENT_MAX_LENGTH = 3000
+COMMENTS_APP = 'edesia.comments'
 
 LOGIN_REDIRECT_URL = '/'
 

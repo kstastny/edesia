@@ -53,7 +53,27 @@ Počet porcí: {{ recipe.servings }}
 </ol>
 
 {# TODO render manually - if user is logged, prefill his name #}
-{% render_comment_form for recipe %}
+{# {% render_comment_form for recipe %} #}
+{% get_comment_form for recipe as form %}
+<form action="{% comment_form_target %}" method="post">
+    {# form.as_p #}
+    {% for field in form.visible_fields %}
+    {{ field.errors }}
+    <p {% ifequal field.name "honeypot" %} style="display:none;" {% endifequal %}>{{ field.label_tag }} {{ field }}</p>
+    {% endfor %}
+
+
+    {% for field in form.hidden_fields %}
+     {{ field }}
+    {% endfor %}
+    <input type="hidden" name="next" value="{% url recipe_detail recipe.slug %}" />
+
+      <p class="submit">
+        <input type="submit" name="post" class="submit-post" value="Odeslat" />
+      </p> 
+
+
+</form>
 
 {% endblock content %}
 
