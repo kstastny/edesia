@@ -4,7 +4,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
+     ('Karel Stastny', 'errors@edesia.cz'),
 )
 
 MANAGERS = ADMINS
@@ -93,7 +93,7 @@ INSTALLED_APPS = (
     'edesia.auth',#TODO rename - has problems when generating DB (same name as auth in django.contrib)
     'edesia.core',
     'edesia.south',#standard django-south 
-    'edesia.contact',#standard django-south 
+    'edesia.contact',
     'edesia.comments',
 )
 
@@ -116,5 +116,3 @@ logging.basicConfig(
         level=LOG_LEVEL,
         filename=LOG_FILE,
         format=LOG_FORMAT)
-
-#initialize 
