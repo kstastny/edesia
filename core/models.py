@@ -7,7 +7,7 @@ class Recipe(models.Model):
     ingredients = models.TextField()
     directions = models.TextField()
     primary_photo = models.CharField(max_length=255, blank=True)
-    inserted = models.DateField(auto_now_add=True)
+    inserted = models.DateField(auto_now_add=True) #TODO change to DateTimeField
     tags = models.ManyToManyField('Tag', blank=True)
     servings = models.PositiveIntegerField(blank=True, null=True)
     preparation_time = models.PositiveIntegerField(blank=True, null=True)
