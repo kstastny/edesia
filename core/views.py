@@ -14,6 +14,17 @@ from forms import RecipeForm
 
 RECIPE_PAGE_SIZE = 25
 
+NEW_RECIPES_COUNT = 5 #count of new recipes displayed on home page
+
+def index(request):
+    recipes = Recipe.objects.order_by('-inserted')[:5]
+
+    print recipes[0].inserted
+
+    return render_to_response('core/index.html',
+            { 'recipes': recipes, },
+            context_instance=RequestContext(request))
+
 
 def recipe_detail(request, recipe_slug):
     r = get_object_or_404(Recipe, slug=recipe_slug)

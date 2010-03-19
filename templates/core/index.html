@@ -1,0 +1,27 @@
+{% extends "core/base.html" %}
+{% load edesia_extras %}
+
+{% block title %}
+ Edesia 
+{% endblock title %}
+
+{% block content %}
+
+<h3>Nejnovější recepty</h3>
+{# TODO format - hide border #}
+<table style="width:100%;">
+{% for recipe in recipes %}
+<tr>
+  <td><a href="{% url core.views.recipe_detail recipe.slug %}" >{{ recipe.name }} </a></td>
+  {# TODO format - make the font lighter #}
+  <td>{{ recipe.inserted|date:"j.n.Y" }} </td>
+</tr> 
+{% endfor %}
+</table>
+
+
+{% endblock content %}
+
+{% block context_menu %}
+    {{ block.super }}
+{% endblock context_menu %}
