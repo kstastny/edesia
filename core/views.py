@@ -17,7 +17,7 @@ RECIPE_PAGE_SIZE = 25
 NEW_RECIPES_COUNT = 5 #count of new recipes displayed on home page
 
 def index(request):
-    recipes = Recipe.objects.order_by('-inserted')[:5]
+    recipes = Recipe.objects.order_by('-inserted')[:NEW_RECIPES_COUNT]
 
     print recipes[0].inserted
 
