@@ -210,7 +210,7 @@ input.button {
 	position: relative;
 	margin: 0 auto;
 	background: url(../images/border.gif) repeat-x left bottom; 	
-	height: 145px;	
+	height: 155px;	
 }
 #header h1#logo-text { margin: 0; padding: 0; }
 #header h1#logo-text a {
@@ -238,7 +238,7 @@ input.button {
 	width: 400px;
 	
 	/* change the values of top and left to adjust the position */
-	top: 175px; left: 110px;		
+	top: 125px; left: 0px;		
 }
 #header #header-image {
 	position: absolute;
