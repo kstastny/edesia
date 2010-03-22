@@ -114,7 +114,8 @@ def category_list(request):
     #ignore categories without recipes - can be removed later when enoug recipes are present
     tags = [tag for tag in tags if tag.recipe_count() > 0]
 
-
+    split_index = (len(tags)+1)/2
     return render_to_response('core/category_list.html',
-            { 'tags' : tags },
+            { 'tags_first' : tags[:split_index],
+                'tags_second' : tags[split_index:]},
             context_instance=RequestContext(request))
