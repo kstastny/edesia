@@ -157,7 +157,9 @@
                 </div>
 			
 				<div class="sidemenu">	
+                    {% block context_menu_header %}
                     {# <h3>Sidebar Menu</h3> #}
+                    {% endblock context_menu_header %}
                     <ul>
                         {% block context_menu %}
                         <li><a href="{% url recipe_edit %}">Nový recept</a></li>

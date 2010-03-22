@@ -24,10 +24,10 @@
 
 <h3>Nejnovější recepty</h3>
 {# TODO format - hide border #}
-<table style="width:100%;">
+<table style="width:100%;" border="0">
 {% for recipe in recipes %}
 <tr>
-  <td><a href="{% url core.views.recipe_detail recipe.slug %}" >{{ recipe.name }} </a></td>
+  <td><a href="{% url core.views.recipe_detail recipe.slug %}" >{{ recipe.name }}</a></td>
   {# TODO format - make the font lighter #}
   <td>{{ recipe.inserted|date:"j.n.Y" }} </td>
 </tr> 
@@ -37,6 +37,18 @@
 
 {% endblock content %}
 
+{% block context_menu_header %}
+    <h3>Oblíbené kategorie</h3>
+{% endblock context_menu_header %}
+
 {% block context_menu %}
-    {{ block.super }}
+    {# TODO make this dynamic #}
+    <li><a href="{% url recipe_list 'kureci-maso' %}">Kuřecí maso</a></li>
+    <li><a href="{% url recipe_list 'veprove-maso' %}">Vepřové maso</a></li>
+    <li><a href="{% url recipe_list 'hovezi-maso' %}">Hovězí maso</a></li>
+    <li><a href="{% url recipe_list 'vegetarianska-jidla' %}">Vegetariánská jídla</a></li>
+    <li><a href="{% url recipe_list 'salaty' %}">Saláty</a></li>
+    <li><a href="{% url recipe_list 'polevky' %}">Polévky</a></li>
+    <li />
+    <li><a href="{% url category_list %}">Seznam kategorií</a></li>
 {% endblock context_menu %}
