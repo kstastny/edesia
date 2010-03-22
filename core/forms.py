@@ -13,7 +13,7 @@ class RecipeForm(ModelForm):
     preparation_time = forms.IntegerField(label='Doba přípravy', required=False)
     servings = forms.IntegerField(label='Počet porcí', required=False)
     tags = forms.ModelMultipleChoiceField(label='Kategorie', widget=forms.CheckboxSelectMultiple,\
-            queryset=Tag.objects.all(), required=False)
+            queryset=Tag.objects.order_by('name'), required=False)
 
     #http://stackoverflow.com/questions/324477/in-a-django-form-how-to-make-a-field-readonly-or-disabled-so-that-it-cannot-be 
     def __init__(self, *args, **kwargs):
