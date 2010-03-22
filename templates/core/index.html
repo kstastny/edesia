@@ -23,13 +23,13 @@
 {# </fieldset> #}
 
 <h3>Nejnovější recepty</h3>
-{# TODO format - hide border #}
 <table style="width:100%;" border="0">
-{% for recipe in recipes %}
+    {% for recipe in recipes %}
+    {# TODO move the styles to external stylesheet - probably not necessary if I can get some designer #}
 <tr>
-  <td><a href="{% url core.views.recipe_detail recipe.slug %}" >{{ recipe.name }}</a></td>
+  <td style="border-style:none;"><a href="{% url core.views.recipe_detail recipe.slug %}" >{{ recipe.name }}</a></td>
   {# TODO format - make the font lighter #}
-  <td>{{ recipe.inserted|date:"j.n.Y" }} </td>
+  <td style="border-style:none;color:#999;">{{ recipe.inserted|date:"j.n.Y" }} </td>
 </tr> 
 {% endfor %}
 </table>
