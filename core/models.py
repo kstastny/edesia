@@ -50,3 +50,14 @@ class Tag(models.Model):
 
     def recipe_count(self):
         return Recipe.objects.filter(tags__id__exact=self.id).count()
+
+
+class News(models.Model):
+    """
+    Represents one piece of news regarding the site
+    """
+
+    #title - internal description of news. 
+    title = models.CharField(max_length=100, blank=True, null=True)
+    text = models.TextField()
+    inserted = models.DateTimeField(auto_now_add=True)

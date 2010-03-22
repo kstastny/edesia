@@ -10,6 +10,18 @@
 <p>Prohlédněte si všechny <a href="{% url category_list %}">kategorie</a> receptů kliknutím na tlačítko 
 <a href="{% url category_list %}">"Recepty"</a>.</p>
 
+{% comment %}
+<fieldset>TODO using fieldsets would be probably better
+<label>test</label>
+{% endcomment %}
+<h3>Novinky</h3>
+{% for n in news %}
+<h4>{{ n.inserted|date:"j. N Y" }}</h4>
+{{ n.text|linebreaksp }}
+{% endfor %}
+
+{# </fieldset> #}
+
 <h3>Nejnovější recepty</h3>
 {# TODO format - hide border #}
 <table style="width:100%;">
