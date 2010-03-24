@@ -11,15 +11,24 @@
 <h2>Kategorie receptů</h2>
 <p><a href="{% url recipe_list %}">Všechny recepty</a></p>
 
-<ul>
-    {% for tag in tags %}
+    <div class="grid_4 alpha">
     <ul>
+    {% for tag in tags_first %}
         <li>
         <a href="{% url recipe_list tag.slug %}">{{ tag.name }}</a>
         </li>
-    </ul>
     {% endfor %}
-</ul>
+    </ul>
+    </div>
+    <div class="grid_4 omega">
+    <ul>
+    {% for tag in tags_second %}
+        <li>
+        <a href="{% url recipe_list tag.slug %}">{{ tag.name }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+    </div>
 
 
 {% endblock content %}
