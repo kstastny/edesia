@@ -52,14 +52,23 @@ Počet porcí: {{ recipe.servings }}
 {% endfor %}
 </ol>
 
-{# TODO render manually - if user is logged, prefill his name #}
+{# TODO render manually - if user is logged, prefill his name, don't allow to change it #}
 {# {% render_comment_form for recipe %} #}
 {% get_comment_form for recipe as form %}
 <form action="{% comment_form_target %}" method="post">
+    <p>Vložte Váš názor na tento recept:<br/>
+    (Pole označená hvězdičkou jsou povinná)</p>
     {# form.as_p #}
     {% for field in form.visible_fields %}
     {{ field.errors }}
-    <p {% ifequal field.name "honeypot" %} style="display:none;" {% endifequal %}>{{ field.label_tag }} {{ field }}</p>
+    <p {% ifequal field.name "honeypot" %} style="display:none;" {% endifequal %}>
+    {% comment %}
+    {% if field.field.required %}*{% endif %} {# field is of type BoundField #}
+    {{ field.label_tag }} 
+    {% endcomment %}
+    {# rendering manually because we need to mark required field with asterisk. make this generic #}
+    <label for="{{ field.auto_id }}">{{ field.label }}{% if field.field.required %}*{% endif %}</label>
+    {{ field }}</p>
     {% endfor %}
 
 
@@ -71,8 +80,6 @@ Počet porcí: {{ recipe.servings }}
       <p class="submit">
         <input type="submit" name="post" class="submit-post" value="Odeslat" />
       </p> 
-
-
 </form>
 
 {% endblock content %}
