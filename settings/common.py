@@ -1,7 +1,5 @@
 # Django settings for edesia project.
-
-DEBUG = True 
-TEMPLATE_DEBUG = DEBUG
+from os import path
 
 ADMINS = (
      ('Karel Stastny', 'errors@edesia.cz'),
@@ -9,16 +7,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-from os import path
-#PROJECT_PATH = path.dirname(path.abspath(path.join(__file__, '..')))
-PROJECT_PATH = path.dirname(path.abspath(__file__))
-
-DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-DATABASE_NAME = path.join(PROJECT_PATH, 'data/data.db')         # Or path to database file if using sqlite3.
-DATABASE_USER = ''             # Not used with sqlite3.
-DATABASE_PASSWORD = ''         # Not used with sqlite3.
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+PROJECT_PATH = path.dirname(path.abspath(path.join(__file__, path.pardir)))
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -40,13 +29,11 @@ USE_I18N = True
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = '%s/site_media/' % PROJECT_PATH
-#MEDIA_ROOT = ''
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = '/site_media/'
-#MEDIA_URL = ''
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -105,14 +92,3 @@ COMMENTS_APP = 'edesia.comments'
 LOGIN_REDIRECT_URL = '/'
 
 AUTH_PROFILE_MODULE = 'auth.UserProfile'
-
-import logging
-#NOTE that the directory is not created automatically!
-LOG_FILE = path.join(PROJECT_PATH, 'logs/django.log')
-LOG_LEVEL = logging.DEBUG
-LOG_FORMAT = '%(asctime)s %(levelname)s %(message)s'
-
-logging.basicConfig(
-        level=LOG_LEVEL,
-        filename=LOG_FILE,
-        format=LOG_FORMAT)
