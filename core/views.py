@@ -8,23 +8,32 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from django.views.decorators.cache import cache_page
 
 from models import Recipe, Tag, News
 from forms import RecipeForm
+from decorators import cache_func
 
 RECIPE_PAGE_SIZE = 25
 
 NEW_RECIPES_COUNT = 5 #count of new recipes displayed on home page
 NEWS_DISPLAYED_COUNT = 3 #number of news displayed on home page
 
+#@cache_page(60*5) #TODO need *not* to cache authentication info
 def index(request):
+
+    return render_to_response('core/index.html',
+            __get_index_data(),
+            context_instance=RequestContext(request))
+
+
+@cache_func()
+def __get_index_data():
     recipes = Recipe.objects.order_by('-inserted')[:NEW_RECIPES_COUNT]
     news = News.objects.order_by('-inserted')[:NEWS_DISPLAYED_COUNT]
 
-    return render_to_response('core/index.html',
-            { 'recipes': recipes, 
-                'news' : news },
-            context_instance=RequestContext(request))
+    return { 'recipes': recipes, 'news' : news }
+
 
 
 def recipe_detail(request, recipe_slug):
