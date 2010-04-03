@@ -34,6 +34,10 @@ def __get_index_data():
 
     return { 'recipes': recipes, 'news' : news }
 
+def searchquery(request):
+    return render_to_response('core/search_result.html',
+            context_instance=RequestContext(request))
+
 
 
 def recipe_detail(request, recipe_slug):

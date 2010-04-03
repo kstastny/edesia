@@ -31,6 +31,8 @@ urlpatterns += patterns('edesia',
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
 
+    url(r'^query/$','core.views.searchquery', name='search_query'),
+
 
     url(r'^categories/$', 'core.views.category_list', name='category_list'),
     #TODO use different home page

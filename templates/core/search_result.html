@@ -1,0 +1,66 @@
+{% extends "core/base.html" %}
+{% load edesia_extras %}
+
+{% block extrahead %}
+<style type="text/css">
+.gsc-search-box {
+    display: none;
+}
+
+.gsc-twiddleRegionCell gsc-twiddle-opened {
+    display: none;
+}
+</style>
+{% endblock extrahead %}
+
+{% block title %}
+ Edesia - výsledky vyhledávání
+{% endblock title %}
+
+{% block content %}
+
+
+<div id="cse" style="width: 100%;"></div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'cs'});
+  google.setOnLoadCallback(function(){
+    var customSearchControl = new google.search.CustomSearchControl('010609958205638306146:vfuc0py8qby');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions()
+    options.setSearchFormRoot('cse-search-form')
+    customSearchControl.draw('cse', options);
+
+//http://www.go4expert.com/forums/showthread.php?t=2163
+// get the current URL
+ var url = window.location.toString();
+ //get the parameters
+ url.match(/\?(.+)$/);
+ var params = RegExp.$1;
+// split up the query string and store in an
+ // associative array
+ var params = params.split("&");
+ var queryStringList = {};
+ 
+ for(var i=0;i<params.length;i++)
+ {
+     var tmp = params[i].split("=");
+     queryStringList[tmp[0]] = unescape(tmp[1]);
+ }
+ 
+ // print all querystring in key value pairs
+ //for(var i in queryStringList)
+ //    document.write(i+" = "+queryStringList[i]+"<br/>");
+ //alert(queryStringList)
+ customSearchControl.execute(queryStringList['qsearch'])
+
+ //TODO fill the query to Search INPUT
+
+  }, true);
+</script>
+<link rel="stylesheet" href="http://www.google.com/cse/style/look/default.css" type="text/css" />
+
+{% endblock content %}
+
+{% block context_menu %}
+{% endblock context_menu %}

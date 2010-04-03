@@ -41,15 +41,13 @@
 		</div>		
 		
 		<div id="header-image"></div> 		
-        {% comment %}	
-		<form id="quick-search" action="index.html" method="get" >
-			<p>
-			<label for="qsearch">Search:</label>
-			<input class="tbox" id="qsearch" type="text" name="qsearch" value="Search..." title="Start typing and hit ENTER" />
-			<input class="btn" alt="Search" type="image" name="searchsubmit" title="Search" src="images/search.gif" />
+        <form id="quick-search" action="{% url search_query %}" method="get" >
+            <p>
+			<label for="qsearch">Vyhledávání:</label>
+			<input class="tbox" id="qsearch" type="text" name="qsearch" value="" title="Zadejte hledaný výraz a stiskněte Enter" />
+            <input class="btn" alt="Search" type="image" name="searchsubmit" title="Search" src="{{MEDIA_URL}}images/search.gif" />
 			</p>
         </form>					
-        {% endcomment %}
 	
 	<!-- header ends here -->
 	</div></div>
