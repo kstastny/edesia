@@ -1,7 +1,11 @@
 {% extends "core/base.html" %}
 
 {% block title %}
- Edesia - recepty 
+ {% if tag %}
+ Edesia - recepty v kategorii {{ tag.name }}
+ {% else %}
+ Edesia - všechny recepty
+ {% endif %}
 {% endblock title %}
 
 {% block content %}
