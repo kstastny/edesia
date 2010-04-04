@@ -10,7 +10,7 @@ urlpatterns = patterns('',
     (r'^%s(?P<path>.*)$' % settings.MEDIA_URL[1:], 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page':'/'}, name='logout'),
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'auth/login.html'}, name='login'),
-    url(r'^register/$', 'edesia.auth.views.register', name='register'),
+    url(r'^register/$', 'edesia.users.views.register', name='register'),
     url(r'^comments/', include('django.contrib.comments.urls')),
     )
 

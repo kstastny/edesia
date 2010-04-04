@@ -77,7 +77,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django.contrib.flatpages',
     'django.contrib.comments',
-    'edesia.auth',#TODO rename - has problems when generating DB (same name as auth in django.contrib)
+    'edesia.users',
     'edesia.core',
     'edesia.south',#standard django-south 
     'edesia.contact',
@@ -91,4 +91,4 @@ COMMENTS_APP = 'edesia.comments'
 
 LOGIN_REDIRECT_URL = '/'
 
-AUTH_PROFILE_MODULE = 'auth.UserProfile'
+AUTH_PROFILE_MODULE = 'users.UserProfile'

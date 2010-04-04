@@ -6,8 +6,8 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
-from auth.forms import UserCreationForm
-from auth.models import UserProfile
+from users.forms import UserCreationForm
+from users.models import UserProfile
 
 def register(request):
     if request.method == 'POST':

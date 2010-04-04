@@ -1,4 +1,4 @@
-from edesia.auth.models import UserProfile
+from edesia.users.models import UserProfile
 from django.contrib import admin
 
 class UserProfileAdmin(admin.ModelAdmin):
