@@ -63,17 +63,9 @@ def recipe_detail(request, recipe_slug):
     r = get_object_or_404(Recipe, slug=recipe_slug)
     #normalize line breaks - see django.utils.html.linebreaks
     ingredients = re.sub(r'\r\n|\r|\n','\n', force_unicode(r.ingredients))
-    ingredient_list = re.split('\n{1,}',ingredients)
+    ingredient_list = re.split('\n{1,}',ingredients.strip())
 
     vote = r.rating.get_rating_for_user(request.user, None)
-    
-    """ 
-    print ingredients
-    print ingredient_list
-
-    ingredient_list = ['a','b','c']
-    """
-    #TODO remove empty rows from ingredients
             
     return render_to_response('core/recipe.html', 
             {'recipe': r,
