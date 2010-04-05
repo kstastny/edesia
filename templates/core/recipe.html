@@ -1,6 +1,7 @@
 {% extends "core/base.html" %}
 {% load edesia_extras %}
 {% load comments %}
+{% load ratings %}
 
 {% block title %}
  Edesia - {{ recipe.name }}
@@ -31,6 +32,34 @@ Počet porcí: {{ recipe.servings }}
 {% if recipe.inserted_by %}
 <p>Recept vložil{% if not recipe.inserted_by.get_profile.gender %}a{% endif %} {{ recipe.inserted_by }} </p>
 {% endif %}
+
+<h4>Hodnocení receptu</h4>
+
+{% if vote %}
+Vaše hodnocení: {{ vote }} <br />
+{% endif %}
+{% if recipe.rating.get_real_rating %}
+Celkové hodnocení: {{ recipe.rating.get_real_rating|floatformat:"-2" }}/5
+{% else %}
+Recept ještě nikdo nehodtnotil. Buďte první a přidejte své hodnocení.
+{% endif %}
+
+
+{# recipe rating #}
+{# TODO use some AJAX and stars #}
+<form action="{% url recipe_rate recipe.id %}" method="post">
+
+    <input type="radio" value="1" name="rating" />1
+    <input type="radio" value="2" name="rating" />2
+    <input type="radio" value="3" name="rating" />3
+    <input type="radio" value="4" name="rating" />4
+    <input type="radio" value="5" name="rating" />5
+
+    <p class="submit">
+        <input type="submit" name="post" class="submit-post" value="Hlasovat" />
+    </p> 
+
+</form>
 
 
 {# recipe comments #}

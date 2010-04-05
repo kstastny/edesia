@@ -10,6 +10,8 @@ from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.views.decorators.cache import cache_page
 
+from djangoratings.views import AddRatingFromModel
+
 from models import Recipe, Tag, News
 from forms import RecipeForm
 from decorators import cache_func
@@ -38,6 +40,23 @@ def searchquery(request):
     return render_to_response('core/search_result.html',
             context_instance=RequestContext(request))
 
+def rate_recipe(request, recipe_id):
+    recipe = Recipe.objects.get(id=recipe_id)
+    if request.method == 'POST':
+        rating = request.POST['rating']
+        params = {
+                'object_id': recipe.id,
+                'field_name': 'rating',
+                'score': rating,
+                'app_label': 'core',
+                'model': 'recipe',
+                }
+        response = AddRatingFromModel()(request, **params)
+        if response.status_code != 200:
+            raise Exception('Error saving rating: %s', response.status_code)
+
+    return HttpResponseRedirect(reverse('recipe_detail', \
+            args=[recipe.slug]))
 
 
 def recipe_detail(request, recipe_slug):
@@ -45,6 +64,8 @@ def recipe_detail(request, recipe_slug):
     #normalize line breaks - see django.utils.html.linebreaks
     ingredients = re.sub(r'\r\n|\r|\n','\n', force_unicode(r.ingredients))
     ingredient_list = re.split('\n{1,}',ingredients)
+
+    vote = r.rating.get_rating_for_user(request.user, None)
     
     """ 
     print ingredients
@@ -57,7 +78,8 @@ def recipe_detail(request, recipe_slug):
     return render_to_response('core/recipe.html', 
             {'recipe': r,
              'ingredient_list': ingredient_list,
-             'can_modify': request.user.can_modify(r) },
+             'can_modify': request.user.can_modify(r),
+             'vote': vote },
             context_instance=RequestContext(request))
 
 def recipe_list(request, tag_slug):

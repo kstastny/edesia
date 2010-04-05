@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
+from djangoratings.fields import RatingField
 
 class Recipe(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -12,7 +13,8 @@ class Recipe(models.Model):
     servings = models.PositiveIntegerField(blank=True, null=True)
     preparation_time = models.PositiveIntegerField(blank=True, null=True)
     inserted_by = models.ForeignKey(User, null=True)
-    slug = models.SlugField(unique=True, blank=True) 
+    slug = models.SlugField(unique=True, blank=True)
+    rating = RatingField(range=5, allow_anonymous=False, can_change_vote=True)
 
     class Meta:
         ordering = ['name']

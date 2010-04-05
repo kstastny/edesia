@@ -27,6 +27,7 @@ urlpatterns += patterns('edesia',
     url(r'^recipe/(?P<recipe_slug>[\w-]+)/$','core.views.recipe_detail', name='recipe_detail'),
     url(r'^recipe_edit/$','core.views.recipe_edit', {'recipe_slug':None}, name='recipe_edit'),
     url(r'^recipe_edit/(?P<recipe_slug>[\w-]+)/$','core.views.recipe_edit',name='recipe_edit'),
+    url(r'^recipe_rate/(?P<recipe_id>[0-9]+)/$','core.views.rate_recipe',name='recipe_rate'),
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
