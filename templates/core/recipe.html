@@ -41,13 +41,15 @@ Vaše hodnocení: {{ vote }} <br />
 {% if recipe.rating.get_real_rating %}
 Celkové hodnocení: {{ recipe.rating.get_real_rating|floatformat:"-2" }}/5
 {% else %}
-Recept ještě nikdo nehodtnotil. Buďte první a přidejte své hodnocení.
+Recept ještě nikdo nehodnotil. Buďte první a přidejte své hodnocení. <br />
 {% endif %}
 
 
 {# recipe rating #}
+{% if user.is_authenticated %}
 {# TODO use some AJAX and stars #}
 <form action="{% url recipe_rate recipe.id %}" method="post">
+    Počet bodů - vyšší číslo znamená chutnější recept.<br />
 
     <input type="radio" value="1" name="rating" />1
     <input type="radio" value="2" name="rating" />2
@@ -55,11 +57,14 @@ Recept ještě nikdo nehodtnotil. Buďte první a přidejte své hodnocení.
     <input type="radio" value="4" name="rating" />4
     <input type="radio" value="5" name="rating" />5
 
-    <p class="submit">
-        <input type="submit" name="post" class="submit-post" value="Hlasovat" />
-    </p> 
+    <input type="submit" name="post" class="submit-post" value="Hlasovat" style="float: right;"/>
 
 </form>
+{% else %}
+Pro hodnocení receptu se 
+<a href="{% url login %}">přihlaste</a> nebo 
+<a href="{% url register %}">zaregistrujte</a>.
+{% endif %}
 
 
 {# recipe comments #}

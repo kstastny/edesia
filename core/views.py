@@ -65,8 +65,11 @@ def recipe_detail(request, recipe_slug):
     ingredients = re.sub(r'\r\n|\r|\n','\n', force_unicode(r.ingredients))
     ingredient_list = re.split('\n{1,}',ingredients.strip())
 
-    vote = r.rating.get_rating_for_user(request.user, None)
-            
+    if request.user.is_authenticated():
+        vote = r.rating.get_rating_for_user(request.user, None)
+    else:
+        vote = None
+
     return render_to_response('core/recipe.html', 
             {'recipe': r,
              'ingredient_list': ingredient_list,
