@@ -29,10 +29,15 @@ DATABASE_PASSWORD = 'lZFHJBNeYP'         # Not used with sqlite3.
 DATABASE_HOST = 'sql.edesia.cz'             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = '3306'             # Set to empty string for default. Not used with sqlite3.
 
+
+ADMIN_MEDIA_PREFIX = '/site_media/admin/'
+
+
 import logging
 LOG_FILE = path.join(PROJECT_PATH, '../logs/django.log')
 LOG_LEVEL = logging.DEBUG
 LOG_FORMAT = '%(asctime)s %(levelname)s %(message)s'
+
 
 logging.basicConfig(
         level=LOG_LEVEL,
