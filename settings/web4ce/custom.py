@@ -2,7 +2,7 @@
 from os import path
 from settings.common import PROJECT_PATH
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
