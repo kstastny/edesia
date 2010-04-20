@@ -15,6 +15,7 @@ def register(request):
         if form.is_valid():
             form.save()
             user = form.instance
+            user.email = form.cleaned_data['email']
 
             #add user to group Users
             user.groups.add(Group.objects.get(name='Users'))
