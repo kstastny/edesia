@@ -30,11 +30,14 @@ Počet porcí: {{ recipe.servings }}
 {{ recipe.directions|linebreaksp }}
 
 {% if recipe.inserted_by %}
-<p>Recept vložil{% if not recipe.inserted_by.get_profile.gender %}a{% endif %} {{ recipe.inserted_by }} </p>
+<p style="float:right">Recept vložil{% if not recipe.inserted_by.get_profile.gender %}a{% endif %} {{ recipe.inserted_by }} </p>
+<br />
+<br />
 {% endif %}
 
 <h4>Hodnocení receptu</h4>
 
+<p>
 {% if vote %}
 Vaše hodnocení: {{ vote }} <br />
 {% endif %}
@@ -43,7 +46,7 @@ Celkové hodnocení: {{ recipe.rating.get_real_rating|floatformat:"-2" }}/5
 {% else %}
 Recept ještě nikdo nehodnotil. Buďte první a přidejte své hodnocení. <br />
 {% endif %}
-
+</p>
 
 {# recipe rating #}
 {% if user.is_authenticated %}
@@ -61,9 +64,11 @@ Recept ještě nikdo nehodnotil. Buďte první a přidejte své hodnocení. <br 
 
 </form>
 {% else %}
+<p>
 Pro hodnocení receptu se 
 <a href="{% url login %}">přihlaste</a> nebo 
 <a href="{% url register %}">zaregistrujte</a>.
+</p>
 {% endif %}
 
 
