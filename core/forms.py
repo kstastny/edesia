@@ -2,6 +2,7 @@
 import logging
 
 from django import forms
+from django.forms.util import ValidationError
 from django.forms import ModelForm
 from models import Recipe, Tag
 
@@ -28,11 +29,21 @@ class RecipeForm(ModelForm):
             
 
     def clean_name(self):
-        logging.debug('In RecipeForm.clean_name')
+        #logging.debug('In RecipeForm.clean_name')
+        #raise ValidationError('no way man')
         instance = getattr(self, 'instance', None)
         if instance and instance.id:
             return instance.name
         return self.cleaned_data.get('name', None)
+
+    
+    def unique_error_message(self, unique_check):
+        if len(unique_check) == 1:
+            return u'Recept s názvem "%s" již existuje. Zadejte prosím jiný název receptu.' % \
+                    self.data['name']
+        else:
+            super(RecipeForm, self).unique_error_message(unique_check)
+
 
     class Meta:
         model = Recipe

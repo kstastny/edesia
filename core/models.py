@@ -18,6 +18,7 @@ class Recipe(models.Model):
 
     class Meta:
         ordering = ['name']
+        verbose_name = 'recept'
 
     def save(self):
         #TODO if slug already exists, assign another - increasing numbers
