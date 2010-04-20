@@ -107,7 +107,12 @@ Pro hodnocení receptu se
     {% endcomment %}
     {# rendering manually because we need to mark required field with asterisk. make this generic #}
     <label for="{{ field.auto_id }}">{{ field.label }}{% if field.field.required %}*{% endif %}</label>
-    {{ field }}</p>
+    {% ifequal field.name "name" %}
+    {% if user.is_authenticated %} <input id="id_name" value="{{ user.username }}" type="text" name="name" readonly="true" disabled="true" />
+        {% else %} {{ field }}{% endif %}
+        {% else %}
+    {{ field }}
+    {% endifequal %}</p>
     {% endfor %}
 
 
