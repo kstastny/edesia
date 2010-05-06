@@ -7,6 +7,10 @@
  Edesia - {{ recipe.name }}
 {% endblock title %}
 
+{% block meta_description %}
+<meta name="description" content="Popis receptu {{recipe.name }} na Internetové kuchařce Edesia. " />
+{% endblock %}
+
 {% block content %}
 
 <h1>{{ recipe.name}}</h1>
