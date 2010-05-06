@@ -5,6 +5,8 @@ from settings.common import PROJECT_PATH
 DEBUG = True 
 TEMPLATE_DEBUG = DEBUG
 
+SERVE_STATIC_FILES = True
+
 DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
 DATABASE_NAME = path.join(PROJECT_PATH, 'data/data.db')         # Or path to database file if using sqlite3.
 DATABASE_USER = ''             # Not used with sqlite3.

@@ -5,6 +5,9 @@ from settings.common import PROJECT_PATH
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
+#If True, static files will be served by Django
+SERVE_STATIC_FILES = False
+
 ADMINS = (
 #     ('Karel Stastny', 'errors@edesia.cz'),
 )
