@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /register/
+Disallow: /recipe_edit/
+Disallow: /recipe_rate/
+Disallow: /login/

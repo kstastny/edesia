@@ -1,0 +1,7 @@
+- run python script 'deploy_beta.py'
+- test old version - should not be broken after dataase migration
+- copy '_dist' directory to FTP directory public_html/beta
+- test beta.edesia.cz
+- download and backup old version
+- rename FTP directory public_html/beta to public_html/www
+- retest basic functionality

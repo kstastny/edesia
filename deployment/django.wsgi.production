@@ -1,0 +1,38 @@
+import os
+import sys
+from os import path
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'edesia.settings'
+
+#TODO change and/or try without setting - maybe django is already installed
+#sys.path.append('/home/home1/edesia_cz/public_html/django/bin')
+#sys.path.append('/home/home1/edesia_cz/public_html/www')
+#sys.path.append('/home/home1/edesia_cz/public_html/www/edesia')
+#to function correctly in beta
+actual_directory = path.dirname(path.abspath(__file__))
+sys.path.append(actual_directory)
+sys.path.append(path.join(actual_directory,'edesia'))
+
+import django.core.handlers.wsgi
+application = django.core.handlers.wsgi.WSGIHandler()
+#app = django.core.handlers.wsgi.WSGIHandler()
+
+
+#testing - does not fail!
+#note: rename to 'application' to catch exceptions from django WSGI handler
+def application1(environ, start_response):
+    status = '200 OK'
+    try:
+        app(environ, start_response)
+        output = 'ok'
+    except Exception, e:
+        import traceback
+#        output = 'error: %s ' % str(e)
+        output = 'error: %s ' % traceback.format_exc()
+    #output = 'Output'
+
+    response_headers = [('Content-type', 'text/plain'),
+                        ('Content-Length', str(len(output)))]
+    start_response(status, response_headers)
+
+    return [output]

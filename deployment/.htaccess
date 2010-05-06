@@ -1,0 +1,23 @@
+#mod_deflat http://www.dquinn.net/htaccess-adding-etags-gzip-expires-headers/
+SetOutputFilter DEFLATE
+
+# 1-WEEK EXPIRES HEADER
+ExpiresActive On
+ExpiresDefault A0
+ExpiresDefault A604800
+Header append Cache-Control "public"
+
+FileETag none
+
+DirectoryIndex django.wsgi
+
+AddHandler wsgi-script .wsgi
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^(site_media/.*)$ /edesia/$1 [QSA,PT,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ /django.wsgi/$1 [QSA,PT,L]
+
+
