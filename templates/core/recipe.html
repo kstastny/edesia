@@ -39,9 +39,11 @@ Počet porcí: {{ recipe.servings }}
 <br />
 {% endif %}
 
+{% comment %}
 <h4>Hodnocení receptu</h4>
 
 <p>
+
 {% if vote %}
 Vaše hodnocení: {{ vote }} <br />
 {% endif %}
@@ -74,6 +76,7 @@ Pro hodnocení receptu se
 <a href="{% url register %}">zaregistrujte</a>.
 </p>
 {% endif %}
+{% endcomment %}
 
 
 {# recipe comments #}
