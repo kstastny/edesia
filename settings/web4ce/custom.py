@@ -22,7 +22,7 @@ EMAIL_HOST = 'mail.edesia.cz'
 EMAIL_HOST_PASSWORD = 'lZFHJBNeYP'
 EMAIL_HOST_USER = 'info@edesia.cz'
 EMAIL_SUBJECT_PREFIX = '[Edesia]'
-EMAIL_USE_TLS = True
+EMAIL_USE_TLS = False #with True, the sending fails
 
 
 DATABASE_ENGINE = 'mysql'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
