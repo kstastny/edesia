@@ -9,7 +9,7 @@ TEMPLATE_DEBUG = DEBUG
 SERVE_STATIC_FILES = False
 
 ADMINS = (
-#     ('Karel Stastny', 'errors@edesia.cz'),
+     ('Karel Stastny', 'errors@edesia.cz'),
 )
 
 MANAGERS = ADMINS
