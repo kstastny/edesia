@@ -54,7 +54,7 @@ Recept ještě nikdo nehodnotil. Buďte první a přidejte své hodnocení. <br 
 </p>
 
 {# recipe rating #}
-{# {% if user.is_authenticated %} #}
+ {% if can_vote %}
 {# TODO use some AJAX and stars #}
 <form action="{% url recipe_rate recipe.id %}" method="post">
     Počet bodů - vyšší číslo znamená chutnější recept.<br />
@@ -68,15 +68,17 @@ Recept ještě nikdo nehodnotil. Buďte první a přidejte své hodnocení. <br 
     <input type="submit" name="post" class="submit-post" value="Hlasovat" style="float: right;"/>
 
 </form>
-    {% comment %}
+{% else %}
+    {% if vote %}
+    {# User has already voted - cannot vote again as anonymous #}
     {% else %}
     <p>
-    Pro hodnocení receptu se 
-    <a href="{% url login %}">přihlaste</a> nebo 
-    <a href="{% url register %}">zaregistrujte</a>.
-    </p>
+        Bohužel byl vyčerpán limit anonymních hodnocení receptu pro tuto IP adresu. Pokud chcete recept ohodnotit, tak se prosím
+        <a href="{% url login %}">přihlaste</a> nebo 
+        <a href="{% url register %}">zaregistrujte</a>.
+        </p>
     {% endif %}
-    {% endcomment %}
+{% endif %}
 
 
 {# recipe comments #}

@@ -5,7 +5,7 @@ import forms
 import itertools
 
 from models import Vote, Score
-from default_settings import RATINGS_VOTES_PER_IP
+from default_settings import RATINGS_VOTES_PER_IP, ANONYMOUS_RATINGS_VOTES_PER_IP
 from exceptions import *
 
 if 'django.contrib.contenttypes' not in settings.INSTALLED_APPS:
@@ -104,6 +104,23 @@ class RatingManager(object):
         except Vote.DoesNotExist:
             pass
         return
+
+    def accept_anonymous_votes(self, ip_address):
+        """
+        Added by Karel Stastny
+        Returns true if user from this IP address can vote anonymously
+        """
+        if getattr(settings, 'ANONYMOUS_RATINGS_VOTES_PER_IP', ANONYMOUS_RATINGS_VOTES_PER_IP):
+            num_votes = Vote.objects.filter(
+                content_type=self.get_content_type(),
+                object_id=self.instance.pk,
+                key=self.field.key,
+                ip_address=ip_address,
+            ).count()
+            if num_votes >= getattr(settings, 'ANONYMOUS_RATINGS_VOTES_PER_IP', ANONYMOUS_RATINGS_VOTES_PER_IP):
+                return False
+        return True
+                
         
     def add(self, score, user, ip_address, commit=True):
         """add(score, user, ip_address)
@@ -139,14 +156,14 @@ class RatingManager(object):
             kwargs['ip_address'] = ip_address
             #Karel Stastny:
             #bugfix - anonymous can change their votes based on IP! 
-            if getattr(settings, 'RATINGS_VOTES_PER_IP', RATINGS_VOTES_PER_IP):
+            if getattr(settings, 'ANONYMOUS_RATINGS_VOTES_PER_IP', ANONYMOUS_RATINGS_VOTES_PER_IP):
                 num_votes = Vote.objects.filter(
                     content_type=kwargs['content_type'],
                     object_id=kwargs['object_id'],
                     key=kwargs['key'],
                     ip_address=ip_address,
                 ).count()
-                if num_votes >= getattr(settings, 'RATINGS_VOTES_PER_IP', RATINGS_VOTES_PER_IP):
+                if num_votes >= getattr(settings, 'ANONYMOUS_RATINGS_VOTES_PER_IP', ANONYMOUS_RATINGS_VOTES_PER_IP):
                     raise IPLimitReached()
             kwargs.update(defaults)
             rating, created = Vote.objects.create(**kwargs), True

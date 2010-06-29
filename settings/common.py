@@ -93,3 +93,7 @@ COMMENTS_APP = 'edesia.comments'
 LOGIN_REDIRECT_URL = '/'
 
 AUTH_PROFILE_MODULE = 'users.UserProfile'
+
+
+#ratings setting
+RATINGS_VOTES_PER_IP = 10

@@ -42,28 +42,24 @@ def searchquery(request):
 
 def rate_recipe(request, recipe_id):
     recipe = Recipe.objects.get(id=recipe_id)
+    response = HttpResponseRedirect(reverse('recipe_detail', \
+            args=[recipe.slug]))
     if request.method == 'POST':
         rating = request.POST['rating']
-        """
-        params = {
-                'object_id': recipe.id,
-                'field_name': 'rating',
-                'score': rating,
-                'app_label': 'core',
-                'model': 'recipe',
-                }
-        response = AddRatingFromModel()(request, **params)
-        if response.status_code != 200:
-            raise Exception('Error saving rating: %s', response.status_code
-        """
         #NOTE error handling is flawed when using the view to rate, so we call the model directly
         if request.user.is_authenticated():
             recipe.rating.add(rating, request.user, request.META['REMOTE_ADDR']) 
         else:
-            recipe.rating.add(rating, None, request.META['REMOTE_ADDR']) 
+            cookie_name = 'recipe_voted_' + str(recipe.id) 
+            if cookie_name in request.COOKIES:
+                pass #TODO display some message
+            else:
+                recipe.rating.add(rating, None, request.META['REMOTE_ADDR']) 
+                #do not allow the user to vote again. Not bulletproof, but sufficient
+                #set the max_age for a week - parameter is in seconds
+                response.set_cookie('recipe_voted_'+str(recipe.id), value=rating, max_age=604800)
 
-    return HttpResponseRedirect(reverse('recipe_detail', \
-            args=[recipe.slug]))
+    return response
 
 
 def recipe_detail(request, recipe_slug):
@@ -75,13 +71,27 @@ def recipe_detail(request, recipe_slug):
     if request.user.is_authenticated():
         vote = r.rating.get_rating_for_user(request.user, None)
     else:
-        vote = None
+        #read data from cookie if specified
+        cookie_name = 'recipe_voted_' + str(r.id) 
+        if cookie_name in request.COOKIES:
+            vote = request.COOKIES[cookie_name]
+        else:
+            vote = None
+
+    can_vote = 0
+    if request.user.is_authenticated():
+        can_vote = 1
+    else:
+        #anonymous can vote only if he has not voted yet AND the anonymous voting limit is not exceeded
+        can_vote = r.rating.accept_anonymous_votes(request.META['REMOTE_ADDR']) and \
+                not vote
 
     return render_to_response('core/recipe.html', 
             {'recipe': r,
              'ingredient_list': ingredient_list,
              'can_modify': request.user.can_modify(r),
-             'vote': vote },
+             'vote': vote,
+             'can_vote': can_vote},
             context_instance=RequestContext(request))
 
 def recipe_list(request, tag_slug):
