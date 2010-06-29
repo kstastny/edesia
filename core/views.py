@@ -44,6 +44,7 @@ def rate_recipe(request, recipe_id):
     recipe = Recipe.objects.get(id=recipe_id)
     if request.method == 'POST':
         rating = request.POST['rating']
+        """
         params = {
                 'object_id': recipe.id,
                 'field_name': 'rating',
@@ -53,7 +54,13 @@ def rate_recipe(request, recipe_id):
                 }
         response = AddRatingFromModel()(request, **params)
         if response.status_code != 200:
-            raise Exception('Error saving rating: %s', response.status_code)
+            raise Exception('Error saving rating: %s', response.status_code
+        """
+        #NOTE error handling is flawed when using the view to rate, so we call the model directly
+        if request.user.is_authenticated():
+            recipe.rating.add(rating, request.user, request.META['REMOTE_ADDR']) 
+        else:
+            recipe.rating.add(rating, None, request.META['REMOTE_ADDR']) 
 
     return HttpResponseRedirect(reverse('recipe_detail', \
             args=[recipe.slug]))

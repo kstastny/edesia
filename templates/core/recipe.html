@@ -39,7 +39,6 @@ Počet porcí: {{ recipe.servings }}
 <br />
 {% endif %}
 
-{% comment %}
 <h4>Hodnocení receptu</h4>
 
 <p>
@@ -55,7 +54,7 @@ Recept ještě nikdo nehodnotil. Buďte první a přidejte své hodnocení. <br 
 </p>
 
 {# recipe rating #}
-{% if user.is_authenticated %}
+{# {% if user.is_authenticated %} #}
 {# TODO use some AJAX and stars #}
 <form action="{% url recipe_rate recipe.id %}" method="post">
     Počet bodů - vyšší číslo znamená chutnější recept.<br />
@@ -69,14 +68,15 @@ Recept ještě nikdo nehodnotil. Buďte první a přidejte své hodnocení. <br 
     <input type="submit" name="post" class="submit-post" value="Hlasovat" style="float: right;"/>
 
 </form>
-{% else %}
-<p>
-Pro hodnocení receptu se 
-<a href="{% url login %}">přihlaste</a> nebo 
-<a href="{% url register %}">zaregistrujte</a>.
-</p>
-{% endif %}
-{% endcomment %}
+    {% comment %}
+    {% else %}
+    <p>
+    Pro hodnocení receptu se 
+    <a href="{% url login %}">přihlaste</a> nebo 
+    <a href="{% url register %}">zaregistrujte</a>.
+    </p>
+    {% endif %}
+    {% endcomment %}
 
 
 {# recipe comments #}

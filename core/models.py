@@ -14,7 +14,7 @@ class Recipe(models.Model):
     preparation_time = models.PositiveIntegerField(blank=True, null=True)
     inserted_by = models.ForeignKey(User, null=True)
     slug = models.SlugField(unique=True, blank=True)
-    rating = RatingField(range=5, allow_anonymous=False, can_change_vote=True)
+    rating = RatingField(range=5, allow_anonymous=True, can_change_vote=True)
 
     class Meta:
         ordering = ['name']
