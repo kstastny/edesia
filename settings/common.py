@@ -96,4 +96,4 @@ AUTH_PROFILE_MODULE = 'users.UserProfile'
 
 
 #ratings setting
-RATINGS_VOTES_PER_IP = 10
+RATINGS_VOTES_PER_IP = 999 #Effectively ignore this parameter
