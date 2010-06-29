@@ -137,10 +137,8 @@ class RatingManager(object):
         )
         if not user:
             kwargs['ip_address'] = ip_address
-
-        try:
-            rating, created = Vote.objects.get(**kwargs), False
-        except Vote.DoesNotExist:
+            #Karel Stastny:
+            #bugfix - anonymous can change their votes based on IP! 
             if getattr(settings, 'RATINGS_VOTES_PER_IP', RATINGS_VOTES_PER_IP):
                 num_votes = Vote.objects.filter(
                     content_type=kwargs['content_type'],
@@ -152,6 +150,23 @@ class RatingManager(object):
                     raise IPLimitReached()
             kwargs.update(defaults)
             rating, created = Vote.objects.create(**kwargs), True
+            # Karel Stastny end
+            #TODO implement limit for voting
+        else:  
+            try:
+                rating, created = Vote.objects.get(**kwargs), False
+            except Vote.DoesNotExist:
+                if getattr(settings, 'RATINGS_VOTES_PER_IP', RATINGS_VOTES_PER_IP):
+                    num_votes = Vote.objects.filter(
+                        content_type=kwargs['content_type'],
+                        object_id=kwargs['object_id'],
+                        key=kwargs['key'],
+                        ip_address=ip_address,
+                    ).count()
+                    if num_votes >= getattr(settings, 'RATINGS_VOTES_PER_IP', RATINGS_VOTES_PER_IP):
+                        raise IPLimitReached()
+                kwargs.update(defaults)
+                rating, created = Vote.objects.create(**kwargs), True
             
         has_changed = False
         if not created:
