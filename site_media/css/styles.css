@@ -33,27 +33,27 @@ body
 
 #menu_list
 {
-  display: block;
-  list-style-type: none;
+    display: block;
+    list-style-type: none;
+    color: #4F9032;
 }
 
 #menu_list li
 {
   float: left;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
   padding-right: 50px;
 }
 
 #menu_list a
 {
-  color: rgb(172,192,167);
-  text-decoration: none;
+    text-decoration: none;
 }
 
-#menu_list a:hover
+a:hover
 {
-  color: rgb(255,32,32);
+  color: #FF2020;
 }
 
 hr
@@ -92,7 +92,6 @@ hr
 #login_info span.nobold
 {
     font-weight: normal;
-    color: #ACC0A7;
 }
 
 #main
@@ -235,10 +234,6 @@ a
     text-decoration: none;
 }
 
-a:hover
-{
-  text-decoration: 1px dotted #FF2020;
-}
 
 #ingredients
 {
@@ -295,11 +290,6 @@ a:hover
     border:1px solid #F0F0F0;
     /* margin:10px; */
     padding:15px 25px 25px 20px;
-}
-
-#right_thin a:hover
-{
-  text-decoration: underline;
 }
 
 
@@ -362,8 +352,9 @@ form p label
 
 #uvod_prvni a:hover
 {
-  text-decoration: underline;
+  color: #FF2020;
 }
+
 
 #uvod_prvni img
 {
@@ -390,9 +381,16 @@ form p label
 
 #uvod_treti a
 {
-  color: rgb(79,144,50);
+  color: #4F9032;
   text-decoration: none;
   line-height: 2em;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+#uvod_treti a:hover
+{
+  color: #FF2020;
 }
 
 #uvod_treti h2
@@ -400,10 +398,6 @@ form p label
   font-size: 18px;
 }
 
-#uvod_treti a:hover
-{
-  text-decoration: underline;
-}
 
 #uvod_treti img
 {

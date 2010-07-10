@@ -133,6 +133,7 @@ Recept {{ recipe.name }}
 
 {% block right %}
     {{ block.super }}
+    <p><a href="{% url recipe_edit %}">Nový recept</a></p>
 
     {% if can_modify %}
     <p><a href="{% url recipe_edit recipe.slug %}">Upravit recept</a></p>
