@@ -1,0 +1,485 @@
+body
+{
+  background-color: rgb(255,255,255);
+  font-family: Verdana;
+  font-size: 11px;
+  margin: 0px;
+  line-height: 1.36em;
+}
+
+#body
+{
+  margin: 0px auto;
+  width: 960px;
+}
+
+#baner
+{
+  padding-left:95px;
+  /* width: 960px; */
+  width: 700px;
+  height: 106px;
+  /* background-image: url("../layout/baner.png"); */
+  background-repeat: no-repeat;
+}
+
+#menu
+{
+  text-align: center;
+  width: 960px;
+  padding-left: 70px;
+  height: 20px;
+}
+
+#menu_list
+{
+  display: block;
+  list-style-type: none;
+}
+
+#menu_list li
+{
+  float: left;
+  font-size: 13px;
+  font-weight: bold;
+  padding-right: 50px;
+}
+
+#menu_list a
+{
+  color: rgb(172,192,167);
+  text-decoration: none;
+}
+
+#menu_list a:hover
+{
+  color: rgb(255,32,32);
+}
+
+hr
+{
+  border: 0px;
+  border-bottom: 1px solid rgb(209,233,192);
+  height: 1px;
+}
+
+#aboutpic1
+{
+  float: left;
+  padding-left: 20px;
+  padding-right: 35px;
+}
+
+#aboutpic2
+{
+  float: right;
+/*  position:relative;
+  top: -120px;
+  left: 110px;*/
+  margin-top: -120px;
+  padding: 0 35px 10px 20px;
+  z-index: -20;
+}
+
+/* header login info */
+#login_info
+{
+    position:relative;
+    top: -10px;
+    font-size: 10px;
+}
+
+#login_info span.nobold
+{
+    font-weight: normal;
+    color: #ACC0A7;
+}
+
+#main
+{
+    float:none;
+    padding-right: 0px;/* why was this 150? */
+    text-align: justify;
+    width: 960px;  
+    /* width: 900px;   */
+}
+
+#separator
+{
+    /*
+    padding-left:95px;
+    width:700px;
+    */
+    margin-top: 10px;
+    padding-left:20px;
+    width:900px;
+}
+
+h1
+{
+  font-size: 18px;
+  /* padding-left: 260px; */
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+
+h2
+{
+  font-size: 12px;
+  padding-bottom: 10px;
+}
+
+h3
+{
+    color: rgb(130,51,2);
+}
+
+hr.cleaner
+{
+   clear: both;
+   height: 1px;
+   border: none;
+   margin: -1em 0 0 0;
+   visibility: hidden;
+   float: none;
+}
+
+
+.author
+{
+  font-style: italic;
+  font-weight: bold;
+}
+
+
+#left_wide
+{
+  padding-left: 40px;
+  width: 500px;
+  float: left;
+}
+
+#right_thin
+{
+  float: right;
+  margin-left: 50px;
+  width: 250px;
+  margin-right: 90px; 
+}
+
+#right_wide
+{
+  padding-left: 300px;
+  padding-right: 150px;
+}
+
+#recipe_comments
+{
+    clear:both;
+    padding-top: 10px;
+}
+
+h1.recipe
+{
+  padding-left: 55px;
+  padding-bottom: 0px;
+  margin-top: 12px;
+}
+
+h1.recipe img
+{
+  border: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 2px;
+}
+
+h1.recipe a
+{
+  text-decoration: none;
+}
+
+#recipe h2
+{
+  font-size: 15px;
+}
+
+#recipe img.share
+{
+  float: right;
+  border: 0px;
+  padding-top: 15px;
+}
+
+p.recipe
+{
+  padding-left: 15px;
+}
+
+#procedure
+{
+  float: right;
+  width: 320px;
+}
+
+#procedure p
+{
+  line-height: 2em;
+}
+
+a
+{
+  /* color: #FF2020; */
+    color: #4F9032;
+    text-decoration: none;
+}
+
+a:hover
+{
+  text-decoration: 1px dotted #FF2020;
+}
+
+#ingredients
+{
+    text-align:left;
+    width: 150px;
+    float: left;
+}
+
+#ingredients ul
+{
+  line-height: 1.36em;
+  list-style-image: url("../layout/dot.png");
+}
+
+
+#right_thin ul li
+{
+  list-style-type: none;
+}
+
+#right_thin a
+{
+  color: rgb(79,144,50);
+  font-weight: bold;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+#right_thin img
+{
+    margin-left: -60px;
+}
+
+.submit_comment
+{
+    margin-left:90px;
+    position: relative;
+    z-index: 5;
+}
+
+#recipe_edit
+{
+    padding-left: 50px;
+}
+
+#rating
+{
+    padding-top: 10px;
+}
+
+.rating_form
+{
+    background:none repeat scroll 0 0 #F8F8F8;
+    border:1px solid #F0F0F0;
+    /* margin:10px; */
+    padding:15px 25px 25px 20px;
+}
+
+#right_thin a:hover
+{
+  text-decoration: underline;
+}
+
+
+input
+{
+  background-color: #FFF;
+  border: 2px solid rgb(0,0,0);
+  color: rgb(0,0,0);
+  font-family: verdana;
+  font-size: 10px;
+  height: 15px;
+  /* width: 150px; */
+}
+
+input.btn
+{
+    border: 1px solid;
+}
+
+textarea
+{
+  background-color: #FFF;
+  border: 2px solid #000;
+  color: #000;
+  font-family: verdana;
+  font-size: 11px;
+}
+
+.radek textarea
+{
+    width: 150px;
+    height: 80px;
+}
+
+.radek input
+{
+    /* width: 150px; */
+}
+
+form p label
+{
+    float:left;
+    position:relative;
+    top:8px;
+    width:120px;
+}
+
+/* Main page */
+#uvod_prvni
+{
+  float: left;
+  width: 250px;
+}
+
+#uvod_prvni a
+{
+  color: rgb(79,144,50);
+  text-decoration: none;
+}
+
+#uvod_prvni a:hover
+{
+  text-decoration: underline;
+}
+
+#uvod_prvni img
+{
+  padding-left: 50px;
+  padding-top: 25px;
+}
+
+#uvod_prvni h2
+{
+  font-size: 18px;
+}
+
+#uvod_druhy
+{
+  float: left;
+  padding-left: 40px;
+  width: 320px;
+}
+
+#uvod_druhy h2
+{
+  font-size: 18px;
+}
+
+#uvod_treti a
+{
+  color: rgb(79,144,50);
+  text-decoration: none;
+  line-height: 2em;
+}
+
+#uvod_treti h2
+{
+  font-size: 18px;
+}
+
+#uvod_treti a:hover
+{
+  text-decoration: underline;
+}
+
+#uvod_treti img
+{
+  padding-top: 25px;
+}
+
+
+#uvod_treti
+{
+  float: right;
+  text-align: left;
+  padding-right: 90px;
+}
+
+.daily_tip
+{
+    text-align: center;
+}
+
+span.pravo
+{
+  color:#999;
+  float: right;
+}
+
+span.popisek
+{
+  padding-left: 20px;
+}
+
+div.popisek
+{
+  padding-left: 20px;
+}
+
+#footer
+{
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px; 
+  height: 30px;
+  padding-top: 20px;
+}
+
+#footer a
+{
+    color: #696969;
+}
+
+#footer a:link, #footer a:visited
+{
+    text-decoration: none;
+}
+
+#footer1
+{
+  padding-left: 100px;
+  color: rgb(105,105,105);
+}
+
+#footer2
+{
+  padding-left:300px;
+  color: rgb(105,105,105);
+}
+
+div.udaje
+{
+  width: 80px;
+  float: left;
+  padding-top: 4px;
+}
+
+div.radek
+{
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+

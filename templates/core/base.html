@@ -1,402 +1,90 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="{{ LANGUAGE_CODE }}" xml:lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
     <head>
-<title>{% block title %}{% endblock %}</title>
-<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/screen.css"/>
-{% block extrastyle %}{% endblock %}
-{% block extrahead %}{% endblock %}
-{% block blockbots %}<meta name="robots" content="index, follow" />{% endblock %}
-
-<meta name="author" content="Karel Stastny" />
-<meta name="keywords" content="recepty, recept, kucharka, vareni, jidlo" />
-{% block meta_description %}
-<meta name="description" content="Internetová kuchařka pro všechny lidi, kteří se rádi dobře najedí a nebojí se vařit. Obsahuje recepty pro všední i sváteční příležitost." />
-{% endblock %}
-</head>
-
-<body>
-
-
-	<!-- header starts-->
-	<div id="header-wrap"><div id="header" class="container_16">						
-        {% block logo %}		
-        <h1 id="logo-text"><a href="{% url home %}" title="">Edesia</a></h1>
-        <p id="intro">Beta</p> {# TODO fill some motto #}
-        {% endblock logo %}
-
-        {% block login_info %}
-        <div id="login_info">
-            {% include "auth/login_info.html" %}
-        </div>
-        {% endblock login_info %}
-
-		<!-- navigation -->
-		<div  id="nav">
-            <ul>
-                {# TODO setting of "current" style, with the li id="current" #}
-                {# <li id="current"><a href="index.html">Home</a></li> #}
-                <li><a href="{% url home %}">Úvod</a></li>
-                <li><a href="{% url category_list %}">Recepty</a></li>
-                <li><a href="/about/">O stránkách</a></li>
-                {# <li><a href="">Odkazy</a></li> #}
-                <li><a href="/contact/">Kontakt</a></li>
-			</ul>		
-		</div>		
-		
-		<div id="header-image"></div> 		
-        <form id="quick-search" action="{% url search_query %}" method="get" >
-            <p>
-			<label for="qsearch">Vyhledávání:</label>
-			<input class="tbox" id="qsearch" type="text" name="qsearch" value="" title="Zadejte hledaný výraz a stiskněte Enter" />
-            <input class="btn" alt="Search" type="image" name="searchsubmit" title="Search" src="{{MEDIA_URL}}images/search.gif" />
-			</p>
-        </form>					
-	
-	<!-- header ends here -->
-	</div></div>
-	
-	<!-- content starts -->
-	<div id="content-outer"><div id="content-wrapper" class="container_16">
-
-
-		<!-- main -->
-        <div id="main" class="grid_9">
-
-            {% block content %}
-            {% endblock content %}
-				
-            {% comment %}
-			<a name="TemplateInfo"></a>
-			<h2><a href="index.html">Template Info</a></h2>
-			
-			<p class="post-info">Posted by <a href="index.html">erwin</a> | Filed under <a href="index.html">templates</a>, <a href="index.html">internet</a></p>
-				
-            <p><strong>Keep It Simple</strong> is a free, W3C-compliant, CSS-based website template
-			by <a href="http://www.styleshout.com/">styleshout.com</a>. This work is
-			distributed under the <a rel="license" href="http://creativecommons.org/licenses/by/2.5/">
-			Creative Commons Attribution 2.5  License</a>, which means that you are free to
-			use and modify it for any purpose. All I ask is that you give me credit by including a <strong>link back</strong> to
-			<a href="http://www.styleshout.com/">my website</a>.
-            </p>
-
-            <p>
-            You can find more of my free template designs at <a href="http://www.styleshout.com/">my website</a>.
-			For premium commercial designs, you can check out
-            <a href="http://www.dreamtemplate.com" title="Website Templates">DreamTemplate.com</a>.
-			</p>
-				
-			<p class="postmeta">		
-			<a href="index.html" class="readmore">Read more</a> |
-			<a href="index.html" class="comments">Comments (7)</a> |				
-			<span class="date">April 17, 2008</span>	
-			</p>
-			
-			<h2><a href="index.html">Lorem Ipsum Dolor Sit Amet</a></h2>
-			
-			<p><a href="http://getfirefox.com/"><img src="images/firefox-gray.jpg" width="100" height="120" alt="firefox" class="float-left" /></a>
-			Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. 
-			Cras id urna. Morbi tincidunt, orci ac convallis aliquam, lectus turpis varius lorem, eu 
-			posuere nunc justo tempus leo. Donec mattis, purus nec placerat bibendum, dui pede condimentum 
-			odio, ac blandit ante orci ut diam. Cras fringilla magna. Phasellus suscipit, leo a pharetra 
-			condimentum, lorem tellus eleifend magna, eget fringilla velit magna id neque. Curabitur vel urna. 
-			In tristique orci porttitor ipsum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. 
-			Cras id urna. Morbi tincidunt, orci ac convallis aliquam, lectus turpis varius lorem, eu 
-			posuere nunc justo tempus leo. 				
-			</p>			
-			
-			<div class="clear">&nbsp;</div>
-			
-			<div class="grid_4 alpha">
-			
-				<h3>Lorem Ipsum Dolor Sit Amet</h3>
-				<p>
-				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. 
-				Cras id urna. Morbi tincidunt, orci ac convallis aliquam, lectus turpis varius lorem, eu 
-				posuere nunc justo tempus leo. Donec mattis, purus nec placerat bibendum, dui pede condimentum 
-				odio, ac blandit ante orci ut diam. Cras fringilla magna. Phasellus suscipit, leo a pharetra 
-				condimentum, lorem tellus eleifend magna, eget fringilla velit magna id neque. Curabitur vel urna. 
-				In tristique orci porttitor ipsum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. 
-				Cras id urna. Morbi tincidunt, orci ac convallis aliquam, lectus turpis varius lorem, eu 
-				posuere nunc justo tempus leo. 				
-				</p>
-			
-				<p><a class="more-link" href="index.html">continue reading</a></p>
-			
-			</div>
-			
-			<div class="grid_4 omega">
-			
-				<h3>Lorem Ipsum Dolor Sit Amet</h3>
-				<p>
-				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. 
-				Cras id urna. Morbi tincidunt, orci ac convallis aliquam, lectus turpis varius lorem, eu 
-				posuere nunc justo tempus leo. Donec mattis, purus nec placerat bibendum, dui pede condimentum 
-				odio, ac blandit ante orci ut diam. Cras fringilla magna. Phasellus suscipit, leo a pharetra 
-				condimentum, lorem tellus eleifend magna, eget fringilla velit magna id neque. Curabitur vel urna. 
-				In tristique orci porttitor ipsum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. 
-				Cras id urna. Morbi tincidunt, orci ac convallis aliquam, lectus turpis varius lorem, eu 
-				posuere nunc justo tempus leo. 				
-				</p>
-			
-				<p><a class="more-link" href="index.html">continue reading</a></p>			
-			
-            </div>
-
-            {% endcomment %}
-		
-		<!-- main ends -->
-		</div>
-		
-		<!-- left-columns starts -->
-		<div id="left-columns" class="grid_4">
-		
-            <div class="grid_4 alpha">
-
-                <div class="sidemenu">
-                    {% block ad_left %} {# advertisement #}
-                    {% endblock ad_left %}
-                </div>
-			
-				<div class="sidemenu">	
-                    {% block context_menu_header %}
-                    {# <h3>Sidebar Menu</h3> #}
-                    {% endblock context_menu_header %}
-                    <ul>
-                        {% block context_menu %}
-                        <li><a href="{% url recipe_edit %}">Nový recept</a></li>
-                        {% endblock context_menu %}
-                        {% comment %}
-						<li><a href="index.html#TemplateInfo">TemplateInfo</a></li>
-						<li><a href="style.html">Style Demo</a></li>
-						<li><a href="blog.html">Blog</a></li>
-                        <li><a href="http://www.dreamtemplate.com" title="Web Templates">Web Templates</a></li>
-                        {% endcomment %}
-					</ul>	
-                </div>
-
-                <div class="sidemenu">
-                    {% block left_block %}
-                    {% endblock left_block %}
-                </div>
-
-                {% comment %}
-				<div class="sidemenu">
-					<h3>Links</h3>
-					<ul>
-						<li><a href="http://www.PDPhoto.org/">PDPhoto</a></li>
-						<li><a href="http://www.alistapart.com">Alistapart</a></li>					
-						<li><a href="http://960.gs/">960 Grid System</a></li>
-						<li><a href="http://www.freephotos.se/">FreePhotos.se</a></li>				
-					</ul>
-				</div>
-			
-				<div class="sidemenu">
-					<h3>Sponsors</h3>
-					<ul>
-						<li><a href="http://www.dreamtemplate.com" title="Website Templates">DreamTemplate <br />
-                            <span>Over 6,000+ Premium Web Templates</span></a>
-                        </li>
-						<li><a href="http://www.themelayouts.com" title="WordPress Themes">ThemeLayouts <br />
-                            <span>Premium WordPress &amp; Joomla Themes</span></a>
-                        </li>
-						<li><a href="http://www.imhosted.com" title="Website Hosting">ImHosted.com <br />
-                            <span>Affordable Web Hosting Provider</span>
-                        </a></li>
-						<li><a href="http://www.dreamstock.com" title="Stock Photos">DreamStock <br />
-                            <span>Download Amazing Stock Photos</span></a>
-                        </li>
-						<li><a href="http://www.evrsoft.com" title="Website Builder">Evrsoft <br />
-                            <span>Website Builder Software &amp; Tools</span></a>
-                        </li>
-						<li><a href="http://www.seostation.com" title="SEO">SEOStation <br />
-                            <span>Increase Your Site Rankings</span></a>
-                        </li>
-					</ul>
-				</div>
-			
-				<h3>Wise Words</h3>
-				<p>
-				&quot;Beauty of style and harmony and grace and good rhythm
-				depends on simplicity.&quot; </p>
-			
-				<p class="align-right"> - Plato</p>
-			
-				<h3>Support Styleshout</h3>
-				<p>
-				If you are interested in supporting my work and would like to contribute, you are
-				welcome to make a small donation through the 
-				<a href="http://www.styleshout.com/">donate link</a> on my website - it will 
-                be a great help and will surely be appreciated.</p>
-
-                {% endcomment %}
-		
-			</div>
-
-            {% comment %}
-			<div class="grid_4 omega">
-		
-				<h3>Featured</h3>		
-			
-				<div class="featured-post">
-				
-					<h4><a href="index.html">Lorem ipsum dolor sit</a></h4>
-					<p class="post-info">Posted by <a href="index.html">erwin</a> on 09/26/08 </p>
-					<p>
-					<a href="http://getfirefox.com/"><img src="images/image.gif" width="160" height="100" alt="firefox" class="float-left" /></a>
-					Vestibulum venenatis. Nulla vel ipsum. Proin rutrum, urna sit amet bibendum 
-					pellentesque, ante sapien varius turpis, eu nonummy nunc urna scelerisque ante. 
-					Nunc sed leo at dolor pharetra facilisis. Sed sed lectus at justo dapibus tristique. 
-					Morbi molestie pulvinar elit. Donec dictum nibh nec est. Aliquam sagittis, lacus 
-					a pharetra tempor, enim justo tempor nisi, at aliquet nulla metus sed augue. 				 				
-					</p>	
-				
-					<p><a class="more-link" href="index.html">continue reading</a></p>
-				
-				</div>
-		
-				<div class="featured-post">
-			
-					<h4><a href="index.html">Lorem ipsum dolor sit</a></h4>
-					<p class="post-info">Posted by <a href="index.html">erwin</a> on 09/26/08 </p>
-					<p>
-					Vestibulum venenatis. Nulla vel ipsum. Proin rutrum, urna sit amet bibendum 
-					pellentesque, ante sapien varius turpis, eu nonummy nunc urna scelerisque ante. 
-					Nunc sed leo at dolor pharetra facilisis. Sed sed lectus at justo dapibus tristique. 
-					Morbi molestie pulvinar elit. Donec dictum nibh nec est. Aliquam sagittis, lacus 
-					a pharetra tempor, enim justo tempor nisi, at aliquet nulla metus sed augue. 				 				
-					</p>	
-				
-					<p><a class="more-link" href="index.html">continue reading</a></p>
-				
-				</div>		
-			
-				<div class="featured-post">
-			
-					<h4><a href="index.html">Lorem ipsum dolor sit</a></h4>
-					<p class="post-info">Posted by <a href="index.html">erwin</a> on 09/26/08 </p>
-					<p>
-					Vestibulum venenatis. Nulla vel ipsum. Proin rutrum, urna sit amet bibendum 
-					pellentesque, ante sapien varius turpis, eu nonummy nunc urna scelerisque ante. 
-					Nunc sed leo at dolor pharetra facilisis. Sed sed lectus at justo dapibus tristique. 
-					Morbi molestie pulvinar elit. Donec dictum nibh nec est. Aliquam sagittis, lacus 
-					a pharetra tempor, enim justo tempor nisi, at aliquet nulla metus sed augue. 				 				
-					</p>	
-				
-					<p><a class="more-link" href="index.html">continue reading</a></p>
-				
-				</div>				
-			
-			</div>	
-		
-		<!-- end left-columns -->
-        </div>		
-    {% endcomment %}
-	
-	<!-- contents end here -->	
-    </div></div>
-
-	<!-- footer starts here -->	
-	<div id="footer-wrapper" class="container_16">
-	
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/styles.css"/> 
+    {% block extrastyle %}{% endblock %}
+    {% block extrahead %}{% endblock %}
+    {% block blockbots %}<meta name="robots" content="index, follow" />{% endblock %} 
+    <meta name="author" content="Karel Stastny" />
+    <meta name="keywords" content="recepty, recept, kucharka, vareni, jidlo" />
+    {% block meta_description %}
+    <meta name="description" content="Internetová kuchařka pro všechny lidi, kteří se rádi dobře najedí a nebojí se vařit. Obsahuje recepty pro všední i sváteční příležitost." />
+    {% endblock %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     {% comment %}
-		<div id="footer-content">
-		
-			<div class="grid_8">
-		
-				<h3>Resource Links</h3>			
-				<p>
-				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. 
-				Cras id urna. Morbi tincidunt, orci ac convallis aliquam, lectus turpis varius lorem, eu 
-				posuere nunc justo tempus leo. Donec mattis, purus nec placerat bibendum, dui pede condimentum 
-				odio, ac blandit ante orci ut diam. <a href="index.html">Read more...</a>
-				</p>
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+    <link rel="Shortcut Icon" href="favicon.ico" />
+    {% endcomment %}
+    <title>Edesia</title>
+  </head>
+  <body>
+  <div id="body">
+      <div id="baner">
+          <a href="{% url home %}"><img src="{{MEDIA_URL}}layout/banner.png" alt="" border="0" /></a>
+    </div>
+    <div id="menu">
+      <ul id="menu_list">
+            {# TODO setting of "current" style, with the li id="current" #}
+            {# <li id="current"><a href="index.html">Home</a></li> #}
+            <li><a href="{% url home %}">Úvod</a></li>
+            <li><a href="{% url category_list %}">Recepty</a></li>
+            <li><a href="/about/">O stránkách</a></li>
+            {# <li><a href="">Odkazy</a></li> #}
+            <li><a href="/contact/">Kontakt</a></li>
+            <li><a href="/query/">Vyhledávání</a></li>
+            <li>
+                <div id="login_info">
+                    {% include "auth/login_info.html" %}
+                </div>
+            </li>
+            {# TODO login, register #}
+            {% comment %}
+            {% block login_info %}
+            <div id="login_info">
+                {% include "auth/login_info.html" %}
+            </div>
+            {% endblock login_info %}
+            {% endcomment %}
+      </ul>
+    </div>
+    <div id="separator">
+      <hr />
+    </div>
+    <div id="main">
 
-				<ul class="footer-list">				
-                    <li><a href="http://www.dreamtemplate.com" title="Website Templates">DreamTemplate -
-                        <span>Over 6,000+ Premium Web Templates</span></a>
-                    </li>
-					<li><a href="http://www.themelayouts.com" title="WordPress Themes">ThemeLayouts -
-                        <span>Premium WordPress &amp; Joomla Themes</span></a>
-                    </li>
-					<li><a href="http://www.imhosted.com" title="Website Hosting">ImHosted.com -
-                        <span>Affordable Web Hosting Provider</span></a>
-                    </li>
-					<li><a href="http://www.dreamstock.com" title="Stock Photos">DreamStock -
-                        <span>Download Amazing Stock Photos</span></a>
-                    </li>
-					<li><a href="http://www.evrsoft.com" title="Website Builder">Evrsoft -
-                        <span>Website Builder Software &amp; Tools</span></a>
-                    </li>
-					<li><a href="http://www.seostation.com" title="SEO">SEOStation -
-                        <span>Increase Your Site Rankings</span></a>
-                    </li>
-				</ul>			
-						
-			</div>
-			
-			<div class="grid_8">
-					
-				<h3>Image Gallery </h3>					
-				<p class="thumbs">
-					<a href="index.html"><img src="images/thumb.jpg" width="40" height="40" alt="thumbnail" /></a>
-					<a href="index.html"><img src="images/thumb.jpg" width="40" height="40" alt="thumbnail" /></a>
-					<a href="index.html"><img src="images/thumb.jpg" width="40" height="40" alt="thumbnail" /></a>
-					<a href="index.html"><img src="images/thumb.jpg" width="40" height="40" alt="thumbnail" /></a>
-					<a href="index.html"><img src="images/thumb.jpg" width="40" height="40" alt="thumbnail" /></a>
-					<a href="index.html"><img src="images/thumb.jpg" width="40" height="40" alt="thumbnail" /></a>	
-					<a href="index.html"><img src="images/thumb.jpg" width="40" height="40" alt="thumbnail" /></a>
-					<a href="index.html"><img src="images/thumb.jpg" width="40" height="40" alt="thumbnail" /></a>													
-					<a href="index.html"><img src="images/thumb.jpg" width="40" height="40" alt="thumbnail" /></a>
-					<a href="index.html"><img src="images/thumb.jpg" width="40" height="40" alt="thumbnail" /></a>
-					<a href="index.html"><img src="images/thumb.jpg" width="40" height="40" alt="thumbnail" /></a>													
-					<a href="index.html"><img src="images/thumb.jpg" width="40" height="40" alt="thumbnail" /></a>
-				</p>	
-			
-				<h3>About</h3>			
-				<p>
-				<a href="http://getfirefox.com/"><img src="images/gravatar.jpg" width="40" height="40" alt="firefox" class="float-left" /></a>
-				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. 
-				Cras id urna. Morbi tincidunt, orci ac convallis aliquam, lectus turpis varius lorem, eu 
-				posuere nunc justo tempus leo. Donec mattis, purus nec placerat bibendum, dui pede condimentum 
-				odio, ac blandit ante orci ut diam.</p>
-				<p>
-				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. 
-				Cras id urna. <a href="index.html">Learn more...</a></p>
-					
-			</div>	
-		
-		</div>
-    {% endcomment %}	
-		<div id="footer-bottom">
-	
-			<p class="bottom-left">			
-            Powered by Edesia&trade;&nbsp; &copy; 2010 <a href="mailto:stastny@edesia.cz">Karel Šťastný</a>&nbsp; &nbsp;
-			<a href="http://www.stylishtemplate.com/" title="Website Templates">website templates</a> by <a href="http://www.styleshout.com/">styleshout</a>
-			</p>	
-			
-			<p class="bottom-right" >
-                <a href="{% url home %}">Home</a> |
-                {# <a href="index.html">Sitemap</a> | #}
-                {# <a href="index.html">RSS Feed</a> |	#}
-				<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | 
-		   	    <a href="http://validator.w3.org/check/referer">XHTML</a>
-			</p>
-	
-		</div>	
-			
-	</div>
-    <!-- footer ends here -->
-{# Google Analytics code #}
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-8194478-2");
-pageTracker._trackPageview();
-} catch(err) {}</script>
-{# Google Analytics code end #}
-</body>
+        {% block content %}
+        {% endblock content %}
+
+    </div>
+
+    <hr class="cleaner" />
+
+    <div id="footer">
+      <span id="footer1">
+        Powered by Edesia&trade;&nbsp; &copy; 2010 <a href="mailto:stastny@edesia.cz">Karel Šťastný</a>&nbsp; &nbsp;
+      </span>
+      <span id="footer2">
+        <a href="{% url home %}">Domů</a> |
+        {# <a href="index.html">Sitemap</a> | #}
+        {# <a href="index.html">RSS Feed</a> |	#}
+        <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | 
+        <a href="http://validator.w3.org/check/referer">XHTML</a>
+      </span>
+    </div>
+  </div>
+    {# Google Analytics code #}
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+    var pageTracker = _gat._getTracker("UA-8194478-2");
+    pageTracker._trackPageview();
+    } catch(err) {}</script>
+    {# Google Analytics code end #}
+  </body>
 </html>
-

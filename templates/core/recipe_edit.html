@@ -1,25 +1,24 @@
-{% extends "core/base.html" %}
+{% extends "core/two_column_left.html" %}
 
 {% block title %}
  Edesia - editace receptu {{ recipe.name }}
 {% endblock title %}
 
-{% block content %}
+{% block left %}
 
-{% if form.instance.id %}
-<form action="{% url recipe_edit form.instance.slug %}" method="POST">
-{% else %}
-<form action="{% url recipe_edit %}" method="POST">
-{% endif %}
-    {{ form.as_p }}
+<div id="recipe_edit">
+    {% if form.instance.id %}
+    <form action="{% url recipe_edit form.instance.slug %}" method="POST">
+    {% else %}
+    <form action="{% url recipe_edit %}" method="POST">
+    {% endif %}
+        {{ form.as_p }}
 
-<input type="submit" value="Uložit" />
-{# TODO add Cancel button - redirect back/to home page #}
+    <input type="submit" value="Uložit" />
+    {# TODO add Cancel button - redirect back/to home page #}
 
-</form>
+    </form>
+</div>
 
-{% endblock content %}
+{% endblock left %}
 
-{% block context_menu %}
-    {{ block.super }}
-{% endblock context_menu %}

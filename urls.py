@@ -1,6 +1,7 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.views.generic.simple import direct_to_template
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -35,6 +36,8 @@ urlpatterns += patterns('edesia',
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
+
+    url(r'^about/$', direct_to_template, {'template':'core/about.html'}),
 
     url(r'^query/$','core.views.searchquery', name='search_query'),
 

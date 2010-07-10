@@ -1,4 +1,4 @@
-{% extends "core/base.html" %}
+{% extends "core/two_column_right.html" %}
 
 {% block title %}
  {% if tag %}
@@ -8,37 +8,45 @@
  {% endif %}
 {% endblock title %}
 
-{% block content %}
 
-<h1>Seznam receptů</h1>
+{% block top_content %}
+    <h1>Seznam receptů</h1>
+    {# TODO different image #}
+    <img id="aboutpic1" src="{{MEDIA_URL}}layout/aboutpic.png" alt="" style="padding-left:80px;"/>
+{% endblock %}
 
-{% if tag %}
-<h2> {{ tag.name }} </h2>
-{% endif %}
 
-<ul>
-{% for recipe in recipes.object_list %}
-<li>
-  <a href="{% url core.views.recipe_detail recipe.slug %}" >{{ recipe.name }}</a>
-</li> 
-{% endfor %}
-</ul>
+{% block right %}
 
-{# TODO better page representation - display icons to First, Prev, Next, Last and a few pages around #}
-<div class="pagination">
-    <span class="step-links">
-        {% if recipes.has_previous %}
-            <a href="?page={{ recipes.previous_page_number }}">Předchozí</a>
-        {% endif %}
+<div id="recipe_list" style="padding-left:80px;">
+    {% if tag %}
+    <h2> {{ tag.name }} </h2>
+    {% endif %}
 
-        <span class="current">
-            Strana {{ recipes.number }}/{{ recipes.paginator.num_pages }}
+    <ul>
+    {% for recipe in recipes.object_list %}
+    <li>
+      <a href="{% url core.views.recipe_detail recipe.slug %}" >{{ recipe.name }}</a>
+    </li> 
+    {% endfor %}
+    </ul>
+
+    {# TODO better page representation - display icons to First, Prev, Next, Last and a few pages around #}
+    <div class="pagination">
+        <span class="step-links">
+            {% if recipes.has_previous %}
+                <a href="?page={{ recipes.previous_page_number }}">Předchozí</a>
+            {% endif %}
+
+            <span class="current">
+                Strana {{ recipes.number }}/{{ recipes.paginator.num_pages }}
+            </span>
+
+            {% if recipes.has_next %}
+                <a href="?page={{ recipes.next_page_number }}">Další</a>
+            {% endif %}
         </span>
-
-        {% if recipes.has_next %}
-            <a href="?page={{ recipes.next_page_number }}">Další</a>
-        {% endif %}
-    </span>
+    </div>
 </div>
 
-{% endblock content %}
+{% endblock right %}

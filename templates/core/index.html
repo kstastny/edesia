@@ -7,48 +7,43 @@
 
 {% block content %}
 
-<p>Prohlédněte si všechny <a href="{% url category_list %}">kategorie</a> receptů kliknutím na tlačítko 
+{# TODO display as some type of tip - display different tips #}
+<p class="daily_tip" >Prohlédněte si všechny <a href="{% url category_list %}">kategorie</a> receptů kliknutím na tlačítko 
 <a href="{% url category_list %}">"Recepty"</a>.</p>
 
-{% comment %}
-<fieldset>TODO using fieldsets would be probably better
-<label>test</label>
-{% endcomment %}
-<h3>Novinky</h3>
-{% for n in news %}
-<h4>{{ n.inserted|date:"j. N Y" }}</h4>
-{{ n.text|linebreaksp }}
-{% endfor %}
-
-{# </fieldset> #}
-
-<h3>Nejnovější recepty</h3>
-<table style="width:100%;" border="0">
+<div id="uvod_prvni">
+    <h2>Nejnovější recepty</h2>
     {% for recipe in recipes %}
-    {# TODO move the styles to external stylesheet - probably not necessary if I can get some designer #}
-<tr>
-  <td style="border-style:none;"><a href="{% url core.views.recipe_detail recipe.slug %}" >{{ recipe.name }}</a></td>
-  {# TODO format - make the font lighter #}
-  <td style="border-style:none;color:#999;">{{ recipe.inserted|date:"j.n.Y" }} </td>
-</tr> 
-{% endfor %}
-</table>
+        <p>
+          <a href="{% url core.views.recipe_detail recipe.slug %}" >{{ recipe.name }}</a><span class="pravo">{{ recipe.inserted|date:"j.n.Y" }}</span><br />
+          {# TODO use for description later (eventually) <span class="popisek">popisek v jednom radku</span> #}
+        </p>
+    {% endfor %}
+    </table>
+    <img alt="" src="{{MEDIA_URL}}layout/jahoda.png" />
+</div>
 
+
+<div id="uvod_druhy">
+    <h2>Novinky</h2>
+    {% for n in news %}
+    <h3>{{ n.inserted|date:"j. N Y" }}</h3>
+    <div class="popisek">{{ n.text|linebreaksp }}</div>
+    {% endfor %}
+</div>
+
+<div id="uvod_treti">
+    <h2>Oblíbené kategorie</h2>
+    {# TODO make this dynamic #}
+    <p><a href="{% url recipe_list 'kureci-maso' %}">Kuřecí maso</a><br />
+    <a href="{% url recipe_list 'veprove-maso' %}">Vepřové maso</a><br />
+    <a href="{% url recipe_list 'hovezi-maso' %}">Hovězí maso</a><br />
+    <a href="{% url recipe_list 'vegetarianska-jidla' %}">Vegetariánská jídla</a><br />
+    <a href="{% url recipe_list 'salaty' %}">Saláty</a><br />
+    <a href="{% url recipe_list 'polevky' %}">Polévky</a><br />
+    <br />
+    <a href="{% url category_list %}">Seznam kategorií</a></p>
+    <img src="{{MEDIA_URL}}layout/vino.png" alt="" />
+</div>
 
 {% endblock content %}
-
-{% block context_menu_header %}
-    <h3>Oblíbené kategorie</h3>
-{% endblock context_menu_header %}
-
-{% block context_menu %}
-    {# TODO make this dynamic #}
-    <li><a href="{% url recipe_list 'kureci-maso' %}">Kuřecí maso</a></li>
-    <li><a href="{% url recipe_list 'veprove-maso' %}">Vepřové maso</a></li>
-    <li><a href="{% url recipe_list 'hovezi-maso' %}">Hovězí maso</a></li>
-    <li><a href="{% url recipe_list 'vegetarianska-jidla' %}">Vegetariánská jídla</a></li>
-    <li><a href="{% url recipe_list 'salaty' %}">Saláty</a></li>
-    <li><a href="{% url recipe_list 'polevky' %}">Polévky</a></li>
-    <li />
-    <li><a href="{% url category_list %}">Seznam kategorií</a></li>
-{% endblock context_menu %}

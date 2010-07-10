@@ -19,7 +19,7 @@ from decorators import cache_func
 RECIPE_PAGE_SIZE = 25
 
 NEW_RECIPES_COUNT = 5 #count of new recipes displayed on home page
-NEWS_DISPLAYED_COUNT = 3 #number of news displayed on home page
+NEWS_DISPLAYED_COUNT = 4 #number of news displayed on home page
 
 #@cache_page(60*5) #TODO need *not* to cache authentication info
 def index(request):

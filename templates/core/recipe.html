@@ -1,4 +1,4 @@
-{% extends "core/base.html" %}
+{% extends "core/two_column_left.html" %}
 {% load edesia_extras %}
 {% load comments %}
 {% load ratings %}
@@ -11,142 +11,185 @@ Recept {{ recipe.name }}
 <meta name="description" content="Popis receptu {{recipe.name }} na Internetové kuchařce Edesia. " />
 {% endblock %}
 
-{% block content %}
+{% block left %}
 
-<h1>{{ recipe.name}}</h1>
-<p>
-{% if recipe.preparation_time %}
-Doba přípravy: {{ recipe.preparation_time }} minut <br />
-{% endif %}
-{% if recipe.servings %}
-Počet porcí: {{ recipe.servings }} 
-{% endif %}
-</p>
-<h2>Přísady</h2>
-
-<ul>
-{% for ingredient in ingredient_list %}
-<li> {{ ingredient }} </li> 
-{% endfor %}
-</ul>
-
-<h2>Postup</h2>
-{{ recipe.directions|linebreaksp }}
-
-{% if recipe.inserted_by %}
-<p style="float:right">Recept vložil{% if not recipe.inserted_by.get_profile.gender %}a{% endif %} {{ recipe.inserted_by }} </p>
-<br />
-<br />
-{% endif %}
-
-<h4>Hodnocení receptu</h4>
-
-<p>
-
-{% if vote %}
-Vaše hodnocení: {{ vote }} <br />
-{% endif %}
-{% if recipe.rating.get_real_rating %}
-Celkové hodnocení: {{ recipe.rating.get_real_rating|floatformat:"-2" }}/5
-{% else %}
-Recept ještě nikdo nehodnotil. Buďte první a přidejte své hodnocení. <br />
-{% endif %}
-</p>
-
-{# recipe rating #}
- {% if can_vote %}
-{# TODO use some AJAX and stars #}
-<form action="{% url recipe_rate recipe.id %}" method="post">
-    Počet bodů - vyšší číslo znamená chutnější recept.<br />
-
-    <input type="radio" value="1" name="rating" />1
-    <input type="radio" value="2" name="rating" />2
-    <input type="radio" value="3" name="rating" />3
-    <input type="radio" value="4" name="rating" />4
-    <input type="radio" value="5" name="rating" />5
-
-    <input type="submit" name="post" class="submit-post" value="Hlasovat" style="float: right;"/>
-
-</form>
-{% else %}
-    {% if vote %}
-    {# User has already voted - cannot vote again as anonymous #}
-    {% else %}
-    <p>
-        Bohužel byl vyčerpán limit anonymních hodnocení receptu pro tuto IP adresu. Pokud chcete recept ohodnotit, tak se prosím
-        <a href="{% url login %}">přihlaste</a> nebo 
-        <a href="{% url register %}">zaregistrujte</a>.
+    <div id="recipe">
+        {% comment %}
+        TODO - left and right arrow for next/prev recipe (maybe, probably not that needed)
+        TODO control for sharing recipe
+        <a href="#"><img src="./layout/share.png" alt="share" title="share" class="share" /></a>
+        <h1 class="recept">
+          <a href="#">
+            <img src="./layout/leftarrow.png" alt="předchozí recept" title="předchozí recept" />
+          </a>
+          Garlic Chicken Cheese
+          <a href="#">
+            <img src="./layout/rightarrow.png" alt="další recept" title="další recept" />
+          </a>
+        </h1>
+        {% endcomment %}
+        <h1 class="recipe">{{ recipe.name}}</h1>
+        <p class="recipe">
+            {% if recipe.preparation_time %}
+              <img src="{{MEDIA_URL}}layout/clock.png" alt="Preparation time" title="Preparation time" />
+                Doba přípravy: {{ recipe.preparation_time }} minut <br />
+            {% endif %}
+            {% if recipe.servings %}
+                {# TODO number of servings - different icons #}
+              <img src="{{MEDIA_URL}}layout/serving.png" alt="Number of servings" title="Number of servings" />
+                Počet porcí: {{ recipe.servings }} 
+            {% endif %}
         </p>
-    {% endif %}
-{% endif %}
+        <div id="ingredients">
+            <h2>Přísady</h2>
 
+            <ul>
+            {% for ingredient in ingredient_list %}
+            <li> {{ ingredient }} </li> 
+            {% endfor %}
+            </ul>
+        </div>
+        <div id="procedure">
+            <h2>Postup</h2>
+            {{ recipe.directions|linebreaksp }}
 
-{# recipe comments #}
-{# TODO count of comments #}
+            {% if recipe.inserted_by %}
+            <p style="float:right">Recept vložil{% if not recipe.inserted_by.get_profile.gender %}a{% endif %} {{ recipe.inserted_by }} </p>
+            <br />
+            <br />
+            {% endif %}
 
-{# TODO paging ? (every 10 comments) #}
-{% get_comment_list for recipe as comment_list %}
-<ol class="commentlist">
-    {% for comment in comment_list %}
-    <li class="{% cycle 'alt' '' %}"> {# TODO class="alt" for every other row #}
-    <cite>
-        {{ comment.user_name }}<br />
-        <span class="comment-data">{{ comment.submit_date|date:"j. N Y, G:i" }}</span>
-    </cite>
-    <div class="comment-text">
-        <p>{{ comment.comment }}</p>
-    </div>
-    </li>
-{% endfor %}
-</ol>
+        <div id="rating">
+        <h4>Hodnocení receptu</h4>
 
-{# TODO render manually - if user is logged, prefill his name, don't allow to change it #}
-{# {% render_comment_form for recipe %} #}
-{% get_comment_form for recipe as form %}
-<form action="{% comment_form_target %}" method="post">
-    <p>Vložte Váš názor na tento recept:<br/>
-    (Pole označená hvězdičkou jsou povinná)</p>
-    {# form.as_p #}
-    {% for field in form.visible_fields %}
-    {{ field.errors }}
-    <p {% ifequal field.name "honeypot" %} style="display:none;" {% endifequal %}>
-    {% comment %}
-    {% if field.field.required %}*{% endif %} {# field is of type BoundField #}
-    {{ field.label_tag }} 
-    {% endcomment %}
-    {# rendering manually because we need to mark required field with asterisk. make this generic #}
-    <label for="{{ field.auto_id }}">{{ field.label }}{% if field.field.required %}*{% endif %}</label>
-    {% ifequal field.name "name" %}
-    {% if user.is_authenticated %} <input id="id_name" value="{{ user.username }}" type="text" name="name" readonly="true" disabled="true" />
-        {% else %} {{ field }}{% endif %}
+        <p>
+
+        {% if vote %}
+        Vaše hodnocení: {{ vote }} <br />
+        {% endif %}
+        {% if recipe.rating.get_real_rating %}
+        Celkové hodnocení: {{ recipe.rating.get_real_rating|floatformat:"-2" }}/5
         {% else %}
-    {{ field }}
-    {% endifequal %}</p>
+        Recept ještě nikdo nehodnotil. Buďte první a přidejte své hodnocení. <br />
+        {% endif %}
+        </p>
+
+        {# recipe rating #}
+         {% if can_vote %}
+        {# TODO use some AJAX and stars #}
+        <form action="{% url recipe_rate recipe.id %}" method="post" class="rating_form">
+            Počet bodů - vyšší číslo znamená chutnější recept.<br />
+
+            <input type="radio" value="1" name="rating" />1
+            <input type="radio" value="2" name="rating" />2
+            <input type="radio" value="3" name="rating" />3
+            <input type="radio" value="4" name="rating" />4
+            <input type="radio" value="5" name="rating" />5
+
+            <input type="submit" name="post" class="btn" value="Hlasovat" style="float: right;"/>
+
+        </form>
+        {% else %}
+            {% if vote %}
+            {# User has already voted - cannot vote again as anonymous #}
+            {% else %}
+            <p>
+                Bohužel byl vyčerpán limit anonymních hodnocení receptu pro tuto IP adresu. Pokud chcete recept ohodnotit, tak se prosím
+                <a href="{% url login %}">přihlaste</a> nebo 
+                <a href="{% url register %}">zaregistrujte</a>.
+                </p>
+            {% endif %}
+        {% endif %}
+        </div>
+
+        </div>
+    </div>
+    
+
+
+<div id="recipe_comments">
+    {# recipe comments #}
+    {# TODO count of comments #}
+
+    {# TODO paging ? (every 10 comments) #}
+    {% get_comment_list for recipe as comment_list %}
+    <ol class="commentlist">
+        {% for comment in comment_list %}
+        <li class="{% cycle 'alt' '' %}"> {# TODO class="alt" for every other row #}
+        <cite>
+            {{ comment.user_name }}<br />
+            <span class="comment-data">{{ comment.submit_date|date:"j. N Y, G:i" }}</span>
+        </cite>
+        <div class="comment-text">
+            <p>{{ comment.comment }}</p>
+        </div>
+        </li>
     {% endfor %}
+    </ol>
+</div>
 
 
-    {% for field in form.hidden_fields %}
-     {{ field }}
-    {% endfor %}
-    <input type="hidden" name="next" value="{% url recipe_detail recipe.slug %}" />
+{% endblock left %}
 
-      <p class="submit">
-        <input type="submit" name="post" class="submit-post" value="Odeslat" />
-      </p> 
-</form>
-
-{% endblock content %}
-
-{% block context_menu %}
+{% block right %}
     {{ block.super }}
 
     {% if can_modify %}
-    <li><a href="{% url recipe_edit recipe.slug %}">Upravit recept</a></li>
+    <p><a href="{% url recipe_edit recipe.slug %}">Upravit recept</a></p>
     {% endif%}
 
     {# TODO format properly #}
     Další recepty v kategorii:
+    <ul>
     {% for tag in recipe.tags.all %}
         <li><a href="{% url core.views.recipe_list tag.slug %}">{{ tag.name }}</a></li>
     {% endfor %}
-{% endblock context_menu %}
+    </ul>
+
+
+    {# TODO render manually - if user is logged, prefill his name, don't allow to change it #}
+    {# {% render_comment_form for recipe %} #}
+    {% get_comment_form for recipe as form %}
+    <form action="{% comment_form_target %}" method="post">
+        <p>Vložte Váš názor na tento recept:<br/>
+        (Pole označená hvězdičkou jsou povinná)</p>
+        {# form.as_p #}
+        {% for field in form.visible_fields %}
+        <div class="radek" {% ifequal field.name "honeypot" %} style="display:none;" {% endifequal %}>
+            {{ field.errors }}
+            {% comment %}
+            {% if field.field.required %}*{% endif %} {# field is of type BoundField #}
+            {{ field.label_tag }} 
+            {% endcomment %}
+            {# rendering manually because we need to mark required field with asterisk. make this generic #}
+            <div class="udaje" >
+                <label for="{{ field.auto_id }}">{{ field.label }}{% if field.field.required %}*{% endif %}</label>
+            </div>
+                {% ifequal field.name "name" %}
+                    {% if user.is_authenticated %} <input id="id_name" value="{{ user.username }}" type="text" name="name" readonly="true" disabled="true" />
+                    {% else %} {{ field }}{% endif %}
+                {% else %}
+                    {{ field }}
+                {% endifequal %}
+        </div>
+        {% endfor %}
+
+
+        {% for field in form.hidden_fields %}
+         {{ field }}
+        {% endfor %}
+        <input type="hidden" name="next" value="{% url recipe_detail recipe.slug %}" />
+            
+            <hr class="cleaner" />
+        <div class="radek">
+          <p class="submit">
+            <input type="submit" name="post" class="btn submit_comment" value="Odeslat" />
+          </p> 
+        </div>
+    </form>
+
+    <div class="radek">
+          <img src="{{MEDIA_URL}}layout/cesnek.png" alt="" />
+    </div>
+
+{% endblock right %}

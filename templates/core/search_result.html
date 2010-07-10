@@ -14,10 +14,21 @@
 {% endblock extrahead %}
 
 {% block title %}
- Edesia - výsledky vyhledávání
+ Edesia - vyhledávání
 {% endblock title %}
 
 {% block content %}
+
+<div style="padding-left:40px;">
+    <form id="quick-search" action="{% url search_query %}" method="get" >
+        <p>
+        <label for="qsearch">Vyhledávání:</label>
+        <input class="tbox" id="qsearch" type="text" name="qsearch" value="" title="Zadejte hledaný výraz a stiskněte Enter"
+        style="width:300px;margin-right:20px;" />
+        <input class="btn" alt="Search" type="image" name="searchsubmit" title="Vyhledat" src="{{MEDIA_URL}}images/search.gif" />
+        </p>
+    </form>
+</div>
 
 
 <div id="cse" style="width: 100%;"></div>

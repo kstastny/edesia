@@ -1,35 +1,42 @@
-{% extends "core/base.html" %}
+{% extends "core/two_column_right.html" %}
 {% load edesia_extras %}
 
 {% block title %}
 Seznam kategorií receptů
 {% endblock title %}
 
-{% block content %}
+{% block top_content %}
+    <br />
+    {# TODO different image #}
+    <img id="aboutpic1" src="{{MEDIA_URL}}layout/aboutpic.png" alt="" 
+    style="position:relative;top:30px;padding-left:80px;"/>
+{% endblock %}
 
-{# TODO generate dynamically - solve where to store the structure #}
-<h2>Kategorie receptů</h2>
-<p><a href="{% url recipe_list %}">Všechny recepty</a></p>
+{% block right %}
 
-    <div class="grid_4 alpha">
-    <ul>
-    {% for tag in tags_first %}
-        <li>
-        <a href="{% url recipe_list tag.slug %}">{{ tag.name }}</a>
-        </li>
-    {% endfor %}
-    </ul>
+<h1>Kategorie receptů</h1>
+    <div style="width:440px;">
+        <p><a href="{% url recipe_list %}">Všechny recepty</a></p>
+
+        <div style="float:left;">
+        <ul>
+        {% for tag in tags_first %}
+            <li>
+            <a href="{% url recipe_list tag.slug %}">{{ tag.name }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+        </div>
+        <div style="float:right;">
+        <ul>
+        {% for tag in tags_second %}
+            <li>
+            <a href="{% url recipe_list tag.slug %}">{{ tag.name }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+        </div>
     </div>
-    <div class="grid_4 omega">
-    <ul>
-    {% for tag in tags_second %}
-        <li>
-        <a href="{% url recipe_list tag.slug %}">{{ tag.name }}</a>
-        </li>
-    {% endfor %}
-    </ul>
-    </div>
 
 
-{% endblock content %}
-
+{% endblock right %}
