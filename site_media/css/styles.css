@@ -155,7 +155,7 @@ hr.cleaner
 #left_wide
 {
   padding-left: 40px;
-  width: 500px;
+  width: 520px;
   float: left;
 }
 
@@ -163,7 +163,7 @@ hr.cleaner
 {
   float: right;
   margin-left: 50px;
-  width: 250px;
+  width: 260px;
   margin-right: 90px; 
 }
 
@@ -219,7 +219,7 @@ p.recipe
 #procedure
 {
   float: right;
-  width: 320px;
+  width: 330px;
 }
 
 #procedure p
@@ -286,20 +286,35 @@ a
 
 .rating_form
 {
-    background:none repeat scroll 0 0 #F8F8F8;
-    border:1px solid #F0F0F0;
-    /* margin:10px; */
     padding:15px 25px 25px 20px;
 }
 
+.recipe_form
+{
+    background-color: #FFF;
+    border: 0px;
+}
+
+.recipe_form input, .recipe_form textarea
+{
+  border: 2px solid #4F9032; 
+  /* width: 150px; TODO uncomment after formatting the button */
+}
+
+input, select, textarea
+{
+  background-color: #FFF;
+  border: 1px solid #D4D4D4;
+  color: #000;
+  font-family: verdana;
+  font-size: 10px;
+  margin: 5px 0;
+}
 
 input
 {
-  background-color: #FFF;
-  border: 2px solid rgb(0,0,0);
   color: rgb(0,0,0);
   font-family: verdana;
-  font-size: 10px;
   height: 15px;
   /* width: 150px; */
 }
@@ -307,15 +322,6 @@ input
 input.btn
 {
     border: 1px solid;
-}
-
-textarea
-{
-  background-color: #FFF;
-  border: 2px solid #000;
-  color: #000;
-  font-family: verdana;
-  font-size: 11px;
 }
 
 .radek textarea
@@ -329,12 +335,21 @@ textarea
     /* width: 150px; */
 }
 
+form
+{
+    background:none repeat scroll 0 0 #F8F8F8;
+    border:1px solid #F0F0F0;
+    padding: 10px;
+}
+
 form p label
 {
     float:left;
     position:relative;
     top:8px;
     width:120px;
+    font-weight: bold;
+    color: #4F9032;
 }
 
 /* Main page */

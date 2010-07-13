@@ -151,7 +151,7 @@ Recept {{ recipe.name }}
     {# TODO render manually - if user is logged, prefill his name, don't allow to change it #}
     {# {% render_comment_form for recipe %} #}
     {% get_comment_form for recipe as form %}
-    <form action="{% comment_form_target %}" method="post">
+    <form action="{% comment_form_target %}" method="post" class="recipe_form" >
         <p>Vložte Váš názor na tento recept:<br/>
         (Pole označená hvězdičkou jsou povinná)</p>
         {# form.as_p #}

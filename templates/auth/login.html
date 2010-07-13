@@ -1,10 +1,10 @@
-{% extends "core/base.html" %}
+{% extends "core/two_column_left.html" %}
 
 {% block title %}
  Edesia - přihlášení uživatele
 {% endblock title %}
 
-{% block content %}
+{% block left %}
 {% if error_message %}
 <p class="errornote">{{ error_message }}</p>
 {% endif %}
