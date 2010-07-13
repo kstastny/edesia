@@ -177,6 +177,8 @@ hr.cleaner
 {
     clear:both;
     padding-top: 10px;
+    float: right;
+    width: 340px;
 }
 
 h1.recipe
@@ -219,7 +221,7 @@ p.recipe
 #procedure
 {
   float: right;
-  width: 330px;
+  width: 340px;
 }
 
 #procedure p
@@ -264,7 +266,7 @@ a
 
 #right_thin img
 {
-    margin-left: -60px;
+    margin-left: -40px;
 }
 
 .submit_comment
@@ -277,6 +279,20 @@ a
 #recipe_edit
 {
     padding-left: 50px;
+}
+
+#recipe_edit ul
+{
+    padding-top: 30px;
+    margin-left: 80px;
+    list-style-type: none;
+}
+
+#recipe_edit input.btn
+{
+    float:right;
+ /*   margin-right: 55px;
+    margin-left:155px;*/
 }
 
 #rating
@@ -308,7 +324,11 @@ input, select, textarea
   color: #000;
   font-family: verdana;
   font-size: 10px;
-  margin: 5px 0;
+}
+
+input[readonly], select[readonly], textarea[readonly]
+{
+    background-color: #E6E6E6;
 }
 
 input
@@ -321,7 +341,17 @@ input
 
 input.btn
 {
-    border: 1px solid;
+    background-image: url('../layout/button_background.png');
+    background-repeat: repeat-x;
+    /* float: right; */
+    margin-right: 15px; 
+    padding: 0 15px 0 15px;
+    font-family: verdana;
+    font-weight: bold; 
+    width: auto;
+    height: 22px;
+    color: #fcffde;
+    border: 1px solid #d1e5c7; 
 }
 
 .radek textarea
@@ -492,3 +522,38 @@ div.radek
   margin-bottom: 6px;
 }
 
+
+/* comments list - based on styleshout template Keep It Simple */
+ol.commentlist {
+	padding: 0;
+	border-style: solid;	
+	border-color: #F0F0F0;	
+	border-width: 1px 1px 0 1px;
+}
+.commentlist li {
+	margin: 0;
+	padding: 10px;
+	list-style: none;
+	border-bottom: 1px solid #F0F0F0; 
+}
+.commentlist li cite {
+	display: block;
+	font-style: normal;
+	font-weight: bold;
+	padding: 7px;	
+}
+.commentlist li cite img {
+	float: left;
+	margin-right: 10px;	
+}
+.commentlist li cite .comment-data {
+	font-size: .8em;
+	font-weight: normal;
+}
+.commentlist li .comment-text {
+	clear: both;
+	margin: 0; padding: 0;
+}
+.commentlist li.alt {
+	background: #f8f8f8 
+}
