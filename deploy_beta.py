@@ -1,7 +1,7 @@
 #not sure how to run admin commands from python, running them using command line
 import sys
 import os
-import paramiko
+#import paramiko
 import shutil
 
 from subprocess import call, Popen, PIPE

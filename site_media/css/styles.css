@@ -311,7 +311,12 @@ a
 
 .rating_form
 {
-    padding:15px 25px 25px 20px;
+    padding:10px 25px 25px 20px;
+}
+
+fieldset
+{
+    border-style:none;
 }
 
 .recipe_form

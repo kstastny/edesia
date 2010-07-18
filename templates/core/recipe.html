@@ -78,16 +78,17 @@ Recept {{ recipe.name }}
          {% if can_vote %}
         {# TODO use some AJAX and stars #}
         <form action="{% url recipe_rate recipe.id %}" method="post" class="rating_form">
-            Počet bodů - vyšší číslo znamená chutnější recept.<br />
+            <p>Počet bodů - vyšší číslo znamená chutnější recept.</p>
 
-            <input type="radio" value="1" name="rating" />1
-            <input type="radio" value="2" name="rating" />2
-            <input type="radio" value="3" name="rating" />3
-            <input type="radio" value="4" name="rating" />4
-            <input type="radio" value="5" name="rating" />5
+            <fieldset>
+                <input type="radio" value="1" name="rating" />1
+                <input type="radio" value="2" name="rating" />2
+                <input type="radio" value="3" name="rating" />3
+                <input type="radio" value="4" name="rating" />4
+                <input type="radio" value="5" name="rating" />5
 
-            <input type="submit" name="post" class="btn" value="Hlasovat" style="float: right;"/>
-
+                <input type="submit" name="post" class="btn" value="Hlasovat" style="float: right;"/>
+            </fieldset>
         </form>
         {% else %}
             {% if vote %}
@@ -113,6 +114,7 @@ Recept {{ recipe.name }}
     <form action="{% comment_form_target %}" method="post" class="recipe_form" >
         <p>Vložte Váš názor na tento recept:<br/>
         (Pole označená hvězdičkou jsou povinná)</p>
+        <fieldset>
         {% for field in form.visible_fields %}
         <div class="radek" {% ifequal field.name "honeypot" %} style="display:none;" {% endifequal %}>
             {{ field.errors }}
@@ -139,17 +141,20 @@ Recept {{ recipe.name }}
         {% endfor %}
         <input type="hidden" name="next" value="{% url recipe_detail recipe.slug %}" />
             
-            <hr class="cleaner" />
+        <hr class="cleaner" />
         <div class="radek">
           <p class="submit">
             <input type="submit" name="post" class="btn submit_comment" value="Odeslat" />
           </p> 
         </div>
+        </fieldset>
     </form>
     {# TODO count of comments #}
 
     {# TODO paging ? (every 10 comments) #}
     {% get_comment_list for recipe as comment_list %}
+    {% ifnotequal comment_list|length 0 %}
+
     <ol class="commentlist">
         {% for comment in comment_list %}
         <li class="{% cycle 'alt' '' %}"> {# TODO class="alt" for every other row #}
@@ -163,6 +168,7 @@ Recept {{ recipe.name }}
         </li>
     {% endfor %}
     </ol>
+    {% endifnotequal %}
 </div>
 
 
@@ -176,7 +182,6 @@ Recept {{ recipe.name }}
     <p><a href="{% url recipe_edit recipe.slug %}">Upravit recept</a></p>
     {% endif%}
 
-    {# TODO format properly #}
     Další recepty v kategorii:
     <ul>
     {% for tag in recipe.tags.all %}
