@@ -397,6 +397,7 @@ form p label
 {
   float: left;
   width: 250px;
+  padding-left: 40px;`
 }
 
 #uvod_prvni a
@@ -464,7 +465,7 @@ form p label
 {
   float: right;
   text-align: left;
-  padding-right: 90px;
+  padding-right: 60px;
 }
 
 .daily_tip
