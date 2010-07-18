@@ -13,14 +13,18 @@ body
   width: 960px;
 }
 
-#baner
+#banner
 {
   padding-left:95px;
   /* width: 960px; */
   width: 700px;
   height: 106px;
-  /* background-image: url("../layout/baner.png"); */
   background-repeat: no-repeat;
+}
+
+#banner img
+{
+    border-style: none;
 }
 
 #menu
