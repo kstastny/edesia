@@ -295,6 +295,11 @@ a
     margin-left:155px;*/
 }
 
+#ads
+{
+    height:200px;
+}
+
 #rating
 {
     padding-top: 10px;
@@ -311,10 +316,17 @@ a
     border: 0px;
 }
 
-.recipe_form input, .recipe_form textarea
+.recipe_form input
 {
-  border: 2px solid #4F9032; 
-  /* width: 150px; TODO uncomment after formatting the button */
+    border: 2px solid #4F9032; 
+    width: 180px;
+}
+
+.recipe_form textarea
+{
+    border: 2px solid #4F9032; 
+    width: 180px;
+    height: 80px;
 }
 
 input, select, textarea
@@ -352,17 +364,6 @@ input.btn
     height: 22px;
     color: #fcffde;
     border: 1px solid #d1e5c7; 
-}
-
-.radek textarea
-{
-    width: 150px;
-    height: 80px;
-}
-
-.radek input
-{
-    /* width: 150px; */
 }
 
 form

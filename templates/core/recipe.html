@@ -107,8 +107,45 @@ Recept {{ recipe.name }}
     
 
 
+{# recipe comments #}
 <div id="recipe_comments">
-    {# recipe comments #}
+    {% get_comment_form for recipe as form %}
+    <form action="{% comment_form_target %}" method="post" class="recipe_form" >
+        <p>Vložte Váš názor na tento recept:<br/>
+        (Pole označená hvězdičkou jsou povinná)</p>
+        {% for field in form.visible_fields %}
+        <div class="radek" {% ifequal field.name "honeypot" %} style="display:none;" {% endifequal %}>
+            {{ field.errors }}
+            {% comment %}
+            {% if field.field.required %}*{% endif %} {# field is of type BoundField #}
+            {{ field.label_tag }} 
+            {% endcomment %}
+            {# rendering manually because we need to mark required field with asterisk. make this generic #}
+            <div class="udaje" >
+                <label for="{{ field.auto_id }}">{{ field.label }}{% if field.field.required %}*{% endif %}</label>
+            </div>
+                {% ifequal field.name "name" %}
+                    {% if user.is_authenticated %} <input id="id_name" value="{{ user.username }}" type="text" name="name" readonly="true" disabled="true" />
+                    {% else %} {{ field }}{% endif %}
+                {% else %}
+                    {{ field }}
+                {% endifequal %}
+        </div>
+        {% endfor %}
+
+
+        {% for field in form.hidden_fields %}
+         {{ field }}
+        {% endfor %}
+        <input type="hidden" name="next" value="{% url recipe_detail recipe.slug %}" />
+            
+            <hr class="cleaner" />
+        <div class="radek">
+          <p class="submit">
+            <input type="submit" name="post" class="btn submit_comment" value="Odeslat" />
+          </p> 
+        </div>
+    </form>
     {# TODO count of comments #}
 
     {# TODO paging ? (every 10 comments) #}
@@ -147,47 +184,8 @@ Recept {{ recipe.name }}
     {% endfor %}
     </ul>
 
-
-    {# TODO render manually - if user is logged, prefill his name, don't allow to change it #}
-    {# {% render_comment_form for recipe %} #}
-    {% get_comment_form for recipe as form %}
-    <form action="{% comment_form_target %}" method="post" class="recipe_form" >
-        <p>Vložte Váš názor na tento recept:<br/>
-        (Pole označená hvězdičkou jsou povinná)</p>
-        {# form.as_p #}
-        {% for field in form.visible_fields %}
-        <div class="radek" {% ifequal field.name "honeypot" %} style="display:none;" {% endifequal %}>
-            {{ field.errors }}
-            {% comment %}
-            {% if field.field.required %}*{% endif %} {# field is of type BoundField #}
-            {{ field.label_tag }} 
-            {% endcomment %}
-            {# rendering manually because we need to mark required field with asterisk. make this generic #}
-            <div class="udaje" >
-                <label for="{{ field.auto_id }}">{{ field.label }}{% if field.field.required %}*{% endif %}</label>
-            </div>
-                {% ifequal field.name "name" %}
-                    {% if user.is_authenticated %} <input id="id_name" value="{{ user.username }}" type="text" name="name" readonly="true" disabled="true" />
-                    {% else %} {{ field }}{% endif %}
-                {% else %}
-                    {{ field }}
-                {% endifequal %}
-        </div>
-        {% endfor %}
-
-
-        {% for field in form.hidden_fields %}
-         {{ field }}
-        {% endfor %}
-        <input type="hidden" name="next" value="{% url recipe_detail recipe.slug %}" />
-            
-            <hr class="cleaner" />
-        <div class="radek">
-          <p class="submit">
-            <input type="submit" name="post" class="btn submit_comment" value="Odeslat" />
-          </p> 
-        </div>
-    </form>
+    <div id="ads">
+    </div>
 
     <div class="radek">
           <img src="{{MEDIA_URL}}layout/cesnek.png" alt="" />
