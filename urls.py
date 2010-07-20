@@ -43,12 +43,17 @@ urlpatterns += patterns('edesia',
 
 
     url(r'^categories/$', 'core.views.category_list', name='category_list'),
-    #TODO use different home page
-    #url(r'^$', 'core.views.recipe_list', {'tag_slug':None}, name='home'),
     url(r'^$', 'core.views.index', name='home'),
 
 )
 
+
+#add sitemap
+from core.sitemap import sitemaps
+
+urlpatterns += patterns('',
+    url(r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps':sitemaps}),
+    )
 
 urlpatterns += patterns('',
         (r'^contact/', include('edesia.contact.urls')),

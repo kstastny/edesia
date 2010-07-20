@@ -83,6 +83,7 @@ INSTALLED_APPS = (
     'edesia.contact',
     'edesia.comments',
     'djangoratings', #dcramer's django-ratings
+    'django.contrib.sitemaps',
 )
 
 #comment settings
