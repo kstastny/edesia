@@ -3,3 +3,5 @@ Disallow: /register/
 Disallow: /recipe_edit/
 Disallow: /recipe_rate/
 Disallow: /login/
+
+Sitemap: http://www.edesia.cz/sitemap.xml
