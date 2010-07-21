@@ -112,7 +112,7 @@ Recept {{ recipe.name }}
 <div id="recipe_comments">
     {% get_comment_form for recipe as form %}
     <form action="{% comment_form_target %}" method="post" class="recipe_form" >
-        <p>Vložte Váš názor na tento recept:<br/>
+        <p>Vložte svůj názor na tento recept:<br/>
         (Pole označená hvězdičkou jsou povinná)</p>
         <fieldset>
         {% for field in form.visible_fields %}
