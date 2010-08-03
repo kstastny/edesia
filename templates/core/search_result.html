@@ -24,6 +24,19 @@
 {% block content %}
 
 <div style="padding-left:40px;">
+<form action='http://www.google.cz/search' id='searchForm'>
+  <p>
+    <label for="qsearch">Vyhledávání:</label>
+    <input name='q' type='hidden' value='site:edesia.cz' />
+    <input name='q' size='31' id="qsearch" type="text" name="qsearch" value="" title="Zadejte hledaný výraz a stiskněte Enter"
+    style="width:300px;margin-right:20px;" />
+    <input name='sa' type='submit' value='Hledat' class="btn" />
+  </p>
+</form>
+</div>
+
+{% comment %}
+<div style="padding-left:40px;">
     <form id="quick-search" action="{% url search_query %}" method="get" >
         <p>
         <label for="qsearch">Vyhledávání:</label>
@@ -73,6 +86,8 @@
 
   }, true);
 </script>
+
+{% endcomment %}
 
 {% endblock content %}
 
