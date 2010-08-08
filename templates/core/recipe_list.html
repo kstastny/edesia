@@ -8,6 +8,13 @@
  {% endif %}
 {% endblock title %}
 
+{% block meta_description %}
+ {% if tag %}
+ <meta name="description" content="Seznam receptů v kategorii {{ tag.name }} v Internetové kuchařce Edesia. " />
+ {% else %}
+    <meta name="description" content="Seznam receptů v Internetové kuchařce Edesia. " />
+ {% endif %}
+{% endblock %}
 
 {% block top_content %}
     <h1>Seznam receptů</h1>
