@@ -110,12 +110,14 @@ Recept {{ recipe.name }}
 
 {# recipe comments #}
 <div id="recipe_comments">
-    {% get_comment_form for recipe as form %}
+    {% if not commentform %}
+        {% get_comment_form for recipe as commentform %}
+    {% endif %}
     <form action="{% comment_form_target %}" method="post" class="recipe_form" >
         <p>Vložte svůj názor na tento recept:<br/>
         (Pole označená hvězdičkou jsou povinná)</p>
         <fieldset>
-        {% for field in form.visible_fields %}
+        {% for field in commentform.visible_fields %}
         <div class="radek" {% ifequal field.name "honeypot" %} style="display:none;" {% endifequal %}>
             {{ field.errors }}
             {% comment %}
@@ -136,7 +138,7 @@ Recept {{ recipe.name }}
         {% endfor %}
 
 
-        {% for field in form.hidden_fields %}
+        {% for field in commentform.hidden_fields %}
          {{ field }}
         {% endfor %}
         <input type="hidden" name="next" value="{% url recipe_detail recipe.slug %}" />

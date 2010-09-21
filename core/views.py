@@ -62,7 +62,7 @@ def rate_recipe(request, recipe_id):
     return response
 
 
-def recipe_detail(request, recipe_slug):
+def recipe_detail(request, recipe_slug, commentform=None):
     r = get_object_or_404(Recipe, slug=recipe_slug)
     #normalize line breaks - see django.utils.html.linebreaks
     ingredients = re.sub(r'\r\n|\r|\n','\n', force_unicode(r.ingredients))
@@ -86,12 +86,22 @@ def recipe_detail(request, recipe_slug):
         can_vote = r.rating.accept_anonymous_votes(request.META['REMOTE_ADDR']) and \
                 not vote
 
-    return render_to_response('core/recipe.html', 
-            {'recipe': r,
+    context_dictionary = {'recipe': r,
              'ingredient_list': ingredient_list,
              'can_modify': request.user.can_modify(r),
              'vote': vote,
-             'can_vote': can_vote},
+             'can_vote': can_vote}
+
+    if commentform:
+        #display updated comment
+        #print commentform
+        context_dictionary.update({
+            'comment': commentform.data.get('comment',''),
+            'commentform': commentform
+            })
+
+    return render_to_response('core/recipe.html', 
+            context_dictionary,
             context_instance=RequestContext(request))
 
 def recipe_list(request, tag_slug):
