@@ -10,6 +10,7 @@ class RecipeAdmin(admin.ModelAdmin):
     list_display = ('name', 'inserted', 'inserted_by', ) 
     list_filter = ('inserted', 'inserted_by', )
     list_per_page = 20
+    ordering = ('-inserted', )
 
 class TagAdmin(admin.ModelAdmin):
     ordering = ('name', )
