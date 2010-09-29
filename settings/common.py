@@ -82,6 +82,7 @@ INSTALLED_APPS = (
     'edesia.south',#standard django-south 
     'edesia.contact',
     'edesia.comments',
+    'edesia.statistics',
     'djangoratings', #dcramer's django-ratings
     'django.contrib.sitemaps',
 )

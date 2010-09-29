@@ -1,0 +1,79 @@
+{% extends "core/base.html" %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="/site_media/css/screen.css"/>
+{% endblock extrastyle %}
+
+{% block title %}
+ Edesia - Statistiky 
+{% endblock title %}
+
+{% block content %}
+   
+    <p>Celkový počet receptů: {{ recipe_count }}</p>
+
+    {# TODO add link to Google Analytics - Edesia.cz #}
+    
+    <h2>Nejnovější recepty</h2>
+    <p><a href="/admin/core/recipe/">Všechny recepty</a></p>
+    <table border=1>
+        <tr>
+            <th>Datum</th>
+            <th>Recept</th>
+        </tr>
+    {% for recipe in recipes %}
+        <tr>
+            <td>{{ recipe.inserted|date:"j. N Y" }}</td>
+            <td>
+            <a href="{% url core.views.recipe_detail recipe.slug %}" >{{ recipe.name }}</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+
+    <h2>Nejnovější komentáře</h2>
+    <p><a href="/admin/comments/comment/">Všechny komentáře</a></p>
+    <table border=1>
+        <tr>
+            <th>Datum</th>
+            <th>Recept</th>
+            <th>Komentář</th>
+        </tr>
+    {% for comment in comments %}
+        <tr>
+            <td>{{ comment.submit_date|date:"j. N Y, G:i" }}</td>
+            <td>
+            {% ifequal comment.content_type.model 'recipe' %}
+            <a href="{% url core.views.recipe_detail comment.content_object.slug %}" >{{ comment.content_object.name }}</a>
+            {% endifequal %}
+            </td>
+            <td>{{ comment.comment }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+    <h2>Nejnovější hlasy</h2>
+    <p><a href="/admin/djangoratings/vote/">Všechny hlasy</a></p>
+    <table border=1>
+        <tr>
+            <th>Datum</th>
+            <th>Recept</th>
+            <th>Skore</th>
+        </tr>
+    {% for vote in votes %}
+        <tr>
+            <td>{{ vote.date_added|date:"j. N Y, G:i" }}</td>
+            <td>
+            {% ifequal vote.content_type.model 'recipe' %}
+            <a href="{% url core.views.recipe_detail vote.content_object.slug %}" >{{ vote.content_object.name }}</a>
+            {% endifequal %}
+            </td>
+            <td>{{ vote.score }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock content %}
+
+
+{% block context_menu %}
+{% endblock context_menu %}
