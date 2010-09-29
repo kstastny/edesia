@@ -18,6 +18,8 @@ def post_recipe_comment(request, next=None):
     form = __get_form(request)
 
     #TODO make generic when necessary - when more model types than Recipe is needed
+    #do this by sending POST parameter 'next_error' that will contain page
+    #where user will be redirected in case of error
     if form.errors:
         #display recipe detail again, if there are some problems with comment
         data = request.POST.copy()

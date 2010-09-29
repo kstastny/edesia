@@ -113,10 +113,14 @@ Recept {{ recipe.name }}
     {% if not commentform %}
         {% get_comment_form for recipe as commentform %}
     {% endif %}
-    <form action="{% comment_form_target %}" method="post" class="recipe_form" >
+    <form action="{% comment_form_target %}#recipe_comments_problems" method="post" class="recipe_form" >
         <p>Vložte svůj názor na tento recept:<br/>
         (Pole označená hvězdičkou jsou povinná)</p>
         <fieldset>
+        {% if commentform.errors %}
+        <span id="recipe_comments_problems"></span>
+        <p><b>Prosím opravte následující chyby:</b></p>
+        {% endif %}
         {% for field in commentform.visible_fields %}
         <div class="radek" {% ifequal field.name "honeypot" %} style="display:none;" {% endifequal %}>
             {{ field.errors }}

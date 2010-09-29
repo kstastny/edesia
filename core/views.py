@@ -99,6 +99,7 @@ def recipe_detail(request, recipe_slug, commentform=None):
             'comment': commentform.data.get('comment',''),
             'commentform': commentform
             })
+        #recipe_comments
 
     return render_to_response('core/recipe.html', 
             context_dictionary,
