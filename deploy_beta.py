@@ -63,6 +63,7 @@ shutil.copytree('core', join(deploy_dir, 'core'))
 shutil.copytree('djangoratings', join(deploy_dir, 'djangoratings'))
 shutil.copytree('south', join(deploy_dir, 'south'))
 shutil.copytree('users', join(deploy_dir, 'users'))
+shutil.copytree('statistics', join(deploy_dir, 'statistics'))
 
 print 'Copying media files and templates...'
 shutil.copytree('templates', join(deploy_dir, 'templates'))
