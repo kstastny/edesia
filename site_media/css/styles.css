@@ -171,6 +171,11 @@ hr.cleaner
   margin-right: 90px; 
 }
 
+#right_thin li
+{
+    margin-top: 4px;
+}
+
 #right_wide
 {
   padding-left: 300px;
