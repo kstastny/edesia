@@ -11,6 +11,7 @@
 <p class="daily_tip" >Prohlédněte si všechny <a href="{% url category_list %}">kategorie</a> receptů kliknutím na tlačítko 
 <a href="{% url category_list %}">"Recepty"</a>.</p>
 
+
 <div id="uvod_prvni">
     <h2>Nejnovější recepty</h2>
     {% for recipe in recipes %}
@@ -19,7 +20,16 @@
           {# TODO use for description later (eventually) <span class="popisek">popisek v jednom radku</span> #}
         </p>
     {% endfor %}
-    <img alt="" src="{{MEDIA_URL}}layout/jahoda.png" />
+    <br />
+    <div>
+    </div>
+    {% comment %}
+<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2F%23%21%2Fpages%2FEdesiacz%2F140433052645668&amp;layout=box_count&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=65" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:65px;" allowTransparency="true"></iframe>
+    {% endcomment %}
+    <div style="margin-left:15px;">
+<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FEdesiacz%2F%23%21%2Fpages%2FEdesiacz%2F140433052645668&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>
+    </div>
+    <img alt="" src="{{MEDIA_URL}}layout/jahoda.png" style="margin-top:-10px;margin-left:10px;"/>
 </div>
 
 
