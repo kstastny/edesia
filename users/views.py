@@ -25,12 +25,14 @@ def register(request):
             #p = user.get_profile()
             p = UserProfile()
             p.user = user
-            p.gender = form.cleaned_data['gender']
+            #cleaned_data value is available as unicode string
+            p.gender = form.cleaned_data['gender'] == 'True'
             p.save()
 
             #login user - after saving user object, password contains just hash,
             #that's why we use the original password from the form
             user = authenticate(username=user.username, password=form.clean_password2())
+
             if user:
                 login(request, user)
 
