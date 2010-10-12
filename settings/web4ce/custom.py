@@ -38,7 +38,7 @@ ADMIN_MEDIA_PREFIX = '/site_media/admin/'
 
 import logging
 LOG_FILE = path.join(PROJECT_PATH, '../logs/django.log')
-LOG_LEVEL = logging.DEBUG
+LOG_LEVEL = logging.WARN
 LOG_FORMAT = '%(asctime)s %(levelname)s %(message)s'
 
 
