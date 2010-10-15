@@ -184,7 +184,7 @@ hr.cleaner
 
 #recipe_comments
 {
-    clear:both;
+    /* clear:both; */
     padding-top: 10px;
     float: right;
     width: 340px;
@@ -304,9 +304,18 @@ a
     margin-left:155px;*/
 }
 
-#ads
+#ads_recipe_right
 {
-    height:200px;
+    margin: 15px 0 10px 15px;
+    padding-top: 10px;
+    height: 310px;
+}
+
+#ads_recipe_left
+{
+    margin: 25px 10 0px 0px;
+    padding-top: 10px;
+    /* height: 610px; */
 }
 
 #rating
