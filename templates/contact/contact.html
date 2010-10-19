@@ -1,10 +1,10 @@
-{% extends "core/two_column_left.html" %}
+{% extends "core/two_column_right.html" %}
 
 {% block title %}
  Edesia - Kontakt
 {% endblock title %}
 
-{% block left %}
+{% block right %}
 
 <p>Pokud máte jakékoli dotazy či připomínky ke stránkám, neváhejte nám je sdělit pomocí tohoto webového formuláře, nebo odeslat email na <a href="mailto:info@edesia.cz">info@edesia.cz</a>.</p>
 
@@ -17,4 +17,8 @@
     <hr class="cleaner" />
 </form>
 
+{% endblock right %}
+
+{% block left %}
+    <img id="contactImage" src="{{MEDIA_URL}}layout/contact.jpg" alt="" style="padding:20px 0 0 20px;"/>
 {% endblock left %}

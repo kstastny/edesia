@@ -163,6 +163,11 @@ hr.cleaner
   float: left;
 }
 
+#left_thin
+{
+    float: left;
+}
+
 #right_thin
 {
   float: right;
@@ -178,8 +183,7 @@ hr.cleaner
 
 #right_wide
 {
-  padding-left: 300px;
-  padding-right: 150px;
+    padding: 0 150px 10px 300px;
 }
 
 #recipe_comments
