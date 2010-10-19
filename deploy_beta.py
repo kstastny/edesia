@@ -48,6 +48,7 @@ shutil.copy(join('deployment', '.htaccess'), DIST_DIRECTORY)
 shutil.copy(join('deployment', 'django.wsgi.production'), join(DIST_DIRECTORY, 'django.wsgi'))
 shutil.copy(join('deployment', 'google0d1d58e1af972248.html'), DIST_DIRECTORY) #google validation
 shutil.copy(join('deployment', 'robots.txt'), DIST_DIRECTORY)
+shutil.copy(join('deployment', 'favicon.ico'), DIST_DIRECTORY)
 
 deploy_dir = join(DIST_DIRECTORY, 'edesia')
 os.mkdir(deploy_dir)
