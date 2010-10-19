@@ -4,5 +4,5 @@ from django import forms
 
 class UserCreationForm(authforms.UserCreationForm):
     # use widget=forms.RadioSelect with proper formatting
-    email = forms.EmailField(label='Email')
+    email = forms.EmailField(label='Email', required=False)
     gender = forms.ChoiceField(choices=((True,'Muž'),(False,'Žena')), label='Pohlaví')
