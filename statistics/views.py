@@ -41,6 +41,7 @@ def display_overview(request):
                 'comments': comments,
                 'votes': votes,
                 'recipes': recipes,
-                'recipe_count': Recipe.objects.count()
+                'recipe_count': Recipe.objects.count(),
+                'hide_google_analytics':True,#do not track this page
                 },
             context_instance=RequestContext(request))
