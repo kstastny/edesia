@@ -28,6 +28,8 @@ Recept {{ recipe.name }}
           </a>
         </h1>
         {% endcomment %}
+
+    <!-- Sklik-kontext-start -->
         <h1 class="recipe">{{ recipe.name}}</h1>
         <p class="recipe">
             {% if recipe.preparation_time %}
@@ -48,6 +50,8 @@ Recept {{ recipe.name }}
             <li> {{ ingredient }} </li> 
             {% endfor %}
             </ul>
+
+    <!-- Sklik-kontext-stop -->
             <div id="ads_recipe_left">
 
 <!-- Kontextová reklama Sklik -->
@@ -65,8 +69,10 @@ Recept {{ recipe.name }}
 
         <div id="procedure">
             <h2>Postup</h2>
+            <!-- Sklik-kontext-start -->
             {{ recipe.directions|linebreaksp }}
 
+            <!-- Sklik-kontext-stop -->
             {% if recipe.inserted_by %}
             <p style="float:right">Recept vložil{% if not recipe.inserted_by.get_profile.gender %}a{% endif %} {{ recipe.inserted_by }} </p>
             <br />
