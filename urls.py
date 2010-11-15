@@ -47,6 +47,7 @@ urlpatterns += patterns('edesia',
     url(r'^$', 'core.views.index', name='home'),
 
     url(r'^statistics/$', 'statistics.views.display_overview', name='statistics_overview'),
+    url(r'^statistics/500$', 'statistics.views.display_bug_500', name="display_500"),
 )
 
 

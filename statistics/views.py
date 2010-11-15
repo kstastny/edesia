@@ -45,3 +45,9 @@ def display_overview(request):
                 'hide_google_analytics':True,#do not track this page
                 },
             context_instance=RequestContext(request))
+
+def display_bug_500(request):
+    """
+    For testing the 500 page.
+    """
+    asdf
