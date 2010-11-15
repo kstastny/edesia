@@ -329,7 +329,13 @@ a
 
 .rating_form
 {
-    padding:10px 25px 25px 20px;
+    padding:10px 25px 40px 20px;
+}
+
+#current_rating
+{
+    font-size: 12px;
+    font-weight: bold;
 }
 
 fieldset

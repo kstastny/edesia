@@ -5,7 +5,7 @@ import logging
 from django.shortcuts import get_object_or_404, render_to_response
 from django.utils.encoding import force_unicode
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.views.decorators.cache import cache_page
@@ -42,6 +42,7 @@ def searchquery(request):
 
 def rate_recipe(request, recipe_id):
     recipe = Recipe.objects.get(id=recipe_id)
+    #send different response if it is AJAX
     response = HttpResponseRedirect(reverse('recipe_detail', \
             args=[recipe.slug]))
     if request.method == 'POST':
@@ -52,12 +53,16 @@ def rate_recipe(request, recipe_id):
         else:
             cookie_name = 'recipe_voted_' + str(recipe.id) 
             if cookie_name in request.COOKIES:
-                pass #TODO display some message
+                pass #TODO display some message - cannot vote twice
             else:
                 recipe.rating.add(rating, None, request.META['REMOTE_ADDR']) 
-                #do not allow the user to vote again. Not bulletproof, but sufficient
-                #set the max_age for a week - parameter is in seconds
-                response.set_cookie('recipe_voted_'+str(recipe.id), value=rating, max_age=604800)
+    if request.is_ajax():
+        #send new rating to user
+        response = HttpResponse('%.2f' % recipe.rating.get_real_rating())
+
+    #do not allow the user to vote again. Not bulletproof, but sufficient
+    #set the max_age for a week - parameter is in seconds
+    response.set_cookie('recipe_voted_'+str(recipe.id), value=rating, max_age=604800)
 
     return response
 

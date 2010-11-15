@@ -3,6 +3,74 @@
 {% load comments %}
 {% load ratings %}
 
+{% block extrahead %}
+    {# <script type="text/javascript" src="{{MEDIA_URL}}/js/jquery-1.4.3.js"></script> #}
+    {# http://blog.jquery.com/2010/11/11/jquery-1-4-4-release-notes/ - using canonical source for performance #}
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="{{MEDIA_URL}}/js/jquery-ui-1.8.6.custom.min.js"></script>
+
+    <!-- Star rating widget stuff-->
+    {# <script type="text/javascript" src="{{MEDIA_URL}}/js/jquery.ui.stars.js"></script> #}
+    <script type="text/javascript" src="{{MEDIA_URL}}/js/jquery.ui.stars.min.js"></script>
+    {# <link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/jquery.ui.stars.css"/> #}
+    <link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/crystal-stars.css"/>
+	<script type="text/javascript">
+		$(function(){
+            {% if not can_vote and vote %}
+            {# display disabled stars so the user can see how he voted.Necessary because the form is not sent from the server #}
+            $("#rating").append(
+            "<form id=\"rating_form\" class='rating_form'>" +
+            "<fieldset>" +
+            "    <input type=\"radio\" value=\"1\" name=\"rating\" title=\"Nedá se to jíst\" />1 " +
+            "    <input type=\"radio\" value=\"2\" name=\"rating\" title=\"Školní jídelna\" />2" +
+            "    <input type=\"radio\" value=\"3\" name=\"rating\" title=\"Normální jídlo\" />3" +
+            "    <input type=\"radio\" value=\"4\" name=\"rating\" title=\"Moc dobré\" />4" +
+            "    <input type=\"radio\" value=\"5\" name=\"rating\" title=\"Úžasné\" />5" +
+            "</fieldset></form> ");
+            {% endif %}
+
+            //if the user already rated - display his rating, hide the textual rating
+            {% if vote %}
+            $("#rating_form input[value={{ vote }}]").attr("checked","checked");
+            $("#rating_form input[value={{ vote }}]").attr("defaultChecked","true");
+            {% endif %}
+            
+			$("#rating_form").children().not(":radio").hide();
+            
+            //TODO finish displaying the caption
+            //$("#rating_caption").show();//TODO display only on hover on stars
+            $("#user_rating").hide();
+
+
+			$("#rating_form").stars({
+                cancelShow: false,
+                {% if not user.is_authenticated %}
+                oneVoteOnly: true,{# unauthenticated users cannot change their votes #}
+                {% endif %}
+                {% if not can_vote %}
+                disabled: true,
+                {% endif %}
+                captionEl: $('#rating_caption'),
+				callback: function(ui, type, value)
+				{
+                    //TODO add error handling - use $.ajax or $.ajaxError
+                    $.post("/recipe_rate/{{ recipe.id }}/", 
+                         { 'rating' : value},
+                         function(data) { 
+                            //after the rating - update 'current rating' with new value
+                            $('#current_rating').text(data + '/5')
+
+                         });
+				}
+            {% if vote %}
+
+            {% endif %}
+			});
+		});
+	</script>
+
+{% endblock extrahead %}
+
 {% block title %}
 Recept {{ recipe.name }}
 {% endblock title %}
@@ -85,10 +153,11 @@ Recept {{ recipe.name }}
         <p>
 
         {% if vote %}
-        Vaše hodnocení: {{ vote }} <br />
+        <span id="user_rating"> Vaše hodnocení: {{ vote }} <br /> </span>
         {% endif %}
         {% if recipe.rating.get_real_rating %}
-        Celkové hodnocení: {{ recipe.rating.get_real_rating|floatformat:"-2" }}/5
+        {# TODO increase the rating so the number is more visible #}
+        Celkové hodnocení: <span id="current_rating"> {{ recipe.rating.get_real_rating|floatformat:"-2" }}/5 </span>
         {% else %}
         Recept ještě nikdo nehodnotil. Buďte první a přidejte své hodnocení. <br />
         {% endif %}
@@ -96,19 +165,19 @@ Recept {{ recipe.name }}
 
         {# recipe rating #}
          {% if can_vote %}
-        {# TODO use some AJAX and stars #}
-        <form action="{% url recipe_rate recipe.id %}" method="post" class="rating_form">
+        <form action="{% url recipe_rate recipe.id %}" method="post" class="rating_form" id="rating_form">
             <p>Počet bodů - vyšší číslo znamená chutnější recept.</p>
 
             <fieldset>
-                <input type="radio" value="1" name="rating" />1
-                <input type="radio" value="2" name="rating" />2
-                <input type="radio" value="3" name="rating" />3
-                <input type="radio" value="4" name="rating" />4
-                <input type="radio" value="5" name="rating" />5
-
+                <input type="radio" value="1" name="rating" title="Nedá se to jíst" />1
+                <input type="radio" value="2" name="rating" title="Školní jídelna" />2
+                <input type="radio" value="3" name="rating" title="Normální jídlo" />3
+                <input type="radio" value="4" name="rating" title="Moc dobré" />4
+                <input type="radio" value="5" name="rating" title="Úžasné" />5
                 <input type="submit" name="post" class="btn" value="Hlasovat" style="float: right;"/>
             </fieldset>
+                {# TODO format and display correctly position:relative; margin-left:20px; some margin-right; lighter gray color #}
+                <span id="rating_caption" style="float: right;margin-right:10px;"></span>
         </form>
         {% else %}
             {% if vote %}
@@ -117,8 +186,7 @@ Recept {{ recipe.name }}
             <p>
                 Bohužel byl vyčerpán limit anonymních hodnocení receptu pro tuto IP adresu. Pokud chcete recept ohodnotit, tak se prosím
                 <a href="{% url login %}">přihlaste</a> nebo 
-                <a href="{% url register %}">zaregistrujte</a>.
-                </p>
+                <a href="{% url register %}">zaregistrujte</a>.  </p>
             {% endif %}
         {% endif %}
         </div>
