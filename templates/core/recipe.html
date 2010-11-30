@@ -18,8 +18,10 @@
 		$(function(){
             {% if not can_vote and vote %}
             {# display disabled stars so the user can see how he voted.Necessary because the form is not sent from the server #}
+            {# TODO get rid of the duplicate fieldset #}
             $("#rating").append(
             "<form id=\"rating_form\" class='rating_form'>" +
+            "<p id=\"rating_label\"><b>Hodnocení: </b></p>" + 
             "<fieldset>" +
             "    <input type=\"radio\" value=\"1\" name=\"rating\" title=\"Nedá se to jíst\" />1 " +
             "    <input type=\"radio\" value=\"2\" name=\"rating\" title=\"Školní jídelna\" />2" +
@@ -37,6 +39,7 @@
             
 			$("#rating_form").children().not(":radio").hide();
             
+            $("#rating_label").show();
             //TODO finish displaying the caption
             //$("#rating_caption").show();//TODO display only on hover on stars
             $("#user_rating").hide();
@@ -167,13 +170,18 @@ Recept {{ recipe.name }}
          {% if can_vote %}
         <form action="{% url recipe_rate recipe.id %}" method="post" class="rating_form" id="rating_form">
             <p>Počet bodů - vyšší číslo znamená chutnější recept.</p>
+            <p id="rating_label"><b>Hodnocení: </b></p>
 
             <fieldset>
+                Nejhorší
                 <input type="radio" value="1" name="rating" title="Nedá se to jíst" />1
                 <input type="radio" value="2" name="rating" title="Školní jídelna" />2
                 <input type="radio" value="3" name="rating" title="Normální jídlo" />3
                 <input type="radio" value="4" name="rating" title="Moc dobré" />4
                 <input type="radio" value="5" name="rating" title="Úžasné" />5
+                Nejlepší
+                <br />
+                <br />
                 <input type="submit" name="post" class="btn" value="Hlasovat" style="float: right;"/>
             </fieldset>
                 {# TODO format and display correctly position:relative; margin-left:20px; some margin-right; lighter gray color #}

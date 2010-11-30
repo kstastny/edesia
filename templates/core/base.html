@@ -74,6 +74,7 @@
     </div>
 </div>
 {# Google Analytics code #}
+{% comment %}
 {% if hide_google_analytics %}
 {% else %}
     <script type="text/javascript">
@@ -86,6 +87,7 @@
     pageTracker._trackPageview();
     } catch(err) {}</script>
 {% endif %}
+{% endcomment %}
     {# Google Analytics code end #}
   </body>
 </html>

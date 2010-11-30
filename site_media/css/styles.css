@@ -332,6 +332,16 @@ a
     padding:10px 25px 40px 20px;
 }
 
+#rating_label /* rating label before the stars */
+{
+    display:none;
+    float:left;
+    margin-right:15px;
+    position:relative;
+    top:-10px;
+    font-size:120%;
+}
+
 #current_rating
 {
     font-size: 12px;
