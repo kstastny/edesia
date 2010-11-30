@@ -22,7 +22,9 @@
   <body>
   <div id="body">
       <div id="banner">
+          {% block banner %}
           <a href="{% url home %}"><img src="{{MEDIA_URL}}layout/banner.png" alt="Link to home page" /></a>
+          {% endblock banner %}
     </div>
     <div id="menu">
       <ul id="menu_list">
@@ -36,7 +38,9 @@
             <li><a href="/query/">Vyhledávání</a></li>
             <li>
                 <div id="login_info">
+                  {% block login_info %}
                     {% include "auth/login_info.html" %}
+                  {% endblock login_info %}
                 </div>
             </li>
       </ul>

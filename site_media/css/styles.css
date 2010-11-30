@@ -558,6 +558,12 @@ div.radek
 }
 
 
+.important_message 
+{
+    font-size: 180%;
+    line-height: 150%;
+}
+
 /* comments list - based on styleshout template Keep It Simple */
 ol.commentlist {
 	padding: 0;

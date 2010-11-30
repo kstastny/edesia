@@ -1,4 +1,4 @@
-{% extends "core/base.html" %}
+{% extends "core/two_column_right.html" %}
 
 {% block extrastyle %}
 <link rel="stylesheet" type="text/css" href="/site_media/css/screen.css"/>
@@ -8,13 +8,18 @@
  Edesia - Chyba
 {% endblock title %}
 
-{% block content %}
+{% block top_content %}
+    <h1 class="important_message">Stránka nenalezena</h1>
+    <img id="aboutpic1" src="{{MEDIA_URL}}layout/404.jpg" alt="" style="padding-left:20px;"/>
+{% endblock %}
+
+{% block right %}
 
 
-<p>Litujeme, ale požadovaná stránka nebyla nalezena. Pokud si myslíte, že zde nějaká stránka není, napište nám prosím
+<p class="important_message">Litujeme, ale požadovaná stránka nebyla nalezena. Pokud si myslíte, že zde nějaká stránka chybí, napište nám prosím
 na emailovou adresu <a href="mailto:errors@edesia.cz">errors@edesia.cz</a>.</p>
 
-{% endblock content %}
+{% endblock right %}
 
 
 {% block context_menu %}

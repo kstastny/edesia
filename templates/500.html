@@ -1,20 +1,34 @@
-{% extends "core/base.html" %}
+{% extends "core/two_column_right.html" %}
+
+{# TODO this page should be completely static! #}
 
 {% block extrastyle %}
-<link rel="stylesheet" type="text/css" href="/site_media/css/screen.css"/>
+<link rel="stylesheet" type="text/css" href="/site_media/css/styles.css"/>
 {% endblock extrastyle %}
 
 {% block title %}
  Edesia - Chyba
 {% endblock title %}
 
-{% block content %}
+{% block banner %} {# MEDIA_URL has to be set statically here #}
+          <a href="{% url home %}"><img src="/site_media/layout/banner.png" alt="Link to home page" /></a>
+{% endblock banner %}
+
+{% block login_info %} {# hide login_info - information not correct #}
+{% endblock login_info %}
+
+{% block top_content %}
+    <h1 class="important_message">Chyba při zpracování požadavku</h1>
+    <img id="aboutpic1" src="/site_media/layout/500.jpg" alt="" style="padding-left:20px;"/>
+{% endblock %}
+
+{% block right %}
 
 
-<p>Litujeme, ale při zpracování požadavku došlo k chybě. Všechny problémy průběžně sledujeme a opravujeme, nicméně pokud se problém bude stále opakovat,
+<p class="important_message">Litujeme, ale při zpracování požadavku došlo k chybě. Všechny problémy průběžně sledujeme a opravujeme, nicméně pokud se problém bude stále opakovat,
 dejte nám prosím vědět na emailové adrese <a href="mailto:errors@edesia.cz">errors@edesia.cz</a>.</p>
 
-{% endblock content %}
+{% endblock right %}
 
 
 {% block context_menu %}
