@@ -330,6 +330,8 @@ a
 .rating_form
 {
     padding:10px 25px 40px 20px;
+    background:none repeat scroll 0 0 #FFF;
+    border:none;
 }
 
 #rating_label /* rating label before the stars */
