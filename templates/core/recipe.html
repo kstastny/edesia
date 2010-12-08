@@ -125,6 +125,7 @@ Recept {{ recipe.name }}
     <!-- Sklik-kontext-stop -->
             <div id="ads_recipe_left">
 
+        {% if flags.showAds %}
 <!-- Kontextová reklama Sklik -->
 <div id="sklikReklama_4336"></div>
 <script type="text/javascript">
@@ -132,6 +133,7 @@ Recept {{ recipe.name }}
 </script>
 <script type="text/javascript" src="http://out.sklik.cz/js/script.js"></script>
 
+        {% endif %}
 
 
             </div>
@@ -293,12 +295,14 @@ Recept {{ recipe.name }}
 
     <div id="ads_recipe_right">
 
+        {% if flags.showAds %}
 <!-- Kontextová reklama Sklik -->
 <div id="sklikReklama_4334"></div>
 <script type="text/javascript">
     var sklikData = { elm: "sklikReklama_4334", zoneId: 4334, w: 200, h: 300 };
 </script>
 <script type="text/javascript" src="http://out.sklik.cz/js/script.js"></script>
+        {% endif %}
 
 
     </div>
