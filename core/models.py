@@ -39,6 +39,7 @@ class Tag(models.Model):
     #TODO make some better structure later
     #order of tag in category listing. If it is negative, the Tag won't be displayed
     order = models.IntegerField(blank=True, null=False, default=9999)
+    image = models.CharField(max_length=255, blank=True, null=True) #image that will be displayed in category list
 
     class Meta:
         ordering = ['order']

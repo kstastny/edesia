@@ -18,13 +18,20 @@
 
 {% block top_content %}
     <h1>Seznam receptů</h1>
-    <img id="aboutpic1" src="{{MEDIA_URL}}layout/mojito.jpg" alt="" style="padding-left:40px;position:relative;top:10px;"/>
+    {# <img id="aboutpic1" src="{{MEDIA_URL}}layout/mojito.jpg" alt="" style="padding-left:40px;position:relative;top:10px;"/> #}
+    {% if tag.image %}
+    {# category has specific image so we display that image. Otherwise we display default image #}
+    <img id="aboutpic1" src="{{MEDIA_URL}}layout/{{ tag.image }}" alt="" style="padding-left:40px;position:relative;top:10px;"/>
+    {% else %}
+    <img id="aboutpic1" src="{{MEDIA_URL}}layout/1196128_16784458.jpg" alt="" style="padding-left:40px;position:relative;top:10px;"/>
+    {% endif %}
 {% endblock %}
 
 
 {% block right %}
 
 <div id="recipe_list" style="padding-left:80px;">
+    {# <p><a href="{% url recipe_edit %}">Nový recept</a></p> #}
     {% if tag %}
     <h2> {{ tag.name }} </h2>
     {% endif %}
