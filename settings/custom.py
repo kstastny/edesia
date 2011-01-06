@@ -2,7 +2,7 @@
 from os import path
 from settings.common import PROJECT_PATH
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 SERVE_STATIC_FILES = True
