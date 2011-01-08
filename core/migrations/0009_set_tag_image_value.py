@@ -4,6 +4,8 @@ from django.db import models
 from edesia.core.models import *
 
 class Migration:
+
+    no_dry_run = True
     
     def forwards(self, orm):
         "Write your forwards migration here"
