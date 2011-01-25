@@ -576,6 +576,21 @@ div.radek
     line-height: 150%;
 }
 
+/* list of recipes */
+#recipe_list
+{
+    font-size: 1.1em;
+    line-height: 1.6em;
+    margin-left: 15px;
+   /* font-weight: bold;*/
+    padding-left:80px;
+}
+
+#recipe_list a
+{
+    font-weight: bold;
+}
+
 /* comments list - based on styleshout template Keep It Simple */
 ol.commentlist {
 	padding: 0;

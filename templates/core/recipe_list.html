@@ -17,7 +17,11 @@
 {% endblock %}
 
 {% block top_content %}
-    <h1>Seznam receptů</h1>
+    {% if tag %}
+    <h1>{{ tag.name }}</h1>
+    {% else %}
+    <h1>Všechny recepty</h1>
+    {% endif %}
     {% if tag.image %}
     {# category has specific image so we display that image. Otherwise we display default image #}
     <img id="aboutpic1" src="{{MEDIA_URL}}layout/{{ tag.image }}" alt="" style="padding-left:40px;position:relative;top:10px;"/>
@@ -29,9 +33,8 @@
 
 {% block right %}
 
-<div id="recipe_list" style="padding-left:80px;">
+<div id="recipe_list">
     {% if tag %}
-    <h2> {{ tag.name }} </h2>
     <p><a href="{% url recipe_edit %}?tag={{ tag.slug }}">Nový recept</a></p>
     {% else %}
         <p><a href="{% url recipe_edit %}">Nový recept</a></p>
@@ -44,6 +47,14 @@
     </li> 
     {% endfor %}
     </ul>
+
+    {% comment %}
+    <p>
+    {% for recipe in recipes.object_list %}
+    <a href="{% url core.views.recipe_detail recipe.slug %}" >{{ recipe.name }}</a><br />
+    {% endfor %}
+    </p>
+    {% endcomment %}
 
     {# TODO better page representation - display icons to First, Prev, Next, Last and a few pages around #}
     <div class="pagination">
