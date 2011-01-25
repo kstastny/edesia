@@ -165,6 +165,16 @@ def recipe_edit(request, recipe_slug):
     else:
         form = RecipeForm()
 
+    #TODO if there's GET parameter tag, check that tag in 'category selection'
+    if 'tag' in request.GET:
+        #http://www.mail-archive.com/django-users@googlegroups.com/msg67842.html
+        try:
+            tag = Tag.objects.get(slug=request.GET['tag'])
+            if tag:
+                form.fields['tags'].initial = [tag.id]
+        except Tag.DoesNotExist, e:
+            logging.warn('Error loading tag [%s]: %s', request.GET['tag'], e)
+
     return render_to_response('core/recipe_edit.html', 
             {'form': form}, 
             context_instance=RequestContext(request))
