@@ -1,8 +1,8 @@
-from django.contrib.comments.views.comments import post_comment
+from django.contrib.comments.views.comments import post_comment, CommentPostBadRequest
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.contrib import comments
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.core.urlresolvers import reverse
 
 from edesia.core.models import Recipe
@@ -16,6 +16,9 @@ def post_recipe_comment(request, next=None):
         errors, redirects to recipe detail
     """
     form = __get_form(request)
+
+    if isinstance(form, HttpResponseBadRequest):
+        return form #we didn't get a form but really an error
 
     #TODO make generic when necessary - when more model types than Recipe is needed
     #do this by sending POST parameter 'next_error' that will contain page
