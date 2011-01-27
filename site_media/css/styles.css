@@ -576,6 +576,19 @@ div.radek
     line-height: 150%;
 }
 
+/* list of categories */
+#category_list
+{
+    width:440px;
+}
+
+#category_list a
+{
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+}
+
 /* list of recipes */
 #recipe_list
 {
