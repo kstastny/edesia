@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page':'/'}, name='logout'),
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'auth/login.html'}, name='login'),
     url(r'^register/$', 'edesia.users.views.register', name='register'),
+    url(r'^profile_edit/$', 'edesia.users.views.profile_edit', name='profile_edit'),
     url(r'^comments/', include('django.contrib.comments.urls')),
     )
 

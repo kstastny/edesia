@@ -1,7 +1,8 @@
 {% if user.is_authenticated %}
-<span style="position:relative; top:12px;">
+<span style="position:relative; top:6px;">
 <span class="nobold"> Přihlášen{% if not user.get_profile.gender %}a{% endif %} jako {{ user.username }}. </span>
-<a href="{% url logout %}">Odhlásit</a>
+<a href="{% url logout %}">Odhlásit</a><br />
+<a href="{% url profile_edit %}">Nastavení</a>
 </span>
 {% else %}
 {% comment %}
