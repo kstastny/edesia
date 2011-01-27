@@ -46,7 +46,9 @@
     <p><a href="{% url recipe_edit %}">Nový recept</a></p>
     <h2>Oblíbené kategorie</h2>
     {# TODO make this dynamic #}
-    <p><a href="{% url recipe_list 'kureci-maso' %}">Kuřecí maso</a><br />
+    <p>
+    <a href="{% url recipe_list 'smakoun' %}">Šmakoun</a><br />
+    <a href="{% url recipe_list 'kureci-maso' %}">Kuřecí maso</a><br />
     <a href="{% url recipe_list 'veprove-maso' %}">Vepřové maso</a><br />
     <a href="{% url recipe_list 'hovezi-maso' %}">Hovězí maso</a><br />
     <a href="{% url recipe_list 'vegetarianska-jidla' %}">Vegetariánská jídla</a><br />
