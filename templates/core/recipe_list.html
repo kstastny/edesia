@@ -57,6 +57,7 @@
     {% endcomment %}
 
     {# TODO better page representation - display icons to First, Prev, Next, Last and a few pages around #}
+    {% ifnotequal recipes.paginator.num_pages 1 %}
     <div class="pagination">
         <span class="step-links">
             {% if recipes.has_previous %}
@@ -72,6 +73,7 @@
             {% endif %}
         </span>
     </div>
+    {% endifnotequal %}
 </div>
 
 {% endblock right %}
