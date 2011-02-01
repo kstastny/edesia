@@ -26,6 +26,17 @@ class UserChangeForm(forms.ModelForm):
 
     #http://stackoverflow.com/questions/324477/in-a-django-form-how-to-make-a-field-readonly-or-disabled-so-that-it-cannot-be 
     def __init__(self, *args, **kwargs):
+
+        instance = kwargs.get('instance', None)
+        if instance and instance.id:
+            profile = instance.get_profile()
+            if profile:
+                #initialize non-User fields - send as initial data
+                initial = kwargs.get('initial', {})
+                if 'gender' not in initial:
+                    initial['gender'] = profile.gender
+                kwargs['initial'] = initial
+
         super(UserChangeForm, self).__init__(*args, **kwargs)
         instance = getattr(self, 'instance', None)
         if instance and instance.id:

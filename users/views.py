@@ -56,11 +56,14 @@ def profile_edit(request):
         form = UserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            #TODO save user profile
+            #save user profile
+            p = request.user.get_profile()
+            p.gender = form.cleaned_data['gender'] == 'True'
+            p.save()
 
+            return HttpResponseRedirect(reverse('home'))
 
     else:
-        #TODO some special form - UserEditForm will be better
         form = UserChangeForm(instance=request.user)
 
     return render_to_response('auth/profile_edit.html',

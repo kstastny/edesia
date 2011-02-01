@@ -308,6 +308,11 @@ a
     margin-left:155px;*/
 }
 
+#recipe_edit form p label
+{
+    top: 4px;
+}
+
 #ads_recipe_right
 {
     margin: 15px 0 10px 5px;
@@ -422,7 +427,6 @@ form p label
 {
     float:left;
     position:relative;
-    top:8px;
     width:120px;
     font-weight: bold;
     color: #4F9032;
