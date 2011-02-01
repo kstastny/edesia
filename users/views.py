@@ -3,6 +3,7 @@
 #TODO use some translated UserCreationForm - can it be localized?
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import Group, User
+from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
@@ -67,5 +68,24 @@ def profile_edit(request):
         form = UserChangeForm(instance=request.user)
 
     return render_to_response('auth/profile_edit.html',
+            {'form': form}, 
+            context_instance=RequestContext(request))
+
+def password_change(request):
+    if not request.user.is_authenticated():
+        #TODO handle somehow
+        raise Exception('Nemůžete změnit své údaje, když nejste přihlášen.')
+
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+
+            return HttpResponseRedirect(reverse('home'))
+    else:
+        form = PasswordChangeForm(request.user)
+
+
+    return render_to_response('auth/password_change.html',
             {'form': form}, 
             context_instance=RequestContext(request))

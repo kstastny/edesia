@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'auth/login.html'}, name='login'),
     url(r'^register/$', 'edesia.users.views.register', name='register'),
     url(r'^profile_edit/$', 'edesia.users.views.profile_edit', name='profile_edit'),
+    url(r'^password_change/$', 'edesia.users.views.password_change', name='password_change'),
     url(r'^comments/', include('django.contrib.comments.urls')),
     )
 

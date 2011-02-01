@@ -580,6 +580,18 @@ div.radek
     line-height: 150%;
 }
 
+/* profile edit */
+#profile_edit label
+{
+    width: 180px;
+}
+
+/* password change */
+#password_change label
+{
+    width: 180px;
+}
+
 /* list of categories */
 #category_list
 {
