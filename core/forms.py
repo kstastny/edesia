@@ -9,9 +9,9 @@ from models import Recipe, Tag
 
 class RecipeForm(ModelForm):
     name = forms.CharField(label='Název')
-    ingredients = forms.CharField(label='Přísady', widget=forms.Textarea)
+    ingredients = forms.CharField(label='Přísady', widget=forms.Textarea, help_text="Každou součást receptu zapište na samostatný řádek.")
     directions = forms.CharField(label='Postup', widget=forms.Textarea)
-    preparation_time = forms.IntegerField(label='Doba přípravy', required=False)
+    preparation_time = forms.IntegerField(label='Doba přípravy', required=False, help_text="Celé číslo udávající kolik minut trvá připravit recept.")
     servings = forms.IntegerField(label='Počet porcí', required=False)
     tags = forms.ModelMultipleChoiceField(label='Kategorie', widget=forms.CheckboxSelectMultiple,\
             queryset=Tag.objects.order_by('name'), required=False)
@@ -43,6 +43,13 @@ class RecipeForm(ModelForm):
                     self.data['name']
         else:
             super(RecipeForm, self).unique_error_message(unique_check)
+
+    #TODO use in some base form class
+    def as_p(self):
+        "Returns this form rendered as HTML <p>s. Modified method from django.forms"
+        #normal_row, error_row, row_ender, help_text_html, errors_on_separate_row
+        return self._html_output(u'<p>%(label)s %(field)s%(help_text)s</p>', u'%s', '</p>',
+                u'<br /><span class="microcopy">%s</span><br />', True)
 
 
     class Meta:

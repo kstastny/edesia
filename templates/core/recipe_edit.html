@@ -8,8 +8,10 @@
 
 <div id="recipe_edit">
     {% if form.instance.id %}
+    <h2>{{ form.instance.name }}</h2>
     <form action="{% url recipe_edit form.instance.slug %}" method="POST">
     {% else %}
+    <h2>Nový recept</h2>
     <form action="{% url recipe_edit %}" method="POST">
     {% endif %}
         {{ form.as_p }}
