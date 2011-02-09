@@ -11,7 +11,7 @@ class RecipeSitemap(Sitemap):
         return Recipe.objects.all()
 
     def location(self, recipe):
-        return '/recipe/%s' % recipe.slug
+        return '/recipe/%s/' % recipe.slug
 
     #http://www.sitemaps.org/protocol.php - valid priority is 0.0 to 1.0
     def priority(self, recipe):
