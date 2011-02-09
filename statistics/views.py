@@ -1,4 +1,5 @@
 import logging
+import django
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseNotFound
@@ -34,6 +35,7 @@ def display_overview(request):
     comments = Comment.objects.order_by('-submit_date')[:NEW_COMMENTS_COUNT]
     votes = Vote.objects.order_by('-date_added')[:NEW_VOTES_COUNT]
     recipes = Recipe.objects.order_by('-inserted')[:NEW_RECIPES_COUNT]
+    versioninfo = 'Django version: %s' % (str(django.VERSION))
 
     return render_to_response(
             'statistics/statistics_overview.html',
@@ -43,6 +45,7 @@ def display_overview(request):
                 'recipes': recipes,
                 'recipe_count': Recipe.objects.count(),
                 'hide_google_analytics':True,#do not track this page
+                'versioninfo': versioninfo,
                 },
             context_instance=RequestContext(request))
 
