@@ -2,17 +2,52 @@
 
 {% block title %}
  Edesia - editace receptu {{ recipe.name }}
-{% endblock title %}
+ {% endblock title %}
+
+ {% block extrahead %}
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"></script>
+
+    <script type="text/javascript">
+    
+        $(function(){
+                {# http://jquery.bassistance.de/validate/demo/ #}
+                {# name of the input field is used as identifier #}
+                $('#recipe_form').validate({
+                    rules: {
+                        name: "required", 
+                        {# TODO onblur - check if the recipe exists; if it does, display message #}
+                        ingredients: "required",
+                        directions: "required",
+                        preparation_time: { number: true },
+                        servings: { number: true }
+                    },
+                    messages: {
+                        name: "Vložte prosím název receptu.",
+                        ingredients: "Zadejte prosím, jaké suroviny jsou potřeba.",
+                        directions: "Zadejte prosím postup receptu.",
+                        preparation_time: "Zadejte prosím celé číslo.",
+                        servings: "Zadejte prosím celé číslo."
+                    }
+                    });
+
+                
+                });
+    </script>
+
+
+ {% endblock extrahead %}
 
 {% block left %}
 
 <div id="recipe_edit">
     {% if form.instance.id %}
     <h2>{{ form.instance.name }}</h2>
-    <form action="{% url recipe_edit form.instance.slug %}" method="POST">
+    <form id="recipe_form" action="{% url recipe_edit form.instance.slug %}" method="POST">
     {% else %}
     <h2>Nový recept</h2>
-    <form action="{% url recipe_edit %}" method="POST">
+    <form id="recipe_form" action="{% url recipe_edit %}" method="POST">
     {% endif %}
         {{ form.as_p }}
 
