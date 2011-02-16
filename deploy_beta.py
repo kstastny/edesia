@@ -18,6 +18,7 @@ def copy_files(src_glob, dst_folder):
 
 settingsArgument = '--settings=settings.web4ce'
 
+"""
 print 'Running syncdb...'
 call(['python', 'manage.py', 'syncdb', settingsArgument])
 
@@ -33,6 +34,7 @@ backup_data = Popen(['python', 'manage.py', 'dumpdata', settingsArgument, '--exc
 backup_file = open(filename, 'w')
 backup_file.write(backup_data)
 backup_file.close()
+"""
 
 print 'Preparing distribution package...'
 DIST_DIRECTORY = '_dist'
