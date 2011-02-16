@@ -50,6 +50,7 @@ urlpatterns += patterns('edesia',
 
     url(r'^statistics/$', 'statistics.views.display_overview', name='statistics_overview'),
     url(r'^statistics/500$', 'statistics.views.display_bug_500', name="display_500"),
+    url(r'^execute_command/(?P<command>[\w-]+)/$', 'management.views.execute_command', name="execute_command"),
 )
 
 
