@@ -1,4 +1,6 @@
 #coding=utf-8
+import logging
+
 from django.contrib.auth import forms as authforms
 from django.contrib.auth.models import User
 from django import forms
@@ -31,10 +33,12 @@ class UserChangeForm(forms.ModelForm):
         if instance and instance.id:
             profile = instance.get_profile()
             if profile:
+                logging.debug('profile.gender = %s', profile.gender)
                 #initialize non-User fields - send as initial data
                 initial = kwargs.get('initial', {})
                 if 'gender' not in initial:
-                    initial['gender'] = profile.gender
+                    #note: on web4ce, the value of profile.gender is 0/1 but we need the string 'True' or 'False'
+                    initial['gender'] = profile.gender and 'True' or 'False'
                 kwargs['initial'] = initial
 
         super(UserChangeForm, self).__init__(*args, **kwargs)

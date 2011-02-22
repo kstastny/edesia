@@ -1,4 +1,5 @@
 #coding=utf-8
+import logging
 
 #TODO use some translated UserCreationForm - can it be localized?
 from django.contrib.auth import login, authenticate
@@ -65,6 +66,7 @@ def profile_edit(request):
             return HttpResponseRedirect(reverse('home'))
 
     else:
+        logging.debug(request.user)
         form = UserChangeForm(instance=request.user)
 
     return render_to_response('auth/profile_edit.html',
