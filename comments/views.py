@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib import comments
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.core.urlresolvers import reverse
+from django.utils.html import escape
 
 from edesia.core.models import Recipe
 from edesia.core.views import recipe_detail
