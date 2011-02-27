@@ -130,15 +130,14 @@ label.error, label.errorlist
 {
     font-weight: normal;
     font-style: italic;
-    /* width: auto; */
     float: none;
+    width: 100%;
     margin-left: 120px;
 }
 
 input.error, textarea.error
 {
     border: 1px solid red;
-    margin-right:50px;
 }
 
 

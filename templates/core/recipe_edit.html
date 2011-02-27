@@ -15,6 +15,8 @@
                 {# http://jquery.bassistance.de/validate/demo/ #}
                 {# name of the input field is used as identifier #}
                 $('#recipe_form').validate({
+                    wrapper: "div",
+                    //errorElement: "p",
                     rules: {
                         name: "required", 
                         {# TODO onblur - check if the recipe exists; if it does, display message #}
