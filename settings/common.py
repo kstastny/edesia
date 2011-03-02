@@ -93,6 +93,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
     'edesia.core.context_processors.flags',
+    'edesia.core.context_processors.ads_ranky_cz',
 )
 
 #comment settings
@@ -107,3 +108,8 @@ AUTH_PROFILE_MODULE = 'users.UserProfile'
 
 #ratings setting
 RATINGS_VOTES_PER_IP = 999 #Effectively ignore this parameter
+
+
+#ADS.RANKY.CZ SETTINGS
+ADS_URL = 'http://ads.ranky.cz/slot/8a077f57382a9b4cffef39aaaffa4106/export/utf.json' #JSON feed with advertisements
+MAX_ADS_CACHE_TIME = 3600 * 3 # in seconds

@@ -422,6 +422,17 @@ form .microcopy
     /* height: 610px; */
 }
 
+/* style for ads.ranky.cz */
+div#ae4 div a { font-weight: bold; color: #4F9032; line-height: 15px; }
+div#ae4 div p { padding: 0px; margin: 0px; color: #000000; line-height: 15px; }
+div#ae4 div { margin: 0.3em 0.1em 0 0.6em; overflow: hidden; width: 137px; height: 90px; float: left; }
+div#ae4 { 
+    border: 0px solid #999999; background-color: #FFFFFF; font-family: Arial; font-size: 12px; overflow: hidden; width: 728px; height: 90px; 
+    margin-left: 116px;
+}
+
+/* ads.ranky.cz end */
+
 #rating
 {
     padding-top: 10px;

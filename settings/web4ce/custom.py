@@ -46,3 +46,6 @@ logging.basicConfig(
         level=LOG_LEVEL,
         filename=LOG_FILE,
         format=LOG_FORMAT)
+
+#ADS.RANKY.CZ SETTINGS
+ADS_CACHE_FILE = path.join(PROJECT_PATH, '../cache/ads_ranky_cz.json')

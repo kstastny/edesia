@@ -1,3 +1,14 @@
+import time
+import logging
+import os
+import urllib
+from os import stat, path
+
+from django.utils import simplejson
+from settings.common import PROJECT_PATH
+
+from django.conf import settings
+
 
 def flags(request):
     """
@@ -15,4 +26,33 @@ def flags(request):
     else:
         flags['user'] = 'noauth'
 
+
+
     return {'flags': flags }
+
+
+def ads_ranky_cz(request):
+
+    if request.user.is_authenticated():
+        return {'ads_ranky_cz': [] }
+
+    cache_file = settings.ADS_CACHE_FILE
+
+    #TODO lock object - handle multithreading
+    if path.exists(cache_file):
+        created = stat(cache_file).st_ctime
+        #if the cached file is older than a few hours, delete it
+        if time.time() - created > settings.MAX_ADS_CACHE_TIME:
+            logging.info('Removing ads.ranky.cz cache file because it expired...')
+            os.remove(cache_file)
+
+    if not path.exists(cache_file):
+        logging.info('ads.ranky.cz cache file does not exist - downloading anew...')
+        urllib.urlretrieve(settings.ADS_URL, cache_file)
+
+    f = open(cache_file)
+    ads = simplejson.loads(f.read())
+    f.close()
+
+
+    return {'ads_ranky_cz': ads }

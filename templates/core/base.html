@@ -59,9 +59,29 @@
     <hr class="cleaner" />
 
     <div id="footer">
+    {% if flags.showAds %}
+       {# advertisement ads.ranky.cz  start #}
+<div id="ae4">
+    {% for ad in ads_ranky_cz %}
+    <div>
+        <a href="{{ ad.url }}">{{ ad.title }}</a>
+        <p>{{ ad.description }}</p>
+    </div>
+    {% endfor %}
+    {% comment %}
+    <div>
+        <a href="http://ads.ranky.cz/slot/8a077f57382a9b4cffef39aaaffa4106/public">Inzerujte zde!</a>
+        <p>Máte zájem o reklamu? Kupte si textový odkaz na této pozici!</p>
+    </div>
+    {% endcomment %}
+</div>
+{# advertisement ads.ranky.cz  end#}
+    {% endif %}
+
       <span id="footer1">
-        Powered by Edesia&trade;&nbsp; &copy; 2010 - 2011 <a href="mailto:stastny@edesia.cz">Karel Šťastný</a>&nbsp; &nbsp;
+          Powered by Edesia&trade;&nbsp; &copy; 2010 - 2011 <a href="mailto:stastny@edesia.cz">Karel Šťastný</a>&nbsp; &nbsp;
       </span>
+
       <span id="footer2">
         {% comment %}
         <a href="{% url home %}">Home</a> |
@@ -73,7 +93,11 @@
         {% endcomment %}
         <a href="http://feeds.feedburner.com/edesiacz">RSS Feed</a> |
         <a href="http://www.facebook.com/#!/pages/Edesiacz/140433052645668">Facebook</a>
-      </span>
+    </span>
+
+<style>
+
+    
     </div>
 </div>
 {# Google Analytics code #}

@@ -45,6 +45,7 @@ if os.access(DIST_DIRECTORY, os.F_OK):
 
 os.mkdir(DIST_DIRECTORY)
 os.mkdir(join(DIST_DIRECTORY, 'logs')) #the log directory is not automatically created
+os.mkdir(join(DIST_DIRECTORY, 'cache')) 
 
 shutil.copy(join('deployment', '.htaccess'), DIST_DIRECTORY)
 shutil.copy(join('deployment', 'django.wsgi.production'), join(DIST_DIRECTORY, 'django.wsgi'))
