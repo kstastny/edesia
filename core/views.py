@@ -56,13 +56,13 @@ def rate_recipe(request, recipe_id):
                 pass #TODO display some message - cannot vote twice
             else:
                 recipe.rating.add(rating, None, request.META['REMOTE_ADDR']) 
-    if request.is_ajax():
-        #send new rating to user
-        response = HttpResponse('%.2f' % recipe.rating.get_real_rating())
+        if request.is_ajax():
+            #send new rating to user
+            response = HttpResponse('%.2f' % recipe.rating.get_real_rating())
 
-    #do not allow the user to vote again. Not bulletproof, but sufficient
-    #set the max_age for a week - parameter is in seconds
-    response.set_cookie('recipe_voted_'+str(recipe.id), value=rating, max_age=604800)
+        #do not allow the user to vote again. Not bulletproof, but sufficient
+        #set the max_age for a week - parameter is in seconds
+        response.set_cookie('recipe_voted_'+str(recipe.id), value=rating, max_age=604800)
 
     return response
 
