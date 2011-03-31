@@ -3,6 +3,7 @@ import logging
 import os
 import urllib
 from os import stat, path
+from multiprocessing import Lock
 
 from django.utils import simplejson
 from settings.common import PROJECT_PATH
@@ -31,6 +32,8 @@ def flags(request):
     return {'flags': flags }
 
 
+lock = Lock()
+
 def ads_ranky_cz(request):
 
     if request.user.is_authenticated():
@@ -47,8 +50,13 @@ def ads_ranky_cz(request):
             os.remove(cache_file)
 
     if not path.exists(cache_file):
-        logging.info('ads.ranky.cz cache file does not exist - downloading anew...')
-        urllib.urlretrieve(settings.ADS_URL, cache_file)
+        lock.acquire()
+        try:
+            if not path.exists(cache_file):
+                logging.info('ads.ranky.cz cache file does not exist - downloading anew...')
+                urllib.urlretrieve(settings.ADS_URL, cache_file)
+        finally:
+            lock.release()
 
     f = open(cache_file)
     ads = simplejson.loads(f.read())
