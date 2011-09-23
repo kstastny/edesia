@@ -55,12 +55,17 @@ def ads_ranky_cz(request):
             if not path.exists(cache_file):
                 logging.info('ads.ranky.cz cache file does not exist - downloading anew...')
                 urllib.urlretrieve(settings.ADS_URL, cache_file)
+        except IOError, e:
+            logging.error('Error loading advertisement', e)
         finally:
             lock.release()
 
-    f = open(cache_file)
-    ads = simplejson.loads(f.read())
-    f.close()
+    if path.exists(cache_file):
+        f = open(cache_file)
+        ads = simplejson.loads(f.read())
+        f.close()
+    else:
+        ads = {}
 
 
     return {'ads_ranky_cz': ads }
