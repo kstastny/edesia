@@ -44,6 +44,8 @@ def __get_index_data():
         print count
         print random.randint(0, count - 1)
         random_recipe = Recipe.objects.all()[random.randint(0, count - 1)]
+    else:
+        random_recipe = None
     
     return { 'recipes': recipes, 'news' : news, 'random_recipe': random_recipe }
 
