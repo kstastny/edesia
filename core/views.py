@@ -1,6 +1,9 @@
 #coding=utf-8
 import re
 import logging
+import random
+
+from datetime import timedelta, datetime
 
 from django.shortcuts import get_object_or_404, render_to_response
 from django.utils.encoding import force_unicode
@@ -20,6 +23,7 @@ RECIPE_PAGE_SIZE = 25
 
 NEW_RECIPES_COUNT = 5 #count of new recipes displayed on home page
 NEWS_DISPLAYED_COUNT = 3 #number of news displayed on home page
+OLDEST_NEWS_DAYS = 30 #News older than this will not be displayed
 
 #@cache_page(60*5) #TODO need *not* to cache authentication info
 def index(request):
@@ -32,9 +36,16 @@ def index(request):
 @cache_func()
 def __get_index_data():
     recipes = Recipe.objects.order_by('-inserted')[:NEW_RECIPES_COUNT]
-    news = News.objects.order_by('-inserted')[:NEWS_DISPLAYED_COUNT]
-
-    return { 'recipes': recipes, 'news' : news }
+    maxdate = datetime.now() - timedelta(days=OLDEST_NEWS_DAYS)
+    news = News.objects.filter(inserted__gt=maxdate).order_by('-inserted')[:NEWS_DISPLAYED_COUNT]
+    if not news:
+        #random_recipe = Recipe.objects.order_by('?')[0] #not using - is slow, has to do full table scan
+        count = Recipe.objects.all().count()
+        print count
+        print random.randint(0, count - 1)
+        random_recipe = Recipe.objects.all()[random.randint(0, count - 1)]
+    
+    return { 'recipes': recipes, 'news' : news, 'random_recipe': random_recipe }
 
 def searchquery(request):
     return render_to_response('core/search_result.html',

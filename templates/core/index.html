@@ -34,11 +34,18 @@
 
 
 <div id="uvod_druhy">
+    {% if news %}
     <h2>Novinky</h2>
     {% for n in news %}
     <h3>{{ n.inserted|date:"j. E Y" }}</h3>
     <div class="popisek">{{ n.text|linebreaksp }}</div>
     {% endfor %}
+    {% else %}
+    <h2>Náhodný recept</h2>
+        <p>
+        <a href="{% url core.views.recipe_detail random_recipe.slug %}" >{{ random_recipe.name }}</a>
+        </p>
+    {% endif%}
 </div>
 
 <div id="uvod_treti">
