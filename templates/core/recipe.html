@@ -20,7 +20,7 @@
             {# display disabled stars so the user can see how he voted.Necessary because the form is not sent from the server #}
             {# TODO get rid of the duplicate fieldset #}
             $("#rating").append(
-            "<form id=\"rating_form\" class='rating_form'>" +
+                "<form id=\"rating_form\" class='rating_form'>" + "{% csrf_token %}"
             "<p id=\"rating_label\"><b>Hodnocení: </b></p>" + 
             "<fieldset>" +
             "    <input type=\"radio\" value=\"1\" name=\"rating\" title=\"Nedá se to jíst\" />1 " +
@@ -170,7 +170,7 @@ Recept {{ recipe.name }}
 
         {# recipe rating #}
          {% if can_vote %}
-        <form action="{% url recipe_rate recipe.id %}" method="post" class="rating_form" id="rating_form">
+        <form action="{% url recipe_rate recipe.id %}" method="post" class="rating_form" id="rating_form">{% csrf_token %}
             <p>Počet bodů - vyšší číslo znamená chutnější recept.</p>
             <p id="rating_label"><b>Hodnocení: </b></p>
 
@@ -212,6 +212,7 @@ Recept {{ recipe.name }}
         {% get_comment_form for recipe as commentform %}
     {% endif %}
     <form action="{% comment_form_target %}#recipe_comments_problems" method="post" class="recipe_form" >
+        {% csrf_token %}
         <p>Vložte svůj názor na tento recept:<br/>
         (Pole označená hvězdičkou jsou povinná)</p>
         <fieldset>
