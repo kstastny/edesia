@@ -10,7 +10,7 @@
 {% endif %}
 <div id="content-main">
     <div id="profile_edit">
-        <form action="{{ app_path }}" method="post" id="login-form">
+        <form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
             <a href="{% url password_change %}" style="float:right;" >Změnit heslo</a>
             <fieldset>
                 {{ form.as_p }}

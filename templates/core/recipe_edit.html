@@ -50,7 +50,8 @@
     {% else %}
     <h2>Nový recept</h2>
     <form id="recipe_form" action="{% url recipe_edit %}" method="POST">
-    {% endif %}
+        {% endif %}
+        {% csrf_token %}
         {{ form.as_p }}
 
     <input type="submit" value="Uložit" class="btn" />

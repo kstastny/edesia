@@ -7,7 +7,7 @@
 {% else %}
 {% comment %}
 {# would need some better formatting #}
-<form action="{% url login %}">
+<form action="{% url login %}">{% csrf_token %}
  Uživatelské jméno: <input type="text" /><br />
  Heslo: <input type="password" />
 </form>
