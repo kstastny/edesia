@@ -12,6 +12,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.views.decorators.cache import cache_page
+from django.views.decorators.csrf import csrf_exempt
 
 from djangoratings.views import AddRatingFromModel
 
@@ -53,6 +54,7 @@ def searchquery(request):
     return render_to_response('core/search_result.html',
             context_instance=RequestContext(request))
 
+@csrf_exempt
 def rate_recipe(request, recipe_id):
     recipe = Recipe.objects.get(id=recipe_id)
     #send different response if it is AJAX
