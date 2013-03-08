@@ -228,6 +228,17 @@ Recept {{ recipe.name }}
             {{ field.label_tag }} 
             {% endcomment %}
             {# rendering manually because we need to mark required field with asterisk. make this generic #}
+            {% ifequal field.name "captcha" %}
+            <div {% if user.is_authenticated %} style="display:none" {% endif %} >
+                <div>
+                    <label for="{{ field.auto_id }}">{{ field.label }}</label>
+                </div>
+                    <div class="udaje" >
+                    </div>
+                    {% if user.is_authenticated %} <input id="id_captcha" value="2" type="text" name="captcha" />
+                    {% else %} {{ field }}{% endif %}
+                </div>
+            {% else %}
             <div class="udaje" >
                 <label for="{{ field.auto_id }}">{{ field.label }}{% if field.field.required %}*{% endif %}</label>
             </div>
@@ -237,6 +248,7 @@ Recept {{ recipe.name }}
                 {% else %}
                     {{ field }}
                 {% endifequal %}
+                {% endifequal %} {# other field than captcha #}
         </div>
         {% endfor %}
 
